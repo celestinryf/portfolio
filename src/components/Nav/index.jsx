@@ -3,8 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
-import './index.module.css';
+import styles from './index.module.css';
 import mainLogo from '../../assets/images/portraits/celestin.jpeg';
+
+console.log('Nav styles:', styles);
 
 const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,64 +33,51 @@ const NavBar = () => {
     };
 
     return (
-        <div className={`nav-bar ${scrolled ? 'scrolled' : ''}`}>
-            <div className="nav-content">
-                <Link className="logo" to="/" onClick={closeMenu}>
+        <div className={`${styles['nav-bar']} ${scrolled ? styles.scrolled : ''}`}>
+            <div className={styles['nav-content']}>
+                <Link className={styles.logo} to="/" onClick={closeMenu}>
                     <img src={mainLogo} alt="Tech Startup Club Logo" />
                 </Link>
 
-                <button className="menu-toggle" onClick={toggleMenu}>
+                <button className={styles['menu-toggle']} onClick={toggleMenu}>
                     <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
                 </button>
 
-                <nav className={isMenuOpen ? 'open' : ''}>
+                <nav className={`${isMenuOpen ? styles.open : ''}`}>
                     <NavLink 
-                        exact="true" 
-                        className="nav-link events-link" 
-                        to="/events"
+                        className={({isActive}) => `${styles['nav-link']} ${isActive ? styles.active : ''}`}
+                        to="/experience"
                         onClick={closeMenu}
                     >
                         Events
                     </NavLink>
                     <NavLink 
-                        exact="true" 
-                        className="nav-link projects-link" 
+                        className={({isActive}) => `${styles['nav-link']} ${isActive ? styles.active : ''}`}
                         to="/projects"
                         onClick={closeMenu}
                     >
                         Projects
                     </NavLink>
                     <NavLink 
-                        exact="true" 
-                        className="nav-link blog-link" 
+                        className={({isActive}) => `${styles['nav-link']} ${isActive ? styles.active : ''}`}
                         to="/blog"
                         onClick={closeMenu}
                     >
                         Blog
                     </NavLink>
                     <NavLink 
-                        exact="true" 
-                        className="nav-link about-link" 
+                        className={({isActive}) => `${styles['nav-link']} ${isActive ? styles.active : ''}`}
                         to="/about"
                         onClick={closeMenu}
                     >
                         About
                     </NavLink>
                     <NavLink 
-                        exact="true" 
-                        className="nav-link contact-link" 
+                        className={({isActive}) => `${styles['nav-link']} ${styles['join-link']} ${isActive ? styles.active : ''}`}
                         to="/contact"
                         onClick={closeMenu}
                     >
                         Contact
-                    </NavLink>
-                    <NavLink 
-                        exact="true" 
-                        className="nav-link join-link" 
-                        to="/joinus"
-                        onClick={closeMenu}
-                    >
-                        Join Us
                     </NavLink>
                 </nav>
             </div>

@@ -1,22 +1,26 @@
+// App.js
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 
-import Home from './routes/Home.jsx'
-// import Blog from './routes/Blog.js';
-import Projects from './routes/Projects.jsx';
-import Contact from './routes/Contact.jsx';
+import Home from './routes/Home/index.jsx'
+import Projects from './routes/Projects/index.jsx';
+import Experience from './routes/Experience/index.jsx';
+import Skills from './routes/Skills/index.jsx';
+import Blog from './routes/Blog/index.jsx';
+import Contact from './routes/Contact/index.jsx';
 
 function App() {
   return (
-    <>
-    <Routes>
-       <Route path="/" element={<Home />} />
-       {/* <Route path="/about" element={<About />} />  */}
-       {/* <Route path="/blog" element={<Blog />} /> */}
-       <Route path="/projects" element={<Projects />} />
-       <Route path="/contact" element={<Contact />} />
-    </Routes>
-    </>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/experience" element={<Experience />} />
+        <Route path="/skills" element={<Skills />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </div>
   );
 }
 

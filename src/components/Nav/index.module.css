@@ -11,7 +11,6 @@
 
     &.scrolled {
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        background: linear-gradient(135deg, #fcc765 0%, #ffa41b 100%);
     }
 
     .nav-content {

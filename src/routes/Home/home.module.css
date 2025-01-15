@@ -1,0 +1,124 @@
+/* home.module.css */
+.graphicHeader {
+    height: 90vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: black;
+    margin-top: 95px;
+}
+
+.headerContent {
+    width: 100%;
+    margin: 0;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    border-radius: 8px;
+    position: relative;
+}
+
+.headerContent::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.headerContent h1 {
+    color: black;
+    font-size: 6vw;
+    margin: 0;
+    width: 100%;
+    font-family: 'Verdana';
+    font-weight: 400;
+    white-space: nowrap;
+    position: relative;
+    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    animation: slideDown 0.8s ease-out;
+}
+
+.headerContent h2 {
+    color: black;
+    font-size: 1vw;
+    margin: 0;
+    font-family: 'Verdana';
+    font-weight: 400;
+    white-space: nowrap;
+    position: relative;
+    z-index: 2;
+    animation: fadeIn 1s ease-out 0.3s both;
+}
+
+.flatButton {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    font-family: 'Arial', sans-serif;
+    text-decoration: none;
+    padding: 12px 20px;
+    border: none;
+    margin-top: 25px;
+    display: inline-block;
+    animation: fadeIn 1s 1.8s backwards;
+    white-space: nowrap;
+    color: white;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, #4b2e83, #6a3fad);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.flatButton:hover {
+    background: linear-gradient(135deg, #5e3a9b, #7a56c2);
+    color: #ffd700;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), inset 0 -4px 0 rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.flatButton:active {
+    background: linear-gradient(135deg, #4b2e83, #5e3a9b);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3), inset 0 -2px 0 rgba(255, 255, 255, 0.1);
+    transform: translateY(1px);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .headerContent h2 {
+        font-size: 2vw;
+    }
+}

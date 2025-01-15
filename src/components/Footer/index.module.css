@@ -1,115 +1,70 @@
-.page-footer {
-    position: relative;
-    background-attachment: scroll;
-    bottom: 0;
+/* index.module.css */
+.pageFooter {
     width: 100%;
-    height: 40px;
-    line-height: 40px;
-    animation: fadeIn 1s 1.8s backwards;
-    border-top: 1px solid grey;
+    padding: 20px;
+    background: linear-gradient(135deg, #4b2e83, #6a3fad);
+    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
-    box-sizing: border-box;
+    position: relative;
+    bottom: 0;
 }
 
-.page-footer .socialSection {
+.socialSection {
     display: flex;
     align-items: center;
-    white-space: nowrap;
+    gap: 20px;
 }
 
-.page-footer .socialText {
-    color: black;
-    font-size: 18px;
+.socialText {
+    font-size: 16px;
+    font-weight: 500;
 }
 
-.page-footer .socialLinks {
-    display: inline-flex;
-    align-items: center;
-    margin-left: 10px;
+.socialLinks {
+    display: flex;
+    gap: 20px;
 }
 
-.page-footer .socialLinks a {
-    font-size: 18px;
-    color: black;
-    text-decoration: none;
-    margin-left: 10px;
+.socialLink {
+    color: white;
+    font-size: 24px;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.page-footer .socialLinks a:hover {
-    color: #b7a57a;
+.socialLink:hover {
+    color: #ffd700;
+    transform: translateY(-2px);
 }
 
-.page-footer .right-section {
+.rightSection {
     display: flex;
     align-items: center;
     gap: 10px;
-    white-space: nowrap;
 }
 
-.page-footer h1 {
-    font-size: 18px;
-    color: black;
-    margin: 0;
+.rightSection h1 {
+    font-size: 16px;
+    font-weight: 400;
 }
 
-.page-footer .cpSymbol {
-    color: black;
-    font-size: 12px;
+.cpSymbol {
+    font-size: 14px;
 }
 
-@media screen and (max-width: 768px) {
-    .page-footer {
-        height: 36px;
-        line-height: 36px;
-        padding: 0 15px;
+@media (max-width: 768px) {
+    .pageFooter {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
     }
-    
-    .page-footer .socialText {
-        font-size: 16px;
-    }
-    
-    .page-footer .socialLinks a {
-        font-size: 16px;
-        margin-left: 8px;
-    }
-    
-    .page-footer h1 {
-        font-size: 16px;
-    }
-    
-    .page-footer .cpSymbol {
-        font-size: 11px;
-    }
-}
 
-@media screen and (max-width: 600px) {
-    .page-footer {
-        height: 32px;
-        line-height: 32px;
-        padding: 0 10px;
+    .socialSection {
+        flex-direction: column;
     }
-    
-    .page-footer .socialText {
-        display: none;
-    }
-    
-    .page-footer .socialLinks {
-        margin-left: 0;
-    }
-    
-    .page-footer .socialLinks a {
-        font-size: 14px;
-        margin-left: 12px;
-    }
-    
-    .page-footer h1 {
-        font-size: 14px;
-    }
-    
-    .page-footer .cpSymbol {
-        font-size: 10px;
+
+    .socialLinks {
+        gap: 15px;
     }
 }
