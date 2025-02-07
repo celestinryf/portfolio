@@ -12,23 +12,37 @@ const projects = [
     {
         name: 'UMarket 2025',
         video: UMarketDemo,
-        description: 'A marketplace for university students to buy and sell. Built with React, TypeScript Front-end. Node.js, Express Back-end. Python with Pandas and PyTorch for Machine Learning, AWS for cloud, and PostgreSQL for database.',
+        description: 'Led full-stack development of a Social media and marketplace for Univeristy of Washington students. Focused on the API connections and UI/UX.',
         github: 'https://github.com/TechStartupClub/UMarket',
         route: '/projects/UMarket'
     },
     {
         name: 'UWealth 2024',
         video: UWealthDemo,
-        description: 'Stock tracking application with user managment, market data, portfolio management, and analyst recommendations. Data from Alpha Vantage presented by React, JavaScript Front-end. Restful API handled by Express, Node.js Back-end server. User database handled by PostgreSQL.',
+        description: 'Led full-stack development of stock tracking website, focusing on development of internal API and API connections between 3rd party, internal, and client.',
         github: 'https://github.com/TechStartupClub/UWealth',
         route: '/projects/UWealth'
-    },
+    },    
     {
         name: 'Club Website 2024',
         video: ClubWebsiteDemo,
-        description: 'The official Tech Startup Club website built with React, JavaScript, HTML, CSS.',
+        description: 'Developed the website for Tech Startup Club, leading a team of 3 to design and create the website.',
         github: 'https://github.com/TechStartupClub/club-website',
-        route: '/'
+        route: 'https://techstartupclub.netlify.app/'
+    },
+    {
+        name: 'Manchester United Statistical Analysis 2024',
+        // video: UWealthDemo,
+        description: 'Built an app to analyze Manchester Uniteds ttransfer spending in the last 10 years. Used R to create graphs to display data, and to analyze 213,000 players statistics.',
+        // github: 'https://github.com/TechStartupClub/UWealth',
+        route: '/projects/ManUtd'
+    },
+    {
+        name: 'Python Calculus Calculator 2023',
+        // video: UWealthDemo,
+        description: 'Developed a Calculus Calculator app in Pyhton with GUI built with TKinter. Able to complete operations including volume, density, matrix algebra, derivatives, integrals, and more.',
+        // github: 'https://github.com/TechStartupClub/UWealth',
+        route: '/projects/Calculator'
     }
 ];
 
@@ -36,7 +50,9 @@ const ProjectCard = ({ project }) => {
     const techStacks = {
         'UMarket 2025': ['React', 'TypeScript', 'Node.js', 'Express', 'Python', 'AWS', 'PostgreSQL'],
         'UWealth 2024': ['React', 'JavaScript', 'Node.js', 'Express', 'PostgreSQL'],
-        'Club Website 2024': ['React', 'JavaScript', 'HTML', 'CSS']
+        'Club Website 2024': ['React', 'JavaScript', 'HTML', 'CSS'],
+        'Manchester United Statistical Analysis 2024': ['R', 'Python'],
+        'Python Calculus Calculator 2023': ['Python', 'TKinter', 'Bootstrap']
     };
 
     return (

@@ -22,6 +22,12 @@
     gap: 20px;
 }
 
+.tscSection {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 .socialText {
     font-size: 16px;
     font-weight: 500;
@@ -39,7 +45,6 @@
 }
 
 .socialLink:hover {
-    /* color: #ffd700; */
     transform: translateY(-2px);
 }
 
