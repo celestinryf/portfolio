@@ -1,0 +1,75 @@
+/* index.module.css */
+.pageFooter {
+    color: white;
+    position: relative;
+    background-attachment: scroll;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    line-height: 40px;
+    animation: fadeIn 1s 1.8s backwards;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.socialSection {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.socialText {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.socialLinks {
+    display: flex;
+    gap: 20px;
+}
+
+.socialLink {
+    color: white;
+    font-size: 24px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.socialLink:hover {
+    /* color: #ffd700; */
+    transform: translateY(-2px);
+}
+
+.rightSection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rightSection h1 {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.cpSymbol {
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .pageFooter {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .socialSection {
+        flex-direction: column;
+    }
+
+    .socialLinks {
+        gap: 15px;
+    }
+}
