@@ -101,12 +101,6 @@ const Projects = () => {
     return (
         <div className={style.layoutWrapper}>
             <div className={style.mainContent}>
-                <section className={style.header}>
-                    <div className={style.content}>
-                        <h1>Projects</h1>
-                        <p>Industry-standard applications built with modern tech stacks</p>
-                    </div>
-                </section>
                 <div className={style.projectsSection}>
                     <div className={style.projectsGrid}>
                         {projects.map((project, index) => (

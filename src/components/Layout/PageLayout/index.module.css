@@ -2,6 +2,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative; /* Add this */
 }
 
 .mainContent {
@@ -10,4 +11,17 @@
     max-width: 1440px;
     margin: 0 auto;
     width: 100%;
+    position: relative;
+    margin-top: 70px;
+}
+
+.mainContent::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
 }

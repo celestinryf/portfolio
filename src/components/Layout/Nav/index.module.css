@@ -1,6 +1,6 @@
 .nav-bar {
     width: 100%;
-    height: 95px;
+    height: 70px;
     position: fixed;
     top: 0;
     left: 0;
@@ -9,31 +9,36 @@
     transition: all 0.3s ease;
 
     &.scrolled {
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        background: linear-gradient(135deg, #65bdfc 0%, #1bafff 100%);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        background-color: #161616;
+        background-image: linear-gradient(180deg, 
+            rgba(0,0,0,1) 0%, 
+            rgba(0,0,0,0.5) 40%, 
+            rgba(0,0,0,0) 100%);
     }
 
     .nav-content {
-        max-width: 1400px;
+        max-width: 95%;
         height: 100%;
         margin: 0 auto;
         padding: 0 20px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
     }
 
     .logo {
         display: flex;
         align-items: center;
-        height: 80%;
+        height: 100%;
         padding: 10px 0;
         z-index: 2;
+        margin-right: 2rem;
 
         img {
             height: 100%;
             width: auto;
             object-fit: contain;
+            border-radius: 50%;
         }
     }
 
@@ -41,8 +46,7 @@
         display: none;
         background: none;
         border: none;
-        font-size: 24px;
-        color: #32006e;
+        font-size: 20px;
         cursor: pointer;
         padding: 10px;
         z-index: 2;
@@ -56,16 +60,17 @@
     nav {
         display: flex;
         align-items: center;
-        gap: 2rem;
+        gap: 1rem;
+        flex: 1;
 
         .nav-link {
-            font-size: 20px;
-            color: black;
+            font-size: 17px;
             text-decoration: none;
             padding: 8px 16px;
             border-radius: 50px;
             transition: all 0.3s ease;
             position: relative;
+            color: white;
 
             &:after {
                 content: '';
@@ -86,12 +91,8 @@
             }
 
             &.active {
-                background: #32006e;
-                color: white;
-
-                &:hover {
-                    background: #4a0098;
-                }
+                background: linear-gradient(135deg, #58b4f6 0%, #0da6f8 100%);
+                color: black;
 
                 &:after {
                     display: none;
@@ -102,9 +103,9 @@
                 background: linear-gradient(135deg, #58b4f6 0%, #0da6f8 100%);
                 color: black;
                 font-weight: 600;
+                margin-left: auto;
 
                 &:hover {
-                    background: linear-gradient(135deg, #65bdfc 0%, #1bafff 100%);
                     transform: translateY(-2px);
                 }
 
@@ -124,6 +125,13 @@
     .nav-bar {
         .menu-toggle {
             display: block;
+            margin-left: auto;
+             color: white;
+
+             &:hover {
+                color: #65bdfc;
+            }
+
         }
 
         nav {
@@ -140,7 +148,8 @@
             visibility: hidden;
             transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            background: linear-gradient(135deg, #65bdfc 0%, #1bafff 100%);
+            background-color: #161616;
+
             &.open {
                 transform: translateY(0);
                 opacity: 1;
@@ -159,6 +168,7 @@
 
                 &:hover {
                     background: linear-gradient(135deg, #65bdfc 0%, #1bafff 100%);
+                    color: black;
                 }
 
                 &.active {
@@ -167,6 +177,7 @@
 
                 &.join-link {
                     margin-top: 10px;
+                    margin-left: 0;
                 }
             }
         }
