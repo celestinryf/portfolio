@@ -68,11 +68,6 @@ const Skills = () => {
             description: 'Data Visualization'
         },
         {
-            title: 'PostgreSQL',
-            icon: <SiPostgresql />,
-            description: 'Data Analysis & Querying'
-        },
-        {
             title: 'Matplotlib',
             icon: <SiPython />,
             description: 'Data Visualization Library'
