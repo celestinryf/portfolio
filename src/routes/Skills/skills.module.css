@@ -1,0 +1,120 @@
+.layoutWrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    max-width: 100vw;
+    overflow-x: hidden;
+    animation: fadeIn 1s 0.3s backwards;
+}
+
+.mainContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1440px;
+}
+
+.skillSection {
+    flex: 1;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+}
+
+.sectionTitle {
+    color: white;
+    font-size: 2.75rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.sectionTitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(135deg, #58b4f6 0%, #0da6f8 100%);
+}
+
+.skillsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px);
+    gap: 1.5rem;
+    max-width: 1440px;
+    margin: 0 auto;
+    place-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.skillCard {
+    background: #1e1e1e;
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.skillCard:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(88, 180, 246, 0.2);
+}
+
+.icon {
+    color: #58b4f6;
+    font-size: 2.5rem;
+}
+
+.skillTitle {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.skillDescription {
+    color: #888;
+    font-size: 1.25rem;
+    text-align: center;
+    line-height: 1.4;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .mainContent {
+        padding: 70px 1rem 2rem;
+        gap: 3rem;
+    }
+
+    .sectionTitle {
+        font-size: 2rem;
+    }
+
+    .skillsGrid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+}

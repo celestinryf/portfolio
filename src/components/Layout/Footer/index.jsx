@@ -27,7 +27,7 @@ const Footer = () => {
                         <FontAwesomeIcon icon={faLinkedin} />
                     </a>
                     <a 
-                        href="https://discord.gg/SPJnwq5hPk" 
+                        href="https://discord.com/users/422882789390680064" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className={styles.socialLink}

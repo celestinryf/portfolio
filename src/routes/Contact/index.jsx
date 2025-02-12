@@ -23,12 +23,6 @@ const Contact = () => {
     return (
         <div className={style.layoutWrapper}>
             <div className={style.mainContent}>
-                <section className={style.header}>
-                    <div className={style.content}>
-                        <h1>Get In Touch</h1>
-                        <p>Have questions? We'd love to hear from you.</p>
-                    </div>
-                </section>
                 <div className={style.container}>
                     <div className={style['contact-page']}>
                         <div className={style['text-zone']}>
