@@ -7,13 +7,13 @@ const Experience = () => {
         {
             title: 'Club President, Founder',
             company: 'Tech Startup Club',
-            period: 'Jun 2023 - Present',
+            period: 'Sep 2024 - Present',
             type: 'work',
             tech: 'React, TypeScript, Node.js, Express.js, RestfulAPI, AWS, PostgreSQL',
             achievements: [
-                'Led Website development for a seamless user experience.',
+                'Led Website and mobile app development for a social media & marketplace, a stock tracking website, and websites for multiple clubs.',
                 'Built an assignment creation app for UWT SET facilitators using ML, reducing workflows by 2hrs a week.',
-                'Optimized system performance for 10,000+ users and 50 million bookings.'
+                'Consumed 3 clubs under my wing, becoming the most attended club on campus.'
             ]
         },
         {
@@ -23,9 +23,9 @@ const Experience = () => {
             type: 'education',
             tech: 'Java, Git, Github, MySQL, Docker, Agile & Scrum',
             achievements: [
-                'Developed chat and video consultation features for patient engagement.',
-                'Built an analytics dashboard, improving data insights for Soccer enthusiasts.',
-                'Optimized Lighthouse score, boosting application performance.'
+                'Placed in the top 10 at the ICPC coding competition',
+                'Competed in an AI hackathon, building an app for recruiters to easily search, setup interviews, and create linkedin ads',
+                'Became the 2nd ever Junior that hadnt taken data structures to be interviewed to be a facilitator.'
             ]
         },
         {
@@ -36,8 +36,8 @@ const Experience = () => {
             tech: 'Python, R, Matplotlib, Tablaeu',
             achievements: [
                 'Worked closely with a Calculus Professor to develop a Calculator app in python.',
-                'Built a notes app using tkinter',
-                'Optimized Lighthouse score, boosting application performance.'
+                'Analyzed Man Utds transfer spending over the last 10 years, comparing 213,000 players',
+                'Built a notes app using tkinter'
             ]
         }
     ];
