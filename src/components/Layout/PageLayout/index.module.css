@@ -3,15 +3,18 @@
     display: flex;
     flex-direction: column;
     position: relative; /* Add this */
+    overflow-x: hiddenx;
 }
 
 .mainContent {
     flex: 1;
     padding: 2rem 1rem;
-    max-width: 1440px;
+    max-width: 95%;
+    align-items: center;
     margin: 0 auto;
     width: 100%;
     position: relative;
+    flex-direction: column;
     margin-top: 70px;
 }
 
@@ -21,7 +24,6 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 20px;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%);
     pointer-events: none;
 }

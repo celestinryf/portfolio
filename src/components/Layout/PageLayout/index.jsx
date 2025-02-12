@@ -3,19 +3,16 @@ import Navbar from '../Nav';
 import Footer from '../Footer';
 import styles from './index.module.css';
 
-// interface PageLayoutProps {
-//     children: React.ReactNode;
-//     showFooter?: boolean;
-// }
-
-const PageLayout= ({ 
+const PageLayout = ({ 
     children, 
     showFooter = true 
 }) => {
     return (
         <div className={styles.layoutContainer}>
             <Navbar />
-            {children}
+            <div className={styles.mainContent}>
+                {children}
+            </div>
             {showFooter && <Footer />}
         </div>
     );

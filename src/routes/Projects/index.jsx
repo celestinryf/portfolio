@@ -2,11 +2,43 @@
 import React from 'react';
 import style from './projects.module.css';
 import { FaGithub } from 'react-icons/fa';
+import { 
+    FaReact, 
+    FaNode, 
+    FaPython, 
+    FaAws, 
+    FaBootstrap 
+} from 'react-icons/fa';
+import { 
+    SiTypescript, 
+    SiExpress, 
+    SiPostgresql, 
+    SiJavascript,
+    SiHtml5,
+    SiCss3,
+    SiR
+} from 'react-icons/si';
 import { Link } from 'react-router-dom';
 
 import ClubWebsiteDemo from '../../assets/images/ClubWebsite/videos/ClubWebsite demo.mov';
 import UMarketDemo from '../../assets/images/UMarket/videos/UMarket demo.mov';
 import UWealthDemo from '../../assets/images/UWealth/Videos/UWealth video.mp4';
+
+const techStackIcons = {
+    'React': <FaReact />,
+    'TypeScript': <SiTypescript />,
+    'Node.js': <FaNode />,
+    'Express': <SiExpress />,
+    'Python': <FaPython />,
+    'AWS': <FaAws />,
+    'PostgreSQL': <SiPostgresql />,
+    'JavaScript': <SiJavascript />,
+    'HTML': <SiHtml5 />,
+    'CSS': <SiCss3 />,
+    'R': <SiR />,
+    'TKinter': <FaPython />,
+    'Bootstrap': <FaBootstrap />
+};
 
 const projects = [
     {
@@ -33,7 +65,7 @@ const projects = [
     {
         name: 'Manchester United Statistical Analysis 2024',
         // video: UWealthDemo,
-        description: 'Built an app to analyze Manchester Uniteds ttransfer spending in the last 10 years. Used R to create graphs to display data, and to analyze 213,000 players statistics.',
+        description: 'Built an app to analyze Manchester Uniteds ttransfer spending in the last 10 years. Used R to create graphs, to display data, and to analyze 213,000 players statistics.',
         // github: 'https://github.com/TechStartupClub/UWealth',
         route: '/projects/ManUtd'
     },
@@ -58,18 +90,20 @@ const ProjectCard = ({ project }) => {
     return (
         <div className={style.projectCard}>
             <Link to={project.route} className={style.cardContent}>
-                <div className={style.videoContainer}>
-                    <video 
-                        src={project.video} 
-                        muted 
-                        loop 
-                        playsInline
-                        autoPlay
-                        className={style.projectVideo}
-                    >
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
+                {project.video && (
+                    <div className={style.videoContainer}>
+                        <video 
+                            src={project.video} 
+                            muted 
+                            loop 
+                            playsInline
+                            autoPlay
+                            className={style.projectVideo}
+                        >
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                )}
                 <div className={style.projectInfo}>
                     <h2>{project.name}</h2>
                     <p>{project.description}</p>
@@ -77,19 +111,22 @@ const ProjectCard = ({ project }) => {
                         <div className={style.techStack}>
                             {techStacks[project.name]?.map((tech, index) => (
                                 <span key={index} className={style.techBadge}>
+                                    <span className={style.techIcon}>{techStackIcons[tech]}</span>
                                     {tech}
                                 </span>
                             ))}
                         </div>
-                        <a 
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={style.githubLink}
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            <FaGithub /> View on GitHub
-                        </a>
+                        {project.github && (
+                            <a 
+                                href={project.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={style.githubLink}
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                <FaGithub /> View on GitHub
+                            </a>
+                        )}
                     </div>
                 </div>
             </Link>
