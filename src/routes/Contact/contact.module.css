@@ -1,214 +1,290 @@
-.layoutWrapper {
-    display: flex;
-    flex-direction: column;
-    /* min-height: 100vh; */
-    align-items: center;
-    justify-content: center;
+.pageWrapper {
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    color: white;
 }
 
-.mainContent {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100%;
+.heroSection {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    padding: 3rem 1rem;
 }
 
-.container {
-    flex: 1;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.heroSection h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: white;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.contact-page {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 90%;
-    max-width: 1400px;
-    gap: 4vw;
+.heroSection p {
+    font-size: 1.25rem;
+    max-width: 600px;
     margin: 0 auto;
 }
 
-.text-zone {
-    width: 45%;
+.contentWrapper {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    h1 {
-        text-align: center;
-        font-size: clamp(1.5rem, 3vw, 2.5rem);
-        margin-bottom: 2vw;
-        color: #333;
-    }
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
-.contact-form {
-    width: 100%;
-    background-color: white;
-    padding: 2.5rem;
+.contactInfo {
+    flex: 1;
+}
+
+.infoCard {
+    background: rgba(30, 30, 30, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2),
+                0 8px 16px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.infoCard h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.contactDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.contactLink {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #a5a5a5;
+    text-decoration: none;
+    padding: 0.75rem;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.contactLink:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(5px);
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    color: #58b4f6;
+}
+
+.availability {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.availability h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.availability ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.availability li {
+    color: #a5a5a5;
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.availability li::before {
+    content: "•";
+    color: #58b4f6;
+    font-weight: bold;
+}
+
+.formSection {
+    flex: 2;
+}
+
+.formCard {
+    background: rgba(30, 30, 30, 0.9);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2),
+                0 8px 16px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.formCard h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.contactForm {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    
-    ul {
-        list-style: none;
-        padding: 0;
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-        
-        li {
-            margin: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            opacity: 1;
-            animation: fadeInUp 1s ease-out;
-            
-            &.half {
-                width: calc(50% - 0.75rem);
-            }
-
-            input, textarea {
-                width: 100%;
-            }
-        }
-    }
-    
-    input[type='text'],
-    input[type='email'],
-    textarea {
-        width: 100%;
-        padding: 1rem;
-        background: #f5f5f5;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 1rem;
-        color: black;
-        
-        &:focus {
-            outline: 2px solid orange;
-            background: white;
-        }
-    }
-    
-    textarea {
-        min-height: 15vh;
-        resize: none;
-    }
-    
-    .flat-button {
-        background: transparent;
-        color: #32006e;
-        border: 2px solid #32006e;
-        padding: 1rem 2rem;
-        font-size: 1rem;
-        letter-spacing: 2px;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        float: right;
-        
-        &:hover {
-            color: black;
-        }
-    }
+    gap: 1.5rem;
 }
 
-.about-img {
-    width: 45%;
+.formRow {
     display: flex;
-    justify-content: center;
+    gap: 1.5rem;
+}
+
+.formGroup {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.formGroup label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #a5a5a5;
+}
+
+.formGroup input,
+.formGroup textarea {
+    color: white;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+    outline: none;
+    border-color: #58b4f6;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+    color: white;
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+    color: #666;
+}
+
+.formGroup textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.submitButton {
+    display: flex;
     align-items: center;
-    
-    .mainLogo {
-        width: 20vw;
-        max-width: 450px;
-        height: auto;
-    }
+    justify-content: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #58b4f6 0%, #0da6f8 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
 }
 
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.submitButton:hover {
+    transform: translateY(-2px);
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+.submitButton:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
 }
 
-@keyframes fadeInUp {
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+.sendIcon {
+    width: 18px;
+    height: 18px;
+}
+
+.alert {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+}
+
+.alertSuccess {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.alertError {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+@keyframes spin {
     from {
-        opacity: 0;
-        transform: translateY(20px);
+        transform: rotate(0deg);
     }
     to {
-        opacity: 1;
-        transform: translateY(0);
+        transform: rotate(360deg);
     }
 }
 
 @media screen and (max-width: 768px) {
-    .contact-page {
+    .contentWrapper {
         flex-direction: column;
-        width: 85%;
     }
-    
-    .text-zone {
-        width: 100%;
-    }
-    
-    .contact-form {
-        width: 90%;
-        
-        ul {
-            width: 100%;
 
-            li.half {
-                width: 100%;
-            }
-        }
+    .formRow {
+        flex-direction: column;
     }
-    
-    .about-img {
-        width: 70%;
-        
-        .mainLogo {
-            width: 40vw;
-            max-width: 350px;
-        }
+
+    .heroSection h1 {
+        font-size: 2.5rem;
+    }
+
+    .infoCard, .formCard {
+        padding: 1.5rem;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .contact-page {
-        width: 95vw;
+    .heroSection {
+        padding: 2rem 1rem;
     }
 
-    .contact-form {
-        padding: 1.5rem;
+    .heroSection h1 {
+        font-size: 2rem;
+    }
+
+    .contactDetails {
+        gap: 0.75rem;
+    }
+
+    .submitButton {
+        width: 100%;
     }
 }
