@@ -18,7 +18,7 @@ const Experience = () => {
         },
         {
             title: 'University of Washington',
-            company: 'Bachelors in computer science',
+            company: 'Bachelors in Computer Science',
             period: 'Sep 2023 - Exp. Jun 2026',
             type: 'education',
             tech: 'Java, Git, Github, MySQL, Docker, Agile & Scrum',

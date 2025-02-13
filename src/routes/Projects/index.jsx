@@ -42,6 +42,13 @@ const techStackIcons = {
 
 const projects = [
     {
+        name: 'UAssignment 2025',
+        video: UMarketDemo,
+        description: 'Led full-stack development of a worksheet creation app for UWT SET Factilitators. Led a team for migration from Google Drive documents to PostgreSQL server, training a model on this database to auto-generate worksheets given users keywords.',
+        github: 'https://github.com/TechStartupClub/UMarket',
+        route: '/projects/UAssignment'
+    },
+    {
         name: 'UMarket 2025',
         video: UMarketDemo,
         description: 'Led full-stack development of a Social media and marketplace for Univeristy of Washington students. Focused on the API connections and UI/UX.',
@@ -75,16 +82,25 @@ const projects = [
         description: 'Developed a Calculus Calculator app in Pyhton with GUI built with TKinter. Able to complete operations including volume, density, matrix algebra, derivatives, integrals, and more.',
         // github: 'https://github.com/TechStartupClub/UWealth',
         route: '/projects/Calculator'
+    },
+    {
+        name: 'Python Notes App 2023',
+        // video: UWealthDemo,
+        description: 'Developed a Calculus Calculator app in Pyhton with GUI built with TKinter. Able to complete operations including volume, density, matrix algebra, derivatives, integrals, and more.',
+        // github: 'https://github.com/TechStartupClub/UWealth',
+        route: '/projects/Calculator'
     }
 ];
 
 const ProjectCard = ({ project }) => {
     const techStacks = {
-        'UMarket 2025': ['React', 'TypeScript', 'Node.js', 'Express', 'Python', 'AWS', 'PostgreSQL'],
+        'UAssignment 2025': ['React', 'TypeScript', 'Node.js', 'Express', 'Python', 'AWS', 'PostgreSQL'],
+        'UMarket 2025': ['React', 'TypeScript', 'Node.js', 'Express', 'SupaBase', 'PostgreSQL'],
         'UWealth 2024': ['React', 'JavaScript', 'Node.js', 'Express', 'PostgreSQL'],
         'Club Website 2024': ['React', 'JavaScript', 'HTML', 'CSS'],
         'Manchester United Statistical Analysis 2024': ['R', 'Python'],
-        'Python Calculus Calculator 2023': ['Python', 'TKinter', 'Bootstrap']
+        'Python Calculus Calculator 2023': ['Python', 'TKinter', 'Bootstrap'],
+        'Python Notes App 2023': ['Python', 'TKinter', 'Bootstrap']
     };
 
     return (
