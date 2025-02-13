@@ -5,6 +5,7 @@
     font-family: "Arial", sans-serif;
     line-height: 1.7;
     text-align: center;
+    animation: fadeIn 1s 0.3s backwards;
   }
   
   .heading {
@@ -42,4 +43,14 @@
     background: #007bff;
     color: white;
   }
-  
+
+  @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
