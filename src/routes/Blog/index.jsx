@@ -84,7 +84,7 @@ const Blog = () => {
         <div className={style.layoutWrapper}>
             <div className={style.mainContent}>
                 <h1 className={style.mainTitle}>
-                    <span className={style.emoji}>📝</span> Blog Posts
+                    Blog Posts
                 </h1>
                 
                 <div className={style.postsGrid}>
