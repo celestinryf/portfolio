@@ -41,13 +41,13 @@ const techStackIcons = {
 };
 
 const projects = [
-    {
-        name: 'UAssignment 2025',
-        video: UMarketDemo,
-        description: 'Led full-stack development of a worksheet creation app for UWT SET Factilitators. Led a team for migration from Google Drive documents to PostgreSQL server, training a model on this database to auto-generate worksheets given users keywords.',
-        github: 'https://github.com/TechStartupClub/UMarket',
-        route: '/projects/UAssignment'
-    },
+    // {
+    //     name: 'UAssignment 2025',
+    //     video: UMarketDemo,
+    //     description: 'Led full-stack development of a worksheet creation app for UWT SET Factilitators. Led a team for migration from Google Drive documents to PostgreSQL server, training a model on this database to auto-generate worksheets given users keywords.',
+    //     github: 'https://github.com/TechStartupClub/UMarket',
+    //     route: '/projects/UAssignment'
+    // },
     {
         name: 'UMarket 2025',
         video: UMarketDemo,
@@ -94,7 +94,7 @@ const projects = [
 
 const ProjectCard = ({ project }) => {
     const techStacks = {
-        'UAssignment 2025': ['React', 'TypeScript', 'Node.js', 'Express', 'Python', 'AWS', 'PostgreSQL'],
+        // 'UAssignment 2025': ['React', 'TypeScript', 'Node.js', 'Express', 'Python', 'AWS', 'PostgreSQL'],
         'UMarket 2025': ['React', 'TypeScript', 'Node.js', 'Express', 'SupaBase', 'PostgreSQL'],
         'UWealth 2024': ['React', 'JavaScript', 'Node.js', 'Express', 'PostgreSQL'],
         'Club Website 2024': ['React', 'JavaScript', 'HTML', 'CSS'],
