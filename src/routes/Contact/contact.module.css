@@ -1,6 +1,5 @@
 .pageWrapper {
-    min-height: 100vh;
-    padding: 2rem 1rem;
+    padding: 1rem 1rem;
     color: white;
     animation: fadeIn 1s 0.3s backwards;
 }
@@ -15,7 +14,6 @@
 .heroSection h1 {
     font-size: 3.5rem;
     font-weight: 700;
-    margin-bottom: 1rem;
     background: white;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
