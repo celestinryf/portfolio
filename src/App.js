@@ -9,6 +9,7 @@ import Skills from './routes/Skills/index.jsx';
 import Blog from './routes/Blog/index.jsx';
 import Contact from './routes/Contact/index.jsx';
 import UWealth from './routes/UWealth/index.jsx';
+import About from './routes/About/index.jsx';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/skills" element={<Skills />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
             <Route path="/projects/UWealth" element={<UWealth />} />
         </Routes>
       </PageLayout>
