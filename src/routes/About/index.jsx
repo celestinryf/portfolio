@@ -1,4 +1,6 @@
 import styles from "./about.module.css";
+import OrangePin from '../../assets/images/logos/Tech Startup Club Logo.png';
+import { FaLinkedin, FaGithub, FaPhone } from 'react-icons/fa';
 
 const About = () => {
   return (
@@ -33,13 +35,20 @@ const About = () => {
 
       <div className={styles.links}>
         <a href="https://www.linkedin.com/in/celestinryf/" target="_blank" rel="noopener noreferrer" className={styles.link}>
+          <FaLinkedin className={styles.icon} />
           LinkedIn
         </a>
         <a href="https://github.com/celestinryf" target="_blank" rel="noopener noreferrer" className={styles.link}>
+          <FaGithub className={styles.icon} />
           GitHub
         </a>
         <a href="https://uwtechstartupclub.netlify.app/" target="_blank" rel="noopener noreferrer" className={styles.link}>
+          <img src={OrangePin} alt="Tech Startup Club" className={styles.clubIcon} />
           Tech Startup Club
+        </a>
+        <a href="tel:+12538819185" className={styles.link}>
+          <FaPhone className={styles.icon} />
+          253-881-9185
         </a>
       </div>
     </div>
