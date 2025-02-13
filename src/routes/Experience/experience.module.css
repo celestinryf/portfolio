@@ -173,11 +173,7 @@
     }
 }
 
-@media (max-width: 768px) {
-    .mainContent {
-        padding: 70px 1rem 2rem;
-    }
-
+@media (max-width: 1080px) {
     .mainTitle {
         font-size: 2rem;
     }
@@ -188,6 +184,7 @@
 
     .timelineItem:nth-child(odd) .timelineContent,
     .timelineItem:nth-child(even) .timelineContent {
+        margin-top: 70px;
         margin-left: 60px;
         margin-right: 20px;
         width: calc(100% - 80px);

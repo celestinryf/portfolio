@@ -24,7 +24,7 @@ const Experience = () => {
             tech: 'Java, Git, Github, MySQL, Docker, Agile & Scrum',
             achievements: [
                 'Placed in the top 10 at the ICPC coding competition',
-                'Competed in an AI hackathon, building an app for recruiters to easily search, setup interviews, and create linkedin ads',
+                'Competed in an AI hackathon, building an app for recruiters to easily search for candidates, setup interviews, and create linkedin ads',
                 'Became the 2nd ever Junior that hadnt taken data structures to be interviewed to be a facilitator.'
             ]
         },
@@ -46,7 +46,7 @@ const Experience = () => {
         <div className={style.layoutWrapper}>
             <div className={style.mainContent}>
                 <h1 className={style.mainTitle}>
-                    <span className={style.emoji}>📅</span> Work Experience & Education Timeline
+                    Work Experience & Education Timeline
                 </h1>
                 
                 <div className={style.timeline}>
