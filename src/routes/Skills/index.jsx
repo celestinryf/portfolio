@@ -112,7 +112,7 @@ const Skills = () => {
 
    const otherTools = [
        {
-           title: 'Github',
+           title: 'Git & Github',
            icon: <FaGithub />,
            description: 'Version Control'
        },

@@ -1,13 +1,14 @@
 // Projects.jsx
 import React from 'react';
 import style from './projects.module.css';
-import { FaGithub } from 'react-icons/fa';
 import { 
     FaReact, 
     FaNode, 
     FaPython, 
     FaAws, 
-    FaBootstrap 
+    FaBootstrap,
+    FaDocker,
+    FaGithub
 } from 'react-icons/fa';
 import { 
     SiTypescript, 
@@ -18,6 +19,8 @@ import {
     SiCss3,
     SiR
 } from 'react-icons/si';
+import { Database } from 'lucide-react'
+
 import { Link } from 'react-router-dom';
 
 import ClubWebsiteDemo from '../../assets/images/ClubWebsite/videos/ClubWebsite demo.mov';
@@ -37,7 +40,9 @@ const techStackIcons = {
     'CSS': <SiCss3 />,
     'R': <SiR />,
     'TKinter': <FaPython />,
-    'Bootstrap': <FaBootstrap />
+    'Bootstrap': <FaBootstrap />,
+    'Supabase': <Database />,
+    'Docker': <FaDocker/>
 };
 
 const projects = [
@@ -95,7 +100,7 @@ const projects = [
 const ProjectCard = ({ project }) => {
     const techStacks = {
         // 'UAssignment 2025': ['React', 'TypeScript', 'Node.js', 'Express', 'Python', 'AWS', 'PostgreSQL'],
-        'UMarket 2025': ['React', 'TypeScript', 'Node.js', 'Express', 'SupaBase', 'PostgreSQL'],
+        'UMarket 2025': ['React', 'TypeScript', 'Node.js', 'Express', 'SupaBase', 'PostgreSQL', 'Docker'],
         'UWealth 2024': ['React', 'JavaScript', 'Node.js', 'Express', 'PostgreSQL'],
         'Club Website 2024': ['React', 'JavaScript', 'HTML', 'CSS'],
         'Manchester United Statistical Analysis 2024': ['R', 'Python'],
