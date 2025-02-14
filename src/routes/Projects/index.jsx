@@ -93,7 +93,7 @@ const projects = [
         // video: UWealthDemo,
         description: 'Developed a Calculus Calculator app in Pyhton with GUI built with TKinter. Able to complete operations including volume, density, matrix algebra, derivatives, integrals, and more.',
         // github: 'https://github.com/TechStartupClub/UWealth',
-        route: '/projects/Calculator'
+        route: '/projects/NotesApp'
     }
 ];
 
