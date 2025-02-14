@@ -26,6 +26,7 @@ import { Link } from 'react-router-dom';
 import ClubWebsiteDemo from '../../assets/images/ClubWebsite/videos/ClubWebsite demo.mov';
 import UMarketDemo from '../../assets/images/UMarket/videos/UMarket demo.mov';
 import UWealthDemo from '../../assets/images/UWealth/Videos/UWealth video.mp4';
+import Notesapp from '../../assets/images/projects/Notesapp/Screenshot 2025-02-13 211351.png';
 
 const techStackIcons = {
     'React': <FaReact />,
@@ -90,7 +91,7 @@ const projects = [
     },
     {
         name: 'Python Notes App 2023',
-        // video: UWealthDemo,
+        video: Notesapp,
         description: 'Developed a Calculus Calculator app in Pyhton with GUI built with TKinter. Able to complete operations including volume, density, matrix algebra, derivatives, integrals, and more.',
         // github: 'https://github.com/TechStartupClub/UWealth',
         route: '/projects/NotesApp'
