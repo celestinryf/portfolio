@@ -124,6 +124,7 @@ const ProjectCard = ({ project }) => {
                         >
                             Your browser does not support the video tag.
                         </video>
+                        
                     </div>
                 )}
                 <div className={style.projectInfo}>
