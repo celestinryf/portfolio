@@ -101,6 +101,9 @@ const Contact = () => {
                                 <li>Full-stack Development</li>
                                 <li>Frontend Development</li>
                                 <li>Backend Development</li>
+                                <li>Database Development</li>
+                                <li>AI/ML</li>
+                                <li>Data Science & Analytics</li>
                             </ul>
                         </div>
                     </div>

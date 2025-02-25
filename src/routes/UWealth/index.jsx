@@ -4,7 +4,7 @@ import style from './uwealth.module.css';
 import UWealthVideo from '../../assets/images/UWealth/Videos/UWealth video.mp4';
 import AnalystRec from '../../assets/images/UWealth/images/Analyst Recs.png';
 import StockStats from '../../assets/images/UWealth/images/Stock Stats.png';
-import StockSummary from '../../assets/images/UWealth/images/Stock Summary.png';
+import StockSummary from '../../assets/images/UWealth/images/Stock-Summary.png';
 
 const UWealth = () => {
     return (
