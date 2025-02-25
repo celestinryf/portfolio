@@ -7,6 +7,7 @@ import umarketImage from '../../assets/images/UMarket/images/UMarket.PNG';
 import uwealthImage3 from '../../assets/images/UWealth/images/mobile-uwealth2.png';
 import tscHackathonFlyer1 from '../../assets/images/Hackathons/TSC/Draft5.jpg';
 import urecruiter from '../../assets/images/URecruiter/Screenshot.png';
+import urecruiter2 from '../../assets/images/URecruiter/Screenshot2.png';
 
 const Home = () => {
     // Prevent scrolling on this page
@@ -29,7 +30,7 @@ const Home = () => {
             id: 2,
             title: 'URecruiter',
             category: 'AI HR tool',
-            imageUrl: urecruiter,
+            imageUrl: urecruiter2,
             link: '/urecruiter'
         },
         {
