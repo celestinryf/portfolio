@@ -6,7 +6,7 @@ import clubImage from '../../assets/images/Meetings/DSC_0207.JPG';
 import umarketImage from '../../assets/images/UMarket/images/UMarket.PNG';
 import uwealthImage3 from '../../assets/images/UWealth/images/mobile-uwealth2.png';
 import tscHackathonFlyer1 from '../../assets/images/Hackathons/TSC/Draft5.jpg';
-import urecruiter from '../../assets/images/URecruiter/Screenshot 2025-02-24 at 11.07.29 PM.png';
+import urecruiter from '../../assets/images/URecruiter/Screenshot.png';
 
 const Home = () => {
     // Prevent scrolling on this page
