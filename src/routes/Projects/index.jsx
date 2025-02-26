@@ -8,7 +8,8 @@ import {
     FaAws, 
     FaBootstrap,
     FaDocker,
-    FaGithub
+    FaGithub,
+    FaOpenAI
 } from 'react-icons/fa';
 import { 
     SiTypescript, 
@@ -17,7 +18,10 @@ import {
     SiJavascript,
     SiHtml5,
     SiCss3,
-    SiR
+    SiR,
+    SiOpenai,
+    SiFlask,
+    SiLangchain
 } from 'react-icons/si';
 import { Database } from 'lucide-react'
 
@@ -27,9 +31,13 @@ import ClubWebsiteDemo from '../../assets/images/ClubWebsite/videos/ClubWebsite 
 import UMarketDemo from '../../assets/images/UMarket/videos/UMarket demo.mov';
 import UWealthDemo from '../../assets/images/UWealth/Videos/UWealth video.mp4';
 import Notesapp from '../../assets/images/projects/Notesapp/Screenshot 2025-02-13 211351.png';
+import Urecruiter from '../../assets/images/URecruiter/Screenshot3.png';
 
 const techStackIcons = {
     'React': <FaReact />,
+    'OpenAI': <SiOpenai />,
+    'Flask': <SiFlask />,
+    'LangChain': <SiLangchain />,
     'TypeScript': <SiTypescript />,
     'Node.js': <FaNode />,
     'Express': <SiExpress />,
@@ -48,12 +56,19 @@ const techStackIcons = {
 
 const projects = [
     // {
-    //     name: 'UAssignment 2025',
+    //     name: 'UFacilitator 2025',
     //     video: UMarketDemo,
     //     description: 'Led full-stack development of a worksheet creation app for UWT SET Factilitators. Led a team for migration from Google Drive documents to PostgreSQL server, training a model on this database to auto-generate worksheets given users keywords.',
     //     github: 'https://github.com/TechStartupClub/UMarket',
     //     route: '/projects/UAssignment'
     // },
+    {
+        name: 'URecruiter 2025',
+        image: Urecruiter,
+        description: '',
+        github: 'https://github.com/celestinryf/URecruiter',
+        route: '/projects/URecruiter'
+    },
     {
         name: 'UMarket 2025',
         video: UMarketDemo,
@@ -101,6 +116,7 @@ const projects = [
 const ProjectCard = ({ project }) => {
     const techStacks = {
         // 'UAssignment 2025': ['React', 'TypeScript', 'Node.js', 'Express', 'Python', 'AWS', 'PostgreSQL'],
+        'URecruiter 2025': ['OpenAI', 'Python', 'Flask', 'React', 'JavaScript', 'PostgreSQL'],
         'UMarket 2025': ['React', 'TypeScript', 'Node.js', 'Express', 'SupaBase', 'PostgreSQL', 'Docker'],
         'UWealth 2024': ['React', 'JavaScript', 'Node.js', 'Express', 'PostgreSQL'],
         'Club Website 2024': ['React', 'JavaScript', 'HTML', 'CSS'],

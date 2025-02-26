@@ -65,9 +65,10 @@ const Home = () => {
                         <div className={style.workInfo}>President, Founder of Tech Startup Club at Univeristy of Washington</div>
                         <section className={style.introSection}>
                             <p className={style.introText}>
-                                An independent design studio collaborating with people who
-                                believe in the power of design to transform their brand,
-                                product or idea and take it to the next level.
+                            A forward-thinking engineer balancing technical 
+                            expertise with leadership acumen. Pushing boundaries 
+                            through AI innovation while mentoring the next generation 
+                            to create meaningful impact in educational technology.
                             </p>
                         </section>
                     </div>

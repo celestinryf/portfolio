@@ -12,7 +12,7 @@ const Experience = () => {
             tech: 'React, TypeScript, Node.js, Express.js, RestfulAPI, AWS, PostgreSQL',
             achievements: [
                 'Led Website and mobile app development for a social media & marketplace, a stock tracking website, and websites for multiple clubs.',
-                'Built an assignment creation app for UWT SET facilitators using ML, reducing workflows by 2hrs a week.',
+                'Built an AI assignment creation app for UWT SET facilitators, reducing workflows by 2hrs a week.',
                 'Consumed 3 clubs under my wing, becoming the most attended club on campus.'
             ]
         },
