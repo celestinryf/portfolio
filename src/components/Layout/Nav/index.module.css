@@ -91,11 +91,12 @@
             }
 
             &.active {
-                background: linear-gradient(135deg, #58b4f6 0%, #0da6f8 100%);
-                color: black;
+                /* background: linear-gradient(135deg, #58b4f6 0%, #0da6f8 100%); */
+                /* color: black; */
 
                 &:after {
-                    display: none;
+                    /* display: none; */
+                    width: 80%;
                 }
             }
 
