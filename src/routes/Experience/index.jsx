@@ -17,6 +17,18 @@ const Experience = () => {
         //     ]
         // },
         {
+            title: 'Undergraduarte Research Assistant',
+            company: 'University of Washington',
+            period: 'March 2025 - Present',
+            type: 'work',
+            tech: 'AWS, Python, PyTorch, TensorFlow, Deep Reinforcement Learning, SCADA Systems',
+            achievements: [
+                'Contributing to research team developing actor-critic DRL framework for SCADA anomaly detection',
+                'Implementing data preprocessing pipelines for high-dimensional feature vectors from IIoT network traffic',
+                'Conducting literature review on epsilon-greedy policies and experience replay mechanisms for anomaly detection'
+            ]
+        },
+        {
             title: 'Club President, Founder',
             company: 'Tech Startup Club',
             period: 'Sep 2024 - Present',

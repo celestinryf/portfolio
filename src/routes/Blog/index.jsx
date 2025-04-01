@@ -17,8 +17,63 @@ import post3image4 from '../../assets/images/linkedin/club/post1/4.jpeg';
 import portfolioPostImage1 from '../../assets/images/portfolio/landing.png';
 import portfolioPostImage2 from '../../assets/images/portfolio/projects.png';
 
+import ClubPost2Image1 from '../../assets/images/linkedin/club/post2/1.jpg';
+import ClubPost2Image2 from '../../assets/images/linkedin/club/post2/2.jpg';
+import ClubPost2Image3 from '../../assets/images/linkedin/club/post2/3.jpg';
+
+import post4image1 from '../../assets/images/linkedin/personal/post3/1.jpg';
+
 const Blog = () => {
     const posts = [
+        {
+            title: "🚀 UHackathon 2025: Build, Innovate, Compete! 🚀",
+            date: "March 2025",
+            content: `    
+                Tech Startup Club, Game Dev Club, WiCS, and UX@UWT are proud to present UHackathon—a dynamic 6-hour hackathon where teams of four will collaborate, create, and compete! Whether you're a coding pro or a first-time hacker, this is your chance to showcase your skills, solve real-world challenges, and connect with industry leaders.
+
+                🔹 What’s in it for you?
+                ✅ Work with cutting-edge technology to build an innovative project
+                ✅ Compete for ranked prizes in front of a panel of judges
+                ✅ Network with top companies, mentors, and fellow hackers
+                ✅ Fast-track your idea from concept to prototype
+
+                📅 Date: Saturday, May 17, 9:00 am - 6:00 pm
+                📍 Location: UW Tacoma
+                📝 Register Here: https://lnkd.in/gzsK4b8T
+
+                💡 Event Schedule:
+                🛠 9–10 AM | Team Formation & Kickoff
+                💻 10 AM–4 PM | Coding & Development
+                🍕 12 PM | Pizza Lunch & Networking
+                🏆 4–6 PM | Project Presentations & Judging
+
+                🔗 Join the Discord for Updates: https://lnkd.in/gPjEhDfH
+
+                📩 Questions? Contact Us:
+                📧 celestinryf@gmail.com (cryf@uw.edu)
+                📧 khammett325995@gmail.com (kylieh74@uw.edu)            `,
+            likes: 22,
+            comments: 1,
+            link: "https://www.linkedin.com/feed/update/urn:li:activity:7311095435706712064/",
+            images: [post4image1]
+        },
+        {
+            title: "❄️ That's it for Winter! 🚀",
+            date: "March 2025",
+            content: `    
+                🔥 Our club grew by 150% this quarter, making us the second-largest CS club in attendance, despite having the smallest number of memberships, and only becoming official just before this quarter started.
+
+                💻 We’ve started development on UMarket, a platform for UW students across all campuses to connect and trade. Built with React and Node.js, and powered by cloud infrastructure and Google Auth, UMarket is designed for scalability and ease of use.
+
+                🍊 Beyond building products, four members secured internships this quarter, and we’ve established strong connections with senior industry professionals to create a career pipeline for our ambitious members.
+
+                👀 And we’re just getting started... stay tuned for two more big announcements this week!
+            `,
+            likes: 6,
+            comments: 0,
+            link: "https://www.linkedin.com/feed/update/urn:li:activity:7310102365330657280/",
+            images: [ClubPost2Image1, ClubPost2Image2, ClubPost2Image3]
+        },
         {
             title: "Proud to have made my first portfolio website!",
             date: "February 2025",
