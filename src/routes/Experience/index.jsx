@@ -69,9 +69,6 @@ const Experience = () => {
     return (
         <div className={style.layoutWrapper}>
             <div className={style.mainContent}>
-                <h1 className={style.mainTitle}>
-                    Work Experience & Education Timeline
-                </h1>
                 
                 <div className={style.timeline}>
                     {experiences.map((exp, index) => (
