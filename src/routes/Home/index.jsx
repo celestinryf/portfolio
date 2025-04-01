@@ -24,14 +24,14 @@ const Home = () => {
             title: 'UMarket',
             category: 'TSC Social Media & Marketplace',
             imageUrl: umarketImage,
-            link: 'https://techstartupclub.netlify.app/projects/UMarket'
+            link: 'https://github.com/TechStartupClub/UMarket'
         },
         {
             id: 2,
             title: 'URecruiter',
             category: 'AI HR tool',
             imageUrl: urecruiter2,
-            link: '/urecruiter'
+            link: 'https://github.com/celestinryf/URecruiter'
         },
         {
             id: 3,
@@ -52,7 +52,7 @@ const Home = () => {
             title: 'UWealth',
             category: 'TSC Stock Tracker',
             imageUrl: uwealthImage3,
-            link: 'https://techstartupclub.netlify.app/projects/UWealth'
+            link: 'https://github.com/TechStartupClub/UWealth'
         }
     ];
 

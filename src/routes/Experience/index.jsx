@@ -4,6 +4,18 @@ import { FaGraduationCap, FaBriefcase } from 'react-icons/fa';
 
 const Experience = () => {
     const experiences = [
+        // {
+        //     title: 'Full-stack Developer Intern',
+        //     company: 'Insights Emerge',
+        //     period: 'March 2025 - Present',
+        //     type: 'work',
+        //     tech: 'React, TypeScript, Node.js, Express.js, Docker, PostgreSQL',
+        //     achievements: [
+        //         'Engineered API connections of an LMS for a cosmetics client, improving system efficiency and user experience.',
+        //         'Developed an engaging LMS improving user scores by 15% on average, directly impacting client success.',
+        //         'Accelerated project delivery completing 4 weeks ahead of schedule, allowing time for critique from client'
+        //     ]
+        // },
         {
             title: 'Club President, Founder',
             company: 'Tech Startup Club',

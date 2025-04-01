@@ -1,8 +1,9 @@
 import React from 'react';
 import style from './skills.module.css';
 import { FaJava, FaPython, FaNodeJs, FaAws, FaDocker, FaHtml5, FaReact, FaGithub } from 'react-icons/fa';
-import { SiTypescript, SiJavascript, SiR, SiMysql, SiPostgresql, SiTableau, SiPycharm, SiIntellijidea, SiPandas, SiExpress, SiPython, SiNetlify } from 'react-icons/si';
+import { SiTypescript, SiJavascript, SiR, SiMysql, SiPostgresql, SiTableau, SiPycharm, SiIntellijidea, SiPandas, SiExpress, SiPython, SiNetlify, SiFlask, SiOpenai, SiLangchain, SiAnthropic } from 'react-icons/si';
 import { VscCode } from "react-icons/vsc";
+// import { TbBrandAnthropic } from 'react-icons/tb';
 
 const Skills = () => {
    const frontendSkills = [
@@ -48,6 +49,11 @@ const Skills = () => {
            title: 'Express.js',
            icon: <SiExpress />,
            description: 'Node.js Framework'
+       },
+       {
+           title: 'Flask',
+           icon: <SiFlask />,
+           description: 'Python Web Framework'
        }
    ];
 
@@ -58,11 +64,6 @@ const Skills = () => {
             description: 'Statistical Computing Language'
         },
         {
-            title: 'Python',
-            icon: <FaPython />,
-            description: 'Data Analysis & ML'
-        },
-        {
             title: 'Tableau',
             icon: <SiTableau />,
             description: 'Data Visualization'
@@ -71,6 +72,24 @@ const Skills = () => {
             title: 'Matplotlib',
             icon: <SiPython />,
             description: 'Data Visualization Library'
+        }
+    ];
+
+   const aiMlSkills = [
+        {
+            title: 'LangChain',
+            icon: <SiLangchain />,
+            description: 'LLM Application Framework'
+        },
+        {
+            title: 'Claude API',
+            icon: <SiAnthropic />,
+            description: 'Anthropic LLM Integration'
+        },
+        {
+            title: 'ChatGPT API',
+            icon: <SiOpenai />,
+            description: 'OpenAI LLM Integration'
         }
     ];
 
@@ -166,6 +185,19 @@ const Skills = () => {
                     <h2 className={style.sectionTitle}>Data Science</h2>
                     <div className={style.skillsGrid}>
                         {dataScience.map((skill, index) => (
+                            <div key={index} className={style.skillCard}>
+                                <div className={style.icon}>{skill.icon}</div>
+                                <h3 className={style.skillTitle}>{skill.title}</h3>
+                                <p className={style.skillDescription}>{skill.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                <section className={style.skillSection}>
+                    <h2 className={style.sectionTitle}>AI/ML</h2>
+                    <div className={style.skillsGrid}>
+                        {aiMlSkills.map((skill, index) => (
                             <div key={index} className={style.skillCard}>
                                 <div className={style.icon}>{skill.icon}</div>
                                 <h3 className={style.skillTitle}>{skill.title}</h3>

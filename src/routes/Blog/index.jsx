@@ -14,8 +14,22 @@ import post3image2 from '../../assets/images/linkedin/club/post1/2.jpeg';
 import post3image3 from '../../assets/images/linkedin/club/post1/3.jpeg';
 import post3image4 from '../../assets/images/linkedin/club/post1/4.jpeg';
 
+import portfolioPostImage1 from '../../assets/images/portfolio/landing.png';
+import portfolioPostImage2 from '../../assets/images/portfolio/projects.png';
+
 const Blog = () => {
     const posts = [
+        {
+            title: "Proud to have made my first portfolio website!",
+            date: "February 2025",
+            content: `    
+                Built with JavaScript, React, and Tailwind CSS, to showcase my work in software development. It highlights my experience in full-stack development, API integrations, and leading collaborative projects. 
+            `,
+            likes: 19,
+            comments: 2,
+            link: "https://www.linkedin.com/feed/update/urn:li:activity:7301315103897919488/",
+            images: [portfolioPostImage1, portfolioPostImage2]
+        },
         {
             title: "Wrapping up an exciting first quarter for Tech Startup Club at University of Washington! 🎉",
             date: "December 2024",
