@@ -31,7 +31,7 @@ import ClubWebsiteDemo from '../../assets/images/ClubWebsite/images/Screenshot2.
 import UMarketDemo from '../../assets/images/UMarket/images/UMarket.PNG';
 import UWealthDemo from '../../assets/images/UWealth/images/Stock-Summary.png';
 import Notesapp from '../../assets/images/projects/Notesapp/Screenshot.png';
-import Urecruiter from '../../assets/images/URecruiter/Screenshot4.png';
+import Urecruiter from '../../assets/images/projects/URecruiter/Screenshot4.png';
 import typesheet from '../../assets/images/projects/TypeSheet/images/TypeSheet.png';
 
 const techStackIcons = {
