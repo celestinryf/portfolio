@@ -100,7 +100,7 @@
 }
 
 .projectCard:hover {
-    /* transform: translateY(-5px); */
+    transform: translateY(-10px);
 }
 
 .projectCard:last-child {

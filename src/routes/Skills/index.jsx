@@ -150,6 +150,7 @@ const Skills = () => {
            icon: <SiIntellijidea />,
            description: 'Java IDE'
        }
+       // miro figma
    ];
 
    return (

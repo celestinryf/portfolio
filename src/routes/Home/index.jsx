@@ -6,7 +6,6 @@ import clubImage from '../../assets/images/Meetings/DSC_0207.JPG';
 import umarketImage from '../../assets/images/UMarket/images/UMarket.PNG';
 import uwealthImage3 from '../../assets/images/UWealth/images/mobile-uwealth2.png';
 import tscHackathonFlyer1 from '../../assets/images/Hackathons/TSC/Draft5.jpg';
-import urecruiter from '../../assets/images/URecruiter/Screenshot.png';
 import urecruiter2 from '../../assets/images/URecruiter/Screenshot2.png';
 
 const Home = () => {
@@ -62,7 +61,7 @@ const Home = () => {
                 <header className={style.header}>
                     <div className={style.headerGroup}>
                         <div className={style.studioTitle}>Célestin Ryf</div>
-                        <div className={style.workInfo}>President, Founder of Tech Startup Club at Univeristy of Washington</div>
+                        <div className={style.workInfo}>President & Co-Founder of Tech Startup Club, Host & Co-Founder of UHackathon</div>
                         <section className={style.introSection}>
                             <p className={style.introText}>
                             A forward-thinking engineer balancing technical 

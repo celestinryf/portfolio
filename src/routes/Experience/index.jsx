@@ -4,18 +4,18 @@ import { FaGraduationCap, FaBriefcase } from 'react-icons/fa';
 
 const Experience = () => {
     const experiences = [
-        // {
-        //     title: 'Full-stack Developer Intern',
-        //     company: 'Insights Emerge',
-        //     period: 'March 2025 - Present',
-        //     type: 'work',
-        //     tech: 'React, TypeScript, Node.js, Express.js, Docker, PostgreSQL',
-        //     achievements: [
-        //         'Engineered API connections of an LMS for a cosmetics client, improving system efficiency and user experience.',
-        //         'Developed an engaging LMS improving user scores by 15% on average, directly impacting client success.',
-        //         'Accelerated project delivery completing 4 weeks ahead of schedule, allowing time for critique from client'
-        //     ]
-        // },
+        {
+            title: 'Software Developer Intern',
+            company: 'Insights Emerge',
+            period: 'April 2025 - Present',
+            type: 'work',
+            tech: 'React, JavaScript, Node.js, PostgreSQL, Miro, Figma',
+            achievements: [
+                'Prototyping LMS platform designed to streamline educational content delivery and learning analytics based on user insights',
+                'Conducted user interviews using Miro with 20 individual users finding solutions to insights and opportunities for positive business outcomes',
+                'Conducting cost-benefit analysis between custom LMS development versus integration of enterprise solutions'
+            ]
+        },
         {
             title: 'Undergraduarte Research Assistant',
             company: 'University of Washington',
@@ -36,8 +36,8 @@ const Experience = () => {
             tech: 'React, TypeScript, Node.js, Express.js, RestfulAPI, AWS, PostgreSQL',
             achievements: [
                 'Led Website and mobile app development for a social media & marketplace, a stock tracking website, and websites for multiple clubs.',
-                'Built an AI assignment creation app for UWT SET facilitators, reducing workflows by 2hrs a week.',
-                'Consumed 3 clubs under my wing, becoming the most attended club on campus.'
+                'Built an AI assignment creation and generation app for UWT SET facilitators, reducing workflows by 2hrs a week.',
+                'Founded & Hosted UHackathon, UWTs first ever hackathon, alongside 5 other clubs, all 3 UW campuses, 4 different colleges & universities, and with sponsorship from 2 companies.'
             ]
         },
         {
