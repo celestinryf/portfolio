@@ -57,18 +57,11 @@ const techStackIcons = {
 
 const projects = [
     {
-        name: 'TypeSheet 2025',
+        name: 'WorksheetIQ 2025',
         image: typesheet,
         description: 'Led full-stack development of a worksheet creation app for UWT SET Factilitators. Led a team for migration from Google Drive documents to PostgreSQL server, training a model on this database to auto-generate worksheets given users keywords.',
         github: 'https://github.com/TechStartupClub/TypeSheet',
         route: '/projects/UAssignment'
-    },
-    {
-        name: 'URecruiter 2025',
-        image: Urecruiter,
-        description: '',
-        github: 'https://github.com/celestinryf/URecruiter',
-        route: '/projects/URecruiter'
     },
     {
         name: 'UMarket 2025',
