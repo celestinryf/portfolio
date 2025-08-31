@@ -102,7 +102,7 @@ function MagneticLink({ href, children, strength = 0.3, className = "", onClick 
           ref={innerTextRef}
           className="block font-medium"
           style={{
-            fontSize: 'clamp(1rem, 1.8vw, 1.1rem)', 
+            fontSize: 'clamp(1rem, 1.8vw, 1.2rem)', 
             transform: 'translateY(calc(0.8vw - 0.5rem)) rotate(0.001deg)'
           }}
         >

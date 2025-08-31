@@ -1,57 +1,81 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
-// Parallax hook
+// Centralized parallax controller to prevent drift between elements
+class ParallaxController {
+  private elements: Map<HTMLElement, { speed: number; smoothness: number; currentY: number; targetY: number }> = new Map();
+  private animationFrame: number | null = null;
+  private currentScrollY: number = 0;
+
+  register(element: HTMLElement, speed: number, smoothness: number) {
+    this.elements.set(element, { speed, smoothness, currentY: 0, targetY: 0 });
+  }
+
+  unregister(element: HTMLElement) {
+    this.elements.delete(element);
+  }
+
+  private updatePositions = () => {
+    this.elements.forEach((data, element) => {
+      const rate = this.currentScrollY * -data.speed;
+      data.targetY = rate;
+      
+      // Smooth interpolation
+      data.currentY += (data.targetY - data.currentY) * data.smoothness;
+      
+      // Apply transform
+      element.style.transform = `translateY(${data.currentY}px)`;
+    });
+    
+    this.animationFrame = requestAnimationFrame(this.updatePositions);
+  };
+
+  private handleScroll = () => {
+    this.currentScrollY = window.scrollY;
+    
+    if (!this.animationFrame) {
+      this.animationFrame = requestAnimationFrame(this.updatePositions);
+    }
+  };
+
+  start() {
+    this.updatePositions();
+    window.addEventListener('scroll', this.handleScroll, { passive: true });
+  }
+
+  stop() {
+    window.removeEventListener('scroll', this.handleScroll);
+    if (this.animationFrame) {
+      cancelAnimationFrame(this.animationFrame);
+      this.animationFrame = null;
+    }
+  }
+}
+
+// Global controller instance
+const parallaxController = new ParallaxController();
+
+// Updated parallax hook that uses centralized controller
 interface ParallaxOptions {
   speed: number;
-  smoothness: number;
+  smoothness?: number;
 }
 
 function useParallaxScroll<T extends HTMLElement = HTMLElement>(
-  options?: Partial<ParallaxOptions>
+  options: ParallaxOptions
 ): React.RefObject<T | null> {
-  const { speed = 1, smoothness = 0.1 } = options || {};
+  const { speed, smoothness = 0.12 } = options; // Standardized smoothness
   const ref = useRef<T>(null);
 
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
 
-    let animationFrame: number;
-    let currentY = 0;
-    let targetY = 0;
-
-    const updatePosition = () => {
-      const scrolled = window.scrollY;
-      const rate = scrolled * -speed;
-      
-      targetY = rate;
-      
-      // Smooth interpolation
-      currentY += (targetY - currentY) * smoothness;
-      
-      // Apply transform
-      element.style.transform = `translateY(${currentY}px)`;
-      
-      animationFrame = requestAnimationFrame(updatePosition);
-    };
-
-    const handleScroll = () => {
-      if (!animationFrame) {
-        animationFrame = requestAnimationFrame(updatePosition);
-      }
-    };
-
-    // Initial setup
-    updatePosition();
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    parallaxController.register(element, speed, smoothness);
     
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (animationFrame) {
-        cancelAnimationFrame(animationFrame);
-      }
+      parallaxController.unregister(element);
     };
   }, [speed, smoothness]);
 
@@ -134,20 +158,27 @@ const GlobeSpinner = ({ className = "" }) => {
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
   
-  // Parallax refs with different speeds for layered effect
-  const heroBackgroundRef = useParallaxScroll<HTMLDivElement>({ speed: 0, smoothness: 0.1 });
-  const heroTextDesktopRef = useParallaxScroll<HTMLDivElement>({ speed: 0.3, smoothness: 0.1 });
-  const heroTextMobileRef = useParallaxScroll<HTMLDivElement>({ speed: 0.9, smoothness: 0.15 });
-  const locationPillRef = useParallaxScroll<HTMLDivElement>({ speed: 0.9, smoothness: 0.1 });
-  const contentArea1Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.3, smoothness: 0.1 });
-  const contentArea2Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2, smoothness: 0.1 });
+  // Parallax refs with consistent smoothness and strategic speeds
+  const heroBackgroundRef = useParallaxScroll<HTMLDivElement>({ speed: 0 });
+  const heroTextDesktopRef = useParallaxScroll<HTMLDivElement>({ speed: 0.3 });
+  const heroTextMobileRef = useParallaxScroll<HTMLDivElement>({ speed: 0.6 });
+  const locationPillRef = useParallaxScroll<HTMLDivElement>({ speed: 0.8 });
+  const contentArea1Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.25 });
+  const contentArea2Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2 });
 
   useEffect(() => {
+    // Start the centralized parallax controller
+    parallaxController.start();
+    
     // Trigger animations after component mount
     const timer = setTimeout(() => {
       setIsLoaded(true);
     }, 100);
-    return () => clearTimeout(timer);
+    
+    return () => {
+      clearTimeout(timer);
+      parallaxController.stop();
+    };
   }, []);
 
   return (
@@ -204,14 +235,28 @@ export default function Home() {
           animation-delay: 0.8s;
         }
 
-        /* Smooth scrolling for better parallax effect */
+        /* Remove conflicting smooth scrolling and add section snapping */
         html {
-          scroll-behavior: smooth;
+          scroll-snap-type: y mandatory;
+          scroll-behavior: auto; /* Let parallax handle smoothing */
+        }
+
+        /* Snap points for main sections */
+        .snap-section {
+          scroll-snap-align: start;
+          scroll-snap-stop: always;
+        }
+
+        /* Better mobile scroll snapping */
+        @media (max-width: 768px) {
+          html {
+            scroll-snap-type: y proximity; /* Less aggressive on mobile */
+          }
         }
       `}</style>
 
       {/* Hero Section - Gray Background with Parallax */}
-      <div ref={heroBackgroundRef} className="relative z-10 min-h-screen bg-stone-400">
+      <div ref={heroBackgroundRef} className="relative z-10 min-h-screen bg-stone-400 snap-section">
         <div className="w-full max-w-8xl mx-auto">
           <div className="hidden md:grid grid-cols-2 gap-0 items-center min-h-screen">
             {/* Hero Text - Desktop with Parallax */}
@@ -219,13 +264,13 @@ export default function Home() {
               <div ref={heroTextDesktopRef} className="leading-tight tracking-tight whitespace-nowrap">
                 <h1 
                   className={`leading-none font-normal mb-6 ${isLoaded ? 'animate-slide-in-1' : 'opacity-0'}`} 
-                  style={{fontSize: 'clamp(1rem, 3.5vw, 2.75rem)'}}
+                  style={{fontSize: 'clamp(1rem, 2vw, 2.75rem)'}}
                 >
                   Project Manager &
                 </h1>
                 <h1 
                   className={`leading-none font-normal ${isLoaded ? 'animate-slide-in-1' : 'opacity-0'}`} 
-                  style={{fontSize: 'clamp(1rem, 3.5vw, 2.75rem)'}}
+                  style={{fontSize: 'clamp(1rem, 2vw, 2.75rem)'}}
                 >
                   Software Engineer
                 </h1>
@@ -272,8 +317,8 @@ export default function Home() {
       {/* Content Section - White Background */}
       <div className="relative bg-white min-h-[200vh]">
         {/* Content area 1 with Parallax */}
-        <div className="relative h-screen flex items-center justify-center">
-          <div ref={contentArea1Ref} className="relative z-10 text-black text-center">
+        <div className="relative h-screen flex items-center justify-center snap-section">
+          <div ref={contentArea1Ref} className="relative z-10 text-black text-center px-8">
             <h2 className="text-4xl font-light mb-4">Experience & Expertise</h2>
             <p className="mt-4 text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Bridging the gap between technical excellence and strategic project management. 
@@ -290,8 +335,8 @@ export default function Home() {
         </div>
         
         {/* Content area 2 with Parallax */}
-        <div className="relative h-screen flex items-center justify-center">
-          <div ref={contentArea2Ref} className="relative z-10 text-black text-center">
+        <div className="relative h-screen flex items-center justify-center snap-section">
+          <div ref={contentArea2Ref} className="relative z-10 text-black text-center px-8">
             <h2 className="text-4xl font-light mb-4">Global Perspective</h2>
             <p className="mt-4 text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Operating across international markets with deep understanding of both 
