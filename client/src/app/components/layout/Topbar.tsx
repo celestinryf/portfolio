@@ -459,7 +459,7 @@ export default function TopNavigation() {
                   <MagneticLink 
                     href="#contact" 
                     strength={0.2}
-                    className="text-sm transition-colors"
+                    className="text-sm hover:text-gray-600 transition-colors"
                     onClick={closeMenu}
                   >
                     Contact

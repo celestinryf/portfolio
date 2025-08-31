@@ -1,112 +1,146 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
-// Globe Spinner Component
+// Parallax hook
+interface ParallaxOptions {
+  speed: number;
+  smoothness: number;
+}
+
+function useParallaxScroll<T extends HTMLElement = HTMLElement>(
+  options?: Partial<ParallaxOptions>
+): React.RefObject<T | null> {
+  const { speed = 1, smoothness = 0.1 } = options || {};
+  const ref = useRef<T>(null);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    let animationFrame: number;
+    let currentY = 0;
+    let targetY = 0;
+
+    const updatePosition = () => {
+      const scrolled = window.scrollY;
+      const rate = scrolled * -speed;
+      
+      targetY = rate;
+      
+      // Smooth interpolation
+      currentY += (targetY - currentY) * smoothness;
+      
+      // Apply transform
+      element.style.transform = `translateY(${currentY}px)`;
+      
+      animationFrame = requestAnimationFrame(updatePosition);
+    };
+
+    const handleScroll = () => {
+      if (!animationFrame) {
+        animationFrame = requestAnimationFrame(updatePosition);
+      }
+    };
+
+    // Initial setup
+    updatePosition();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+    };
+  }, [speed, smoothness]);
+
+  return ref;
+}
+
+// Globe Spinner Component with Tailwind
 const GlobeSpinner = ({ className = "" }) => {
   return (
-    <div className={`globe-container ${className}`}>
-      <div className="globe">
+    <div className={`w-8 h-8 ${className}`} style={{ perspective: '1000px' }}>
+      <div 
+        className="relative w-full h-full animate-spin"
+        style={{
+          transformStyle: 'preserve-3d',
+          transform: 'rotateZ(15deg)',
+          animationDuration: '8s',
+          animationTimingFunction: 'linear',
+          animationIterationCount: 'infinite'
+        }}
+      >
         {/* Longitude lines (vertical circles) */}
-        <div className="circle longitude" />
-        <div className="circle longitude" />
-        <div className="circle longitude" />
+        <div 
+          className="absolute inset-0 border border-white/60 rounded-full bg-transparent"
+          style={{ transform: 'rotateY(0deg)' }}
+        />
+        <div 
+          className="absolute inset-0 border border-white/60 rounded-full bg-transparent"
+          style={{ transform: 'rotateY(60deg)' }}
+        />
+        <div 
+          className="absolute inset-0 border border-white/60 rounded-full bg-transparent"
+          style={{ transform: 'rotateY(120deg)' }}
+        />
         
         {/* Latitude lines (horizontal circles) */}
-        <div className="circle latitude" />
-        <div className="circle latitude" />
-        <div className="circle latitude" />
+        <div 
+          className="absolute border border-white/50 rounded-full bg-transparent"
+          style={{
+            height: '60%',
+            width: '60%',
+            top: '20%',
+            left: '20%',
+            transform: 'rotateX(75deg) translateZ(8px)'
+          }}
+        />
+        <div 
+          className="absolute border border-white/50 rounded-full bg-transparent"
+          style={{
+            height: '60%',
+            width: '60%',
+            top: '20%',
+            left: '20%',
+            transform: 'rotateX(75deg) translateZ(-8px)'
+          }}
+        />
+        <div 
+          className="absolute border border-white/50 rounded-full bg-transparent"
+          style={{
+            height: '85%',
+            width: '85%',
+            top: '7.5%',
+            left: '7.5%',
+            transform: 'rotateX(75deg) translateZ(4px)'
+          }}
+        />
         
         {/* Equator - slightly thicker */}
-        <div className="circle equator" />
+        <div 
+          className="absolute inset-0 rounded-full bg-transparent"
+          style={{
+            transform: 'rotateX(75deg)',
+            border: '1.2px solid rgba(255, 255, 255, 0.7)'
+          }}
+        />
       </div>
-      
-      <style jsx>{`
-        .globe-container {
-          perspective: 1000px;
-        }
-        
-        .globe {
-          width: 32px;
-          height: 32px;
-          position: relative;
-          animation: globe-rotate 8s infinite linear;
-          transform-style: preserve-3d;
-          transform: rotateZ(15deg) rotateY(0deg);
-        }
-        
-        .circle {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          border-radius: 50%;
-          border: 1px solid rgba(255, 255, 255, 0.6);
-          background: transparent;
-        }
-        
-        /* Longitude lines (vertical circles) */
-        .longitude:nth-child(1) {
-          transform: rotateY(0deg);
-        }
-        
-        .longitude:nth-child(2) {
-          transform: rotateY(60deg);
-        }
-        
-        .longitude:nth-child(3) {
-          transform: rotateY(120deg);
-        }
-        
-        /* Latitude lines (horizontal circles) */
-        .latitude {
-          border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-        
-        .latitude:nth-child(4) {
-          height: 60%;
-          width: 60%;
-          top: 20%;
-          left: 20%;
-          transform: rotateX(75deg) translateZ(8px);
-        }
-        
-        .latitude:nth-child(5) {
-          height: 60%;
-          width: 60%;
-          top: 20%;
-          left: 20%;
-          transform: rotateX(75deg) translateZ(-8px);
-        }
-        
-        .latitude:nth-child(6) {
-          height: 85%;
-          width: 85%;
-          top: 7.5%;
-          left: 7.5%;
-          transform: rotateX(75deg) translateZ(4px);
-        }
-        
-        /* Equator */
-        .equator {
-          transform: rotateX(75deg);
-          border: 1.2px solid rgba(255, 255, 255, 0.7);
-        }
-        
-        @keyframes globe-rotate {
-          0% {
-            transform: rotateZ(15deg) rotateY(0deg);
-          }
-          100% {
-            transform: rotateZ(15deg) rotateY(360deg);
-          }
-        }
-      `}</style>
     </div>
   );
 };
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Parallax refs with different speeds for layered effect
+  const heroBackgroundRef = useParallaxScroll<HTMLDivElement>({ speed: 0, smoothness: 0.1 });
+  const heroTextDesktopRef = useParallaxScroll<HTMLDivElement>({ speed: 0.3, smoothness: 0.1 });
+  const heroTextMobileRef = useParallaxScroll<HTMLDivElement>({ speed: 0.9, smoothness: 0.15 });
+  const locationPillRef = useParallaxScroll<HTMLDivElement>({ speed: 0.9, smoothness: 0.1 });
+  const contentArea1Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.3, smoothness: 0.1 });
+  const contentArea2Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2, smoothness: 0.1 });
 
   useEffect(() => {
     // Trigger animations after component mount
@@ -170,57 +204,28 @@ export default function Home() {
           animation-delay: 0.8s;
         }
 
-        /* Location pill styling */
-        .location-pill {
-          position: fixed;
-          bottom: 40px;
-          left: 40px;
-          background: rgba(40, 40, 40, 0.85);
-          backdrop-filter: blur(10px);
-          border-radius: 50px;
-          padding: 12px 20px 12px 52px;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          z-index: 50;
-        }
-
-        .globe-wrapper {
-          position: absolute;
-          left: 10px;
-          transform: translateY(-50%);
-          width: 32px;
-          height: 32px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        @media (max-width: 768px) {
-          .location-pill {
-            bottom: 30px;
-            left: 20px;
-            padding: 10px 16px 10px 48px;
-          }
+        /* Smooth scrolling for better parallax effect */
+        html {
+          scroll-behavior: smooth;
         }
       `}</style>
 
-      {/* Hero Section - Gray Background */}
-      <div className="relative z-10 min-h-screen bg-stone-400">
+      {/* Hero Section - Gray Background with Parallax */}
+      <div ref={heroBackgroundRef} className="relative z-10 min-h-screen bg-stone-400">
         <div className="w-full max-w-8xl mx-auto">
           <div className="hidden md:grid grid-cols-2 gap-0 items-center min-h-screen">
-            {/* Hero Text - Desktop */}
+            {/* Hero Text - Desktop with Parallax */}
             <div className="col-start-2 flex flex-col justify-center items-center text-left space-y-6">
-              <div className="leading-tight tracking-tight whitespace-nowrap">
+              <div ref={heroTextDesktopRef} className="leading-tight tracking-tight whitespace-nowrap">
                 <h1 
                   className={`leading-none font-normal mb-6 ${isLoaded ? 'animate-slide-in-1' : 'opacity-0'}`} 
-                  style={{fontSize: 'clamp(1rem, 3.5vw, 2.5rem)'}}
+                  style={{fontSize: 'clamp(1rem, 3.5vw, 2.75rem)'}}
                 >
                   Project Manager &
                 </h1>
                 <h1 
                   className={`leading-none font-normal ${isLoaded ? 'animate-slide-in-1' : 'opacity-0'}`} 
-                  style={{fontSize: 'clamp(1rem, 3.5vw, 2.5rem)'}}
+                  style={{fontSize: 'clamp(1rem, 3.5vw, 2.75rem)'}}
                 >
                   Software Engineer
                 </h1>
@@ -229,9 +234,9 @@ export default function Home() {
           </div>
         </div>
         
-        {/* Hero Text - Mobile (Bottom Left) */}
+        {/* Hero Text - Mobile (Bottom Left) with Parallax */}
         <div className="absolute bottom-24 left-8 md:hidden">
-          <div className="leading-tight tracking-tight">
+          <div ref={heroTextMobileRef} className="leading-tight tracking-tight">
             <h1 
               className={`leading-none font-normal mb-2 ${isLoaded ? 'animate-slide-in-1' : 'opacity-0'}`} 
               style={{fontSize: 'clamp(1.375rem, 3.5vw, 2.5rem)'}}
@@ -247,18 +252,17 @@ export default function Home() {
           </div>
         </div>
         
-        {/* Location Pill with Globe - Fixed Position Bottom Left */}
-        <div className={`location-pill ${isLoaded ? 'animate-slide-from-left' : 'opacity-0'}`}>
-          <div className={`globe-wrapper ${isLoaded ? 'animate-fade-in-scale' : 'opacity-0'}`}>
+        {/* Location Pill with Globe - Using Tailwind */}
+        <div 
+          ref={locationPillRef} 
+          className={`absolute bottom-10 left-8 md:bottom-10 md:left-10 bg-black backdrop-blur-md rounded-full px-5 py-3 pl-14 flex items-center gap-3 z-50 ${isLoaded ? 'animate-slide-from-left' : 'opacity-0'}`}
+        >
+          {/* Globe Wrapper - Using Tailwind */}
+          <div className={`absolute left-2.5 w-8 h-8 flex items-center justify-center ${isLoaded ? 'animate-fade-in-scale' : 'opacity-0'}`}>
             <GlobeSpinner />
           </div>
           <span 
-            className="text-white/90 whitespace-nowrap"
-            style={{
-              fontSize: '13px',
-              fontWeight: '300',
-              letterSpacing: '0.02em'
-            }}
+            className="text-white/90 whitespace-nowrap text-xs font-light tracking-wide"
           >
             American & French Citizenship
           </span>
@@ -267,17 +271,47 @@ export default function Home() {
       
       {/* Content Section - White Background */}
       <div className="relative bg-white min-h-[200vh]">
-        {/* Content area 1 */}
-        <div className="relative h-screen flex items-center justify-center overflow-hidden">
-          <div className="relative z-10 text-black">
-            <h2 className="text-4xl font-light">Content Area 1</h2>
+        {/* Content area 1 with Parallax */}
+        <div className="relative h-screen flex items-center justify-center">
+          <div ref={contentArea1Ref} className="relative z-10 text-black text-center">
+            <h2 className="text-4xl font-light mb-4">Experience & Expertise</h2>
+            <p className="mt-4 text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Bridging the gap between technical excellence and strategic project management. 
+              With dual citizenship and a global perspective, I bring innovative solutions 
+              to complex challenges in software development and team leadership.
+            </p>
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm text-gray-500">
+              <div>Project Management</div>
+              <div>Software Engineering</div>
+              <div>Team Leadership</div>
+              <div>Strategic Planning</div>
+            </div>
           </div>
         </div>
         
-        {/* Content area 2 */}
-        <div className="relative h-screen flex items-center justify-center overflow-hidden">
-          <div className="relative z-10 text-black">
-            <h2 className="text-4xl font-light">Content Area 2</h2>
+        {/* Content area 2 with Parallax */}
+        <div className="relative h-screen flex items-center justify-center">
+          <div ref={contentArea2Ref} className="relative z-10 text-black text-center">
+            <h2 className="text-4xl font-light mb-4">Global Perspective</h2>
+            <p className="mt-4 text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Operating across international markets with deep understanding of both 
+              American and European business cultures. Specialized in building 
+              cross-functional teams that deliver exceptional results.
+            </p>
+            <div className="mt-8 flex justify-center space-x-8 text-sm text-gray-500">
+              <div className="flex flex-col items-center">
+                <div className="w-12 h-12 bg-stone-100 rounded-full mb-2"></div>
+                <span>Agile Methodologies</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-12 h-12 bg-stone-100 rounded-full mb-2"></div>
+                <span>Technical Architecture</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-12 h-12 bg-stone-100 rounded-full mb-2"></div>
+                <span>International Collaboration</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
