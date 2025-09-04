@@ -323,209 +323,185 @@ export default function Home() {
         {/* White Background with Independent Parallax */}
         <div 
           ref={contentBackgroundRef} 
-          className="absolute inset-0 bg-white z-11"
-          style={{ height: '100%' }}
+          className="absolute inset-0 bg-white dark:bg-black z-11"
+          style={{ height: '200%' }}
         />
         
         {/* Experience Section */}
-        <div className="relative min-h-screen px-8 md:px-16 py-20 snap-section z-11">
-          {/* Experience Header */}
-          <div ref={contentArea1Ref} className="mb-20 ">
-            <h2 className="text-5xl md:text-7xl font-light tracking-tight">Experience</h2>
-          </div>
+        <div className="relative min-h-screen px-8 md:px-16 py-20 snap-section z-20 transition-colors duration-300">
+          <div className="w-full md:w-[66vw] mx-auto">
+            
+            {/* Experience Header */}
+            <div ref={contentArea1Ref} className="mb-20">
+              <h2 className="text-5xl md:text-7xl font-light text-black dark:text-white tracking-tight">My experience</h2>
+            </div>
 
-          {/* Project 1 */}
-          <div ref={project1Ref} className="mb-32">
-            {/* Top Row - Skill and Position */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              {/* Main Skill */}
-              <div className="max-w-full md:max-w-[33vw]">
-                <h3 className="text-2xl md:text-3xl font-normal mb-2">Product Management</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Led cross-functional teams to deliver
-                  enterprise cloud solutions
-                </p>
-              </div>
-              
-              {/* Position */}
-              <div className="text-left md:text-right">
-                <h4 className="text-xl md:text-2xl font-normal">Senior Product Manager</h4>
-                <p className="text-sm text-gray-600">Microsoft Azure</p>
+            {/* === Project 1 === */}
+            <div ref={project1Ref} className="mb-32">
+              <div className="mx-auto">
+
+                {/* Top Row */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                  <div className="text-left">
+                    <h4 className="text-4xl text-black dark:text-white font-normal">Cloud Solutions Architect</h4>
+                    <p className="text-sm text-black dark:text-gray-300">Amazon Web Services</p>
+                  </div>
+
+                  <div>
+                    <div className="border-t border-gray-300 dark:border-gray-700 py-4">
+                      <p className="text-black dark:text-gray-300">Designed and deployed multi-region, fault-tolerant architectures for Fortune 500 companies migrating to AWS.</p>
+                    </div>
+                    <div className="border-t border-gray-300 dark:border-gray-700 py-4">
+                      <p className="text-black dark:text-gray-300">Reduced infrastructure costs by 45% while improving system reliability to 99.99% uptime through automated scaling and monitoring.</p>
+                    </div>
+                    <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
+                      <a href="/projects" className="inline-flex items-center text-black dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors">
+                        Check Projects
+                        <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Image */}
+                <div className="w-full h-[600px] bg-gradient-to-br from-orange-100 to-red-100 dark:from-orange-300/10 dark:to-red-300/10 rounded-lg shadow-lg mb-8"></div>
+
+                {/* Bottom Row */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div>
+                    <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">01</p>
+                    <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">Enterprise Migration Suite</h5>
+                    <p className="text-black dark:text-gray-300 text-sm mb-4">Cloud Transformation</p>
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-2xl md:text-3xl text-black dark:text-white font-normal mb-2">Cloud Architecture</h3>
+                      <p className="text-sm text-black dark:text-gray-300 leading-relaxed">
+                        Designing resilient, scalable cloud infrastructure solutions
+                      </p>
+                    </div>
+                    <p className="text-black dark:text-gray-300 leading-relaxed">
+                      Architected comprehensive cloud migration strategies for enterprise clients, facilitating the seamless transition of legacy systems to AWS infrastructure...
+                    </p>
+                    <button className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors mt-4">
+                      View Case Study
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Info Table */}
-            <div className="mb-12 max-w-4xl">
-              <div className="border-t border-gray-300 py-4">
-                <p className="text-gray-700">Led the development of Azure's next-generation container orchestration platform, managing a team of 12 engineers and designers to deliver enterprise-grade solutions.</p>
-              </div>
-              <div className="border-t border-gray-300 py-4">
-                <p className="text-gray-700">Drove product strategy, roadmap definition, and go-to-market execution resulting in 40% YoY growth in enterprise adoption.</p>
-              </div>
-              <div className="border-t border-b border-gray-300 py-4">
-                <a href="/projects" className="inline-flex items-center text-black hover:text-gray-600 transition-colors">
-                  Check Projects
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
+            {/* === Project 2 === */}
+            <div ref={project2Ref} className="mb-32">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="text-left">
+                  <h4 className="text-xl md:text-2xl text-black dark:text-white font-normal">Senior Software Engineer</h4>
+                  <p className="text-sm text-black dark:text-gray-300 mb-8">Spotify</p>
+                  <div className="w-full h-[600px] bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-300/10 dark:to-emerald-300/10 shadow-lg"></div>
+                </div>
+
+                <div className="text-left">
+                  <div className="mb-8">
+                    <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">02</p>
+                    <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">Discover Weekly Engine</h5>
+                    <p className="text-black dark:text-gray-300 text-sm mb-4">Music Discovery</p>
+                  </div>
+
+                  <div className="mb-8">
+                    <div className="border-t border-gray-300 dark:border-gray-700 py-4">
+                      <p className="text-black dark:text-gray-300">Architected and implemented the recommendation engine powering Spotify's Discover Weekly, serving 200M+ users.</p>
+                    </div>
+                    <div className="border-t border-gray-300 dark:border-gray-700 py-4">
+                      <p className="text-black dark:text-gray-300">Built microservices using Python, Go, and Kubernetes, reducing latency by 60% and improving user engagement by 35%.</p>
+                    </div>
+                    <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
+                      <a href="/projects" className="inline-flex items-center text-black dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors">
+                        Check Projects
+                        <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-2xl md:text-3xl text-black dark:text-white font-normal mb-2">Software Development</h3>
+                      <p className="text-sm text-black dark:text-gray-300 leading-relaxed">
+                        Full-stack development with focus on scalable web applications
+                      </p>
+                    </div>
+                    <p className="text-black dark:text-gray-300 leading-relaxed">
+                      Led the technical implementation of Spotify's revolutionary Discover Weekly feature...
+                    </p>
+                    <button className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors mt-4">
+                      View Case Study
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Project Image */}
-            <div className="mb-12 flex justify-center">
-              <div className="project-image w-full md:w-[66vw] h-[400px] bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg shadow-lg"></div>
-            </div>
+            {/* === Project 3 === */}
+            <div ref={project3Ref} className="mb-32">
+              <div className="mx-auto">
 
-            {/* Project Details */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {/* Left Column - Title */}
-              <div className="flex flex-col items-center text-center">
-                <h5 className="text-3xl md:text-4xl font-light mb-3">Azure Container Platform</h5>
-                <p className="text-gray-600">Cloud Infrastructure</p>
-              </div>
-              
-              {/* Right Column - Description and Button */}
-              <div className="space-y-6">
-                <p className="text-gray-700 leading-relaxed text-left">
-                  Spearheaded the development of Azure's container orchestration platform, enabling enterprises to deploy and manage containerized applications at scale. The platform now serves over 10,000 enterprise customers globally, processing millions of container deployments daily. My role involved defining the product vision, managing stakeholder relationships, and ensuring seamless integration with existing Azure services.
-                </p>
-                <button className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors">
-                  View Case Study
-                </button>
-              </div>
-            </div>
-          </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                  <div className="text-left">
+                    <h4 className="text-xl md:text-2xl text-black dark:text-white font-normal">Lead DevOps Engineer</h4>
+                    <p className="text-sm text-black dark:text-gray-300">Netflix</p>
+                  </div>
 
-          {/* Project 2 */}
-          <div ref={project2Ref} className="mb-32">
-            {/* Top Row - Skill and Position */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              {/* Main Skill */}
-              <div className="max-w-full md:max-w-[33vw]">
-                <h3 className="text-2xl md:text-3xl font-normal mb-2">Software Development</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Full-stack development with focus on
-                  scalable web applications
-                </p>
-              </div>
-              
-              {/* Position */}
-              <div className="text-left md:text-right">
-                <h4 className="text-xl md:text-2xl font-normal">Senior Software Engineer</h4>
-                <p className="text-sm text-gray-600">Spotify</p>
-              </div>
-            </div>
+                  <div>
+                    <div className="border-t border-gray-300 dark:border-gray-700 py-4">
+                      <p className="text-black dark:text-gray-300">Built and maintained CI/CD pipelines serving 200M+ global users with 99.99% uptime across multiple regions.</p>
+                    </div>
+                    <div className="border-t border-gray-300 dark:border-gray-700 py-4">
+                      <p className="text-black dark:text-gray-300">Implemented infrastructure as code using Terraform and Kubernetes, reducing deployment time by 80%.</p>
+                    </div>
+                    <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
+                      <a href="/projects" className="inline-flex items-center text-black dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors">
+                        Check Projects
+                        <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
 
-            {/* Info Table */}
-            <div className="mb-12 max-w-4xl">
-              <div className="border-t border-gray-300 py-4">
-                <p className="text-gray-700">Architected and implemented the recommendation engine powering Spotify's Discover Weekly, serving 200M+ users.</p>
-              </div>
-              <div className="border-t border-gray-300 py-4">
-                <p className="text-gray-700">Built microservices using Python, Go, and Kubernetes, reducing latency by 60% and improving user engagement by 35%.</p>
-              </div>
-              <div className="border-t border-b border-gray-300 py-4">
-                <a href="/projects" className="inline-flex items-center text-black hover:text-gray-600 transition-colors">
-                  Check Projects
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                  <div className="w-full h-[600px] bg-gradient-to-br from-red-100 to-pink-100 dark:from-red-300/10 dark:to-pink-300/10 shadow-lg"></div>
+                  <div className="w-full h-[600px] bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-300/10 dark:to-purple-300/10 shadow-lg"></div>
+                </div>
 
-            {/* Project Image */}
-            <div className="mb-12 flex justify-center">
-              <div className="w-full md:w-[66vw] h-[400px] bg-gradient-to-br from-green-100 to-emerald-100 rounded-lg shadow-lg"></div>
-            </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div>
+                    <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">03</p>
+                    <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">Global Streaming Platform</h5>
+                    <p className="text-black dark:text-gray-300 text-sm mb-4">Infrastructure & DevOps</p>
+                  </div>
 
-            {/* Project Details */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {/* Left Column - Title */}
-              <div className="flex flex-col items-center text-center">
-                <h5 className="text-3xl md:text-4xl font-light mb-3">Discover Weekly Engine</h5>
-                <p className="text-gray-600">Music Discovery</p>
-              </div>
-              
-              {/* Right Column - Description and Button */}
-              <div className="space-y-6">
-                <p className="text-gray-700 leading-relaxed text-left">
-                  Led the technical implementation of Spotify's revolutionary Discover Weekly feature, utilizing machine learning algorithms and collaborative filtering to deliver personalized music recommendations. The system processes billions of data points weekly, analyzing listening patterns, user preferences, and musical attributes to create unique playlists for each user. This feature became one of Spotify's most beloved features, significantly increasing user retention.
-                </p>
-                <button className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors">
-                  View Case Study
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Project 3 */}
-          <div ref={project3Ref} className="mb-32">
-            {/* Top Row - Skill and Position */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              {/* Main Skill */}
-              <div className="max-w-full md:max-w-[33vw]">
-                <h3 className="text-2xl md:text-3xl font-normal mb-2">Cloud Architecture</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Designing resilient, scalable cloud
-                  infrastructure solutions
-                </p>
-              </div>
-              
-              {/* Position */}
-              <div className="text-left md:text-right">
-                <h4 className="text-xl md:text-2xl font-normal">Cloud Solutions Architect</h4>
-                <p className="text-sm text-gray-600">Amazon Web Services</p>
-              </div>
-            </div>
-
-            {/* Info Table */}
-            <div className="mb-12 max-w-4xl">
-              <div className="border-t border-gray-300 py-4">
-                <p className="text-gray-700">Designed and deployed multi-region, fault-tolerant architectures for Fortune 500 companies migrating to AWS.</p>
-              </div>
-              <div className="border-t border-gray-300 py-4">
-                <p className="text-gray-700">Reduced infrastructure costs by 45% while improving system reliability to 99.99% uptime through automated scaling and monitoring.</p>
-              </div>
-              <div className="border-t border-b border-gray-300 py-4">
-                <a href="/projects" className="inline-flex items-center text-black hover:text-gray-600 transition-colors">
-                  Check Projects
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-
-            {/* Project Image */}
-            <div className="mb-12 flex justify-center">
-              <div className="w-full md:w-[66vw] h-[400px] bg-gradient-to-br from-orange-100 to-red-100 rounded-lg shadow-lg"></div>
-            </div>
-
-            {/* Project Details */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {/* Left Column - Title */}
-              <div className="flex flex-col items-center text-center">
-                <h5 className="text-3xl md:text-4xl font-light mb-3">Enterprise Migration Suite</h5>
-                <p className="text-gray-600">Cloud Transformation</p>
-              </div>
-              
-              {/* Right Column - Description and Button */}
-              <div className="space-y-6">
-                <p className="text-gray-700 leading-relaxed text-left">
-                  Architected comprehensive cloud migration strategies for enterprise clients, facilitating the seamless transition of legacy systems to AWS infrastructure. Developed automated migration tools and frameworks that reduced migration time by 70% while ensuring zero downtime. The solution included real-time monitoring, disaster recovery protocols, and cost optimization strategies that saved clients millions in operational expenses.
-                </p>
-                <button className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors">
-                  View Case Study
-                </button>
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-2xl md:text-3xl text-black dark:text-white font-normal mb-2">DevOps Excellence</h3>
+                      <p className="text-sm text-black dark:text-gray-300 leading-relaxed">
+                        Scalable infrastructure and deployment automation
+                      </p>
+                    </div>
+                    <p className="text-black dark:text-gray-300 leading-relaxed">
+                      Architected and maintained the infrastructure powering Netflix's global streaming platform...
+                    </p>
+                    <button className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors mt-4">
+                      View Case Study
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        
-        {/* Content area 2 with Parallax */}
-        <div className="relative h-screen flex items-center justify-center snap-section z-10">
         </div>
       </div>
     </div>

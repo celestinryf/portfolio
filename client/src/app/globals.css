@@ -1,9 +1,17 @@
 @import "tailwindcss";
-/* @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap'); */
+
+/* Add this custom variant for class-based dark mode */
+@variant dark (&:where(.dark *));
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+}
+
+/* Use class-based selectors instead of media queries */
+:root.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 ::-webkit-scrollbar {
@@ -11,22 +19,8 @@
 }
 
 html {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  /* --font-sans: var(--font-geist-sans); */
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 body {

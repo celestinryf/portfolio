@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Topbar from "./components/layout/Topbar";
 import Footer from "./components/layout/Footer";
+import DarkModeToggle from "../app/components/LightDark"; // Adjust import path accordingly
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,9 +31,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
         <Topbar />
-        <main className="flex-grow">
-          {children}
-        </main>
+        
+        <DarkModeToggle />
+
+        <main className="flex-grow">{children}</main>
         <Footer />
       </body>
     </html>
