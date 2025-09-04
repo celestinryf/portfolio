@@ -157,6 +157,7 @@ const GlobeSpinner = ({ className = "" }) => {
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [contentHeight, setContentHeight] = useState('300vh');
   
   // Parallax refs with consistent smoothness and strategic speeds
   const heroBackgroundRef = useParallaxScroll<HTMLDivElement>({ speed: 0 });
@@ -167,8 +168,8 @@ export default function Home() {
   const contentArea1Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.3});
   const contentArea2Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.3 });
   const project1Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.3 });
-  const project2Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2 });
-  const project3Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.1 });
+  const project2Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.3 });
+  const project3Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.3 });
 
   useEffect(() => {
     // Start the centralized parallax controller
@@ -179,14 +180,29 @@ export default function Home() {
       setIsLoaded(true);
     }, 100);
     
+    // Calculate dynamic height for content section to prevent gaps
+    const calculateContentHeight = () => {
+      // Calculate maximum parallax movement based on expected scroll distance
+      const maxParallaxSpeed = 0.8; // Highest speed from your elements
+      const estimatedScrollDistance = window.innerHeight * 0.5; // Estimate based on content
+      const maxParallaxMovement = estimatedScrollDistance * maxParallaxSpeed;
+      
+      // Set height to cover parallax movement plus extra buffer
+      const dynamicHeight = `calc(100% + ${maxParallaxMovement}px)`;
+      setContentHeight(dynamicHeight);
+    };
+
+    const heightTimer = setTimeout(calculateContentHeight, 200);
+    
     return () => {
       clearTimeout(timer);
+      clearTimeout(heightTimer);
       parallaxController.stop();
     };
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden pointer-events-none">
       <style jsx global>{`
         @keyframes slideInFromBottom {
           from {
@@ -318,18 +334,23 @@ export default function Home() {
         </div>
       </div>
       
-      {/* Content Section - White Background with Independent Parallax */}
-      <div className="relative min-h-[200vh]">
-        {/* White Background with Independent Parallax */}
+      {/* Content Section - White Background with Parallax Gap Fix */}
+      <div className="relative">
+        {/* White Background with Dynamic Height to Prevent Gaps */}
         <div 
           ref={contentBackgroundRef} 
-          className="absolute inset-0 bg-white dark:bg-black z-11"
-          style={{ height: '200%' }}
+          className="absolute inset-0 bg-white dark:bg-black z-11 pointer-events-none"
+          style={{ 
+            // height: contentHeight, // Dynamic height based on parallax movement
+            minHeight: '1000vh' // Fallback minimum coverage
+          }}
         />
         
         {/* Experience Section */}
-        <div className="relative min-h-screen px-8 md:px-16 py-20 snap-section z-20 transition-colors duration-300">
-          <div className="w-full md:w-[66vw] mx-auto">
+        <div 
+          className="relative snap-section z-20 transition-colors duration-300 pointer-events-auto"
+        >
+          <div className="w-full md:w-[66vw] mx-auto" style={{ paddingTop: '10vh' }}>
             
             {/* Experience Header */}
             <div ref={contentArea1Ref} className="mb-20">
@@ -445,7 +466,9 @@ export default function Home() {
             </div>
 
             {/* === Project 3 === */}
-            <div ref={project3Ref} className="mb-32">
+            <div ref={project3Ref} className="mb-32" style={{
+                marginBottom: 'calc(8rem - 95vh)'
+              }}>
               <div className="mx-auto">
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -462,7 +485,7 @@ export default function Home() {
                       <p className="text-black dark:text-gray-300">Implemented infrastructure as code using Terraform and Kubernetes, reducing deployment time by 80%.</p>
                     </div>
                     <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
-                      <a href="/projects" className="inline-flex items-center text-black dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors">
+                      <a href="/projects" className="inline-flex items-components text-black dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors">
                         Check Projects
                         <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -507,3 +530,4 @@ export default function Home() {
     </div>
   );
 }
+
