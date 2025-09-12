@@ -3,11 +3,58 @@
 import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from 'next/image'
 
 // Register GSAP plugins
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
+
+// Add global styles
+const globalStyles = `
+  :root {
+    --section-padding: clamp(5em, 21vh, 12em);
+    --container-padding: clamp(2.5em, 8vw, 8em);
+    --gap-padding: clamp(1.5em, 4vw, 2.5em);
+  }
+  
+  .footer-text {
+    font-family: 'Dennis Sans', sans-serif;
+    line-height: 1.6;
+    font-weight: 450;
+    font-style: normal;
+    font-size: clamp(16px, 1.2vw, 19px);
+  }
+  
+  .footer-heading {
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 1;
+  }
+  
+  .footer-time {
+    font-size: clamp(14px, 1.1vw, 18px);
+  }
+  
+  .footer-label {
+    font-size: clamp(12px, 0.9vw, 14px);
+  }
+  
+  .footer-button {
+    font-size: clamp(16px, 1.1vw, 18px);
+    padding: clamp(0.75em, 1.5vw, 1.5em) clamp(1.5em, 3vw, 3em);
+  }
+  
+  .footer-circle-button {
+    width: clamp(120px, 12vw, 200px);
+    height: clamp(120px, 12vw, 200px);
+    font-size: clamp(14px, 1.1vw, 16px);
+  }
+  
+  .footer-profile {
+    width: clamp(60px, 8vw, 120px);
+    height: clamp(60px, 8vw, 120px);
+  }
+`;
 
 // Magnetic Link Component using GSAP
 interface MagneticLinkProps {
@@ -174,114 +221,146 @@ export default function Footer() {
   };
 
   return (
-    <footer 
-      ref={footerRef}
-      className="relative bg-black dark:bg-white text-white dark:text-black overflow-hidden"
-      style={{ height: '100vh' }}
-    >
-      {/* Black box that covers the footer and slides up */}
-      <div
-        ref={blackBoxRef}
-        className="absolute inset-0 bg-white dark:bg-black z-50"
-        style={{ transformOrigin: 'top' }}
-      />
+    <>
+      <style dangerouslySetInnerHTML={{ __html: globalStyles }} />
+      <footer 
+        ref={footerRef}
+        className="relative bg-black dark:bg-white text-white dark:text-black overflow-hidden"
+        style={{ 
+          minHeight: '80vh',
+          paddingTop: 'var(--section-padding)',
+          paddingBottom: 'clamp(3em, 8vh, 6em)'
+        }}
+      >
+        {/* Black box that covers the footer and slides up */}
+        <div
+          ref={blackBoxRef}
+          className="absolute inset-0 bg-white dark:bg-black z-50"
+          style={{ transformOrigin: 'top' }}
+        />
 
-      {/* Footer content */}
-      <div className="absolute inset-0 flex items-start pt-[22.5vh]">
-        <div className="w-full px-[15vw]">
-          {/* Main header section - LEFT ALIGNED */}
-          <div className="mb-20">
-            <div className="flex items-center gap-8">
-              {/* Profile picture - larger size */}
-              <div className="w-25 h-25 rounded-full bg-white/20 dark:bg-black/20 flex-shrink-0 overflow-hidden">
-                {!imageError ? (
-                  <img 
-                    src="/pfp.jpg" 
-                    alt="Profile" 
-                    className="w-full h-full rounded-full object-cover"
-                    onError={() => setImageError(true)}
-                  />
-                ) : (
-                  <div className="w-full h-full rounded-full bg-gradient-to-br from-white/30 to-white/10 dark:from-black/30 dark:to-black/10"></div>
-                )}
+        {/* Footer content */}
+        <div className="relative z-10" style={{ 
+          paddingLeft: 'var(--container-padding)',
+          paddingRight: 'var(--container-padding)'
+        }}>
+          <div className="w-full max-w-[80em] mx-auto">
+            {/* Main header section */}
+            <div style={{ marginBottom: 'var(--gap-padding)' }}>
+              <div className="flex flex-col md:flex-row items-start md:items-center" style={{ gap: 'clamp(1.5em, 3vw, 2em)' }}>
+                {/* Profile picture */}
+                <div className="footer-profile translate-y-1/10 rounded-full flex-shrink-0 overflow-hidden">
+                  {!imageError ? (
+                    <Image 
+                      src="/pfp.jpg" 
+                      alt="Profile" 
+                      fill
+                      className="rounded-full object-cover"
+                      onError={() => setImageError(true)}
+                    />
+                  ) : (
+                    <div className=" h-full rounded-full bg-gradient-to-br from-white/30 to-white/10 dark:from-black/30 dark:to-black/10"></div>
+                  )}
+                </div>
+                <h1 className="footer-heading ">
+                  <span>Let's work</span>
+                </h1>
               </div>
-              <h1 className="text-6xl md:text-7xl lg:text-[6rem] font-light leading-none">
-                <span>Let's work</span>
+              <h1 className="footer-heading" style={{ marginTop: '0.25em' }}>
+                together.
               </h1>
             </div>
-            <h1 className="text-6xl md:text-7xl lg:text-[6rem] font-light mt-4 leading-none">together.</h1>
-          </div>
 
-          {/* Center line with buttons */}
-          <div className="relative w-full mb-16">
-            <div className="border-t-1 border-white/40 dark:border-black/40"></div>
-            
-            {/* Get in touch circular button - overlayed on the line */}
-            <MagneticLink 
-              href="mailto:hello@yourname.com"
-              strength={0.4}
-              className="absolute left-225 -translate-y-1/2 w-50 h-50 rounded-full bg-white dark:bg-black text-black dark:text-white flex items-center justify-center hover:scale-105 transition-transform cursor-pointer z-10"
-            >
-              <span className="text-base font-medium">Get in touch</span>
-            </MagneticLink>
-          </div>
+            {/* Center line with button */}
+            <div className="relative" style={{ marginBottom: 'clamp(8em, 15vh, 12em)', marginTop: 'calc(clamp(3em, 8vh, 12em) + 2em)' }}>
+              <div className="border-t border-white/40 dark:border-black/40"></div>
+              
+              {/* Get in touch circular button */}
+              <MagneticLink 
+                href="/contact"
+                strength={0.4}
+                className="absolute left-1/2 md:left-3/4 -translate-x-1/2 md:-translate-x-0 -translate-y-1/2 footer-circle-button rounded-full bg-white dark:bg-black text-black dark:text-white flex items-center justify-center hover:scale-105 transition-transform cursor-pointer z-10"
+              >
+                <span className="footer-text font-medium">Get in touch</span>
+              </MagneticLink>
+            </div>
 
-          {/* Email and Phone buttons - larger spacing from line */}
-          <div className="flex gap-4 -mt-[200px]">
-            <MagneticLink 
-              href="mailto:hello@yourname.com"
-              strength={0.3}
-              className="px-12 py-6 border-2 border-white/40 dark:border-black/40 rounded-full hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white transition-all"
-            >
-              <span className="text-base">celestinryf@gmail.com</span>
-            </MagneticLink>
-            <MagneticLink 
-              href="tel:+1234567890"
-              strength={0.3}
-              className="px-12 py-6 border-2 border-white/40 dark:border-black/40 rounded-full hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white transition-all"
-            >
-              <span className="text-base">+1 (253) 881-9185</span>
-            </MagneticLink>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom bar - absolute positioned at corners */}
-      <div className="absolute bottom-0 left-0 right-0 flex justify-between items-end p-8">
-        {/* Local Time - Far left corner */}
-        <div className="flex flex-col">
-          <p className="text-white/60 dark:text-black/60 text-sm uppercase tracking-wide mb-2">
-            Local Time
-          </p>
-          <div className="flex items-center space-x-2">
-            <span className="text-white dark:text-black text-base font-mono">
-              {formatTime(currentTime)}
-            </span>
-            <span className="text-white/60 dark:text-black/60 text-sm">
-              PST
-            </span>
+            {/* Email and Phone buttons */}
+            <div className="flex flex-col md:flex-row" style={{ 
+              gap: 'clamp(1em, 2vw, 1.5em)',
+              marginTop: 'clamp(-14em, -10vh, -16em)'
+            }}>
+              <MagneticLink 
+                href="mailto:celestinryf@gmail.com"
+                strength={0.3}
+                className="footer-button footer-text border-2 border-white/40 dark:border-black/40 rounded-full hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white transition-all inline-block text-center"
+              >
+                celestinryf@gmail.com
+              </MagneticLink>
+              <MagneticLink 
+                href="tel:+12538819185"
+                strength={0.3}
+                className="footer-button footer-text border-2 border-white/40 dark:border-black/40 rounded-full hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white transition-all inline-block text-center"
+              >
+                +1 (253) 881-9185
+              </MagneticLink>
+            </div>
           </div>
         </div>
 
-        {/* Socials - Far right corner */}
-        <div className="flex flex-col items-end">
-          <p className="text-white/60 dark:text-black/60 text-sm uppercase tracking-wide mb-2">
-            Socials
-          </p>
-          <MagneticLink 
-            href="https://linkedin.com/in/celestinryf" 
-            strength={0.2}
-            className="text-white/80 dark:text-black/80 hover:text-white dark:hover:text-black transition-colors text-base"
-          >
-            LinkedIn
-          </MagneticLink>
+        {/* Bottom bar */}
+        <div 
+          className="absolute max-w-[110em] mx-auto bottom-0 left-0 right-0 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-0"
+          style={{
+            padding: 'var(--gap-padding)',
+            // paddingLeft: 'var(--container-padding)',
+            // paddingRight: 'var(--container-padding)'
+          }}
+        >
+          {/* Local Time */}
+          <div className="flex flex-col">
+            <p className="footer-label footer-text text-white/60 dark:text-black/60 uppercase tracking-wide mb-2">
+              Local Time
+            </p>
+            <div className="flex items-center space-x-2">
+              <span className="footer-time footer-text text-white dark:text-black font-mono">
+                {formatTime(currentTime)}
+              </span>
+              <span className="footer-label footer-text text-white/60 dark:text-black/60">
+                PST
+              </span>
+            </div>
+          </div>
+
+          {/* Socials */}
+ <div className="flex flex-col items-start md:items-end">
+            <p className="footer-label footer-text text-white/60 dark:text-black/60 uppercase tracking-wide mb-2">
+              Socials
+            </p>
+            <div className="flex gap-4">
+              <MagneticLink 
+                href="https://linkedin.com/in/celestinryf" 
+                strength={0.2}
+                className="footer-text text-white/80 dark:text-black/80 hover:text-white dark:hover:text-black transition-colors"
+              >
+                LinkedIn
+              </MagneticLink>
+              <MagneticLink 
+                href="https://github.com/celestinryf" 
+                strength={0.2}
+                className="footer-text text-white/80 dark:text-black/80 hover:text-white dark:hover:text-black transition-colors"
+              >
+                GitHub
+              </MagneticLink>
+            </div>
+          </div>
         </div>
-      </div>
-      
-      {/* Optional: Add a subtle pattern or gradient to the footer background */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <div className="w-full h-full bg-gradient-to-t from-transparent to-white/10 dark:to-black/10"></div>
-      </div>
-    </footer>
+        
+        {/* Optional gradient overlay */}
+        <div className="absolute inset-0 opacity-5 pointer-events-none">
+          <div className="w-full h-full bg-gradient-to-t from-transparent to-white/10 dark:to-black/10"></div>
+        </div>
+      </footer>
+    </>
   );
 }
