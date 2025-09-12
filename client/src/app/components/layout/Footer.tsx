@@ -267,7 +267,7 @@ export default function Footer() {
                 </h1>
               </div>
               <h1 className="footer-heading" style={{ marginTop: '0.25em' }}>
-                together.
+                together
               </h1>
             </div>
 
