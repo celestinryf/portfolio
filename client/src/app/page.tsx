@@ -467,7 +467,7 @@ export default function Home() {
 
             {/* === Project 3 === */}
             <div ref={project3Ref} className="mb-32" style={{
-                marginBottom: 'calc(8rem - 95vh)'
+                marginBottom: 'calc(10rem - 70vh)'
               }}>
               <div className="mx-auto">
 
