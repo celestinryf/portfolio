@@ -283,12 +283,6 @@ export default function Home() {
             <div className="col-start-2 flex flex-col justify-center items-center text-left space-y-6">
               <div ref={heroTextDesktopRef} className="leading-tight tracking-tight whitespace-nowrap">
                 <h1 
-                  className={`leading-none font-normal mb-6 ${isLoaded ? 'animate-slide-in-1' : 'opacity-0'}`} 
-                  style={{fontSize: 'clamp(1rem, 2vw, 2.75rem)'}}
-                >
-                  Project Manager &
-                </h1>
-                <h1 
                   className={`leading-none font-normal ${isLoaded ? 'animate-slide-in-1' : 'opacity-0'}`} 
                   style={{fontSize: 'clamp(1rem, 2vw, 2.75rem)'}}
                 >
@@ -350,22 +344,25 @@ export default function Home() {
         <div 
           className="relative snap-section z-20 transition-colors duration-300 pointer-events-auto"
         >
-          <div className="w-full md:w-[66vw] mx-auto" style={{ paddingTop: '10vh' }}>
-            
+        <div
+          className="w-full max-w-[1880px] px-[5vw] mx-auto"
+          style={{ paddingTop: '10vh' }}
+        >        
             {/* Experience Header */}
             <div ref={contentArea1Ref} className="mb-20">
               <h2 className="text-5xl md:text-7xl font-light text-black dark:text-white tracking-tight">My experience</h2>
             </div>
 
             {/* === Project 1 === */}
-            <div ref={project1Ref} className="mb-32">
+            <div ref={project1Ref} className="mb-16">
+              <div className="border-t border-gray-300 dark:border-gray-700 py-8"></div>
               <div className="mx-auto">
 
                 {/* Top Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                   <div className="text-left">
-                    <h4 className="text-4xl text-black dark:text-white font-normal">Cloud Solutions Architect</h4>
-                    <p className="text-sm text-black dark:text-gray-300">Amazon Web Services</p>
+                  <h4 className="text-4xl text-black dark:text-white font-normal">Software Enigineering Intern</h4>
+                  <p className="text-m text-black dark:text-gray-300 mb-8">University of Washington</p>
                   </div>
 
                   <div>
@@ -376,18 +373,13 @@ export default function Home() {
                       <p className="text-black dark:text-gray-300">Reduced infrastructure costs by 45% while improving system reliability to 99.99% uptime through automated scaling and monitoring.</p>
                     </div>
                     <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
-                      <a href="/projects" className="inline-flex items-center text-black dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors">
-                        Check Projects
-                        <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </a>
+                      <p className="text-black dark:text-gray-300">Reduced infrastructure costs by 45% while improving system reliability to 99.99% uptime through automated scaling and monitoring.</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Image */}
-                <div className="w-full h-[600px] bg-gradient-to-br from-orange-100 to-red-100 dark:from-orange-300/10 dark:to-red-300/10 rounded-lg shadow-lg mb-8"></div>
+                <div className="w-full h-[600px] bg-gradient-to-br from-orange-100 to-red-100 dark:from-orange-300/10 dark:to-red-300/10 rounded-lg mb-8"></div>
 
                 {/* Bottom Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -415,12 +407,13 @@ export default function Home() {
             </div>
 
             {/* === Project 2 === */}
-            <div ref={project2Ref} className="mb-32">
+            <div ref={project2Ref} className="mb-16">
+              <div className="border-t border-gray-300 dark:border-gray-700 py-8"></div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="text-left">
-                  <h4 className="text-xl md:text-2xl text-black dark:text-white font-normal">Senior Software Engineer</h4>
-                  <p className="text-sm text-black dark:text-gray-300 mb-8">Spotify</p>
-                  <div className="w-full h-[600px] bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-300/10 dark:to-emerald-300/10 shadow-lg"></div>
+                    <h4 className="text-4xl text-black dark:text-white font-normal">Software Enigineering Intern</h4>
+                    <p className="text-m text-black dark:text-gray-300 mb-8">Insights Emerge</p>
+                  <div className="w-full h-[600px] bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-300/10 dark:to-emerald-300/10"></div>
                 </div>
 
                 <div className="text-left">
@@ -438,12 +431,7 @@ export default function Home() {
                       <p className="text-black dark:text-gray-300">Built microservices using Python, Go, and Kubernetes, reducing latency by 60% and improving user engagement by 35%.</p>
                     </div>
                     <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
-                      <a href="/projects" className="inline-flex items-center text-black dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors">
-                        Check Projects
-                        <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </a>
+                      <p className="text-black dark:text-gray-300">Built microservices using Python, Go, and Kubernetes, reducing latency by 60% and improving user engagement by 35%.</p>
                     </div>
                   </div>
 
@@ -466,15 +454,16 @@ export default function Home() {
             </div>
 
             {/* === Project 3 === */}
-            <div ref={project3Ref} className="mb-32" style={{
+            <div ref={project3Ref} className="mb-16" style={{
                 marginBottom: 'calc(10rem - 70vh)'
               }}>
+              <div className="border-t border-gray-300 dark:border-gray-700 py-8"></div>
               <div className="mx-auto">
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                   <div className="text-left">
-                    <h4 className="text-xl md:text-2xl text-black dark:text-white font-normal">Lead DevOps Engineer</h4>
-                    <p className="text-sm text-black dark:text-gray-300">Netflix</p>
+                    <h4 className="text-4xl text-black dark:text-white font-normal">President & Founder </h4>
+                    <p className="text-m text-black dark:text-gray-300 mb-8">Tech Startup Club</p>
                   </div>
 
                   <div>
@@ -485,19 +474,14 @@ export default function Home() {
                       <p className="text-black dark:text-gray-300">Implemented infrastructure as code using Terraform and Kubernetes, reducing deployment time by 80%.</p>
                     </div>
                     <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
-                      <a href="/projects" className="inline-flex items-components text-black dark:text-white hover:text-black dark:hover:text-gray-200 transition-colors">
-                        Check Projects
-                        <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </a>
+                      <p className="text-black dark:text-gray-300">Implemented infrastructure as code using Terraform and Kubernetes, reducing deployment time by 80%.</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                  <div className="w-full h-[600px] bg-gradient-to-br from-red-100 to-pink-100 dark:from-red-300/10 dark:to-pink-300/10 shadow-lg"></div>
-                  <div className="w-full h-[600px] bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-300/10 dark:to-purple-300/10 shadow-lg"></div>
+                  <div className="w-full h-[600px] bg-gradient-to-br from-red-100 to-pink-100 dark:from-red-300/10 dark:to-pink-300/10"></div>
+                  <div className="w-full h-[600px] bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-300/10 dark:to-purple-300/10"></div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
