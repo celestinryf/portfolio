@@ -361,19 +361,19 @@ export default function Home() {
                 {/* Top Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                   <div className="text-left">
-                  <h4 className="text-4xl text-black dark:text-white font-normal">Software Enigineering Intern</h4>
+                  <h4 className="text-4xl text-black dark:text-white font-normal">Ful Stack Software Enigineer Intern</h4>
                   <p className="text-m text-black dark:text-gray-300 mb-8">University of Washington</p>
                   </div>
 
                   <div>
                     <div className="border-t border-gray-300 dark:border-gray-700 py-4">
-                      <p className="text-black dark:text-gray-300">Designed and deployed multi-region, fault-tolerant architectures for Fortune 500 companies migrating to AWS.</p>
+                      <p className="text-black dark:text-gray-300">Built an ML-powered document ingestion pipeline using OCR (Tesseract) and pattern matching in Python, migrating over 50,000 legacy files to a structured PostgreSQL database and reducing manual data entry by over 90%.</p>
                     </div>
                     <div className="border-t border-gray-300 dark:border-gray-700 py-4">
-                      <p className="text-black dark:text-gray-300">Reduced infrastructure costs by 45% while improving system reliability to 99.99% uptime through automated scaling and monitoring.</p>
+                      <p className="text-black dark:text-gray-300">Developed a full-stack internal dashboard using React, TypeScript, GraphQL, and REST APIs, enabling real-time data access for 500+ researchers and automating reporting workflows across departments.</p>
                     </div>
                     <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
-                      <p className="text-black dark:text-gray-300">Reduced infrastructure costs by 45% while improving system reliability to 99.99% uptime through automated scaling and monitoring.</p>
+                      <p className="text-black dark:text-gray-300">Deployed GitHub Actions CI/CD workflows and engineered backend features in Node.js, increasing code review throughput by 23% and delivering 85% of scoped functionality based on insights from 27 stakeholder interviews.</p>
                     </div>
                   </div>
                 </div>
@@ -384,16 +384,20 @@ export default function Home() {
                 {/* Bottom Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
-                    <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">01</p>
-                    <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">Enterprise Migration Suite</h5>
-                    <p className="text-black dark:text-gray-300 text-sm mb-4">Cloud Transformation</p>
+                    <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">Professional Project 01</p>
+                    <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">SETlib</h5>
+                    <p className="text-black dark:text-gray-300 text-sm mb-4">Document Management System</p>
                   </div>
                   <div className="space-y-4">
-                    <div>
-                      <h3 className="text-2xl md:text-3xl text-black dark:text-white font-normal mb-2">Cloud Architecture</h3>
-                      <p className="text-sm text-black dark:text-gray-300 leading-relaxed">
-                        Designing resilient, scalable cloud infrastructure solutions
-                      </p>
+                    <div className="flex flex-wrap gap-3">
+                      {["Go", "Java Spring", "Python", "TypeScript", "Docker", "Kubernetes", "AWS", "CI/CD", "next.js", "GitHub Actions"].map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-4 py-1 text-sm rounded-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white font-medium shadow-sm"
+                        >
+                          {skill}
+                        </span>
+                      ))}
                     </div>
                     <p className="text-black dark:text-gray-300 leading-relaxed">
                       Architected comprehensive cloud migration strategies for enterprise clients, facilitating the seamless transition of legacy systems to AWS infrastructure...
@@ -411,36 +415,40 @@ export default function Home() {
               <div className="border-t border-gray-300 dark:border-gray-700 py-8"></div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="text-left">
-                    <h4 className="text-4xl text-black dark:text-white font-normal">Software Enigineering Intern</h4>
+                    <h4 className="text-4xl text-black dark:text-white font-normal">Software Enigineer Intern</h4>
                     <p className="text-m text-black dark:text-gray-300 mb-8">Insights Emerge</p>
                   <div className="w-full h-[600px] bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-300/10 dark:to-emerald-300/10"></div>
                 </div>
 
                 <div className="text-left">
                   <div className="mb-8">
-                    <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">02</p>
-                    <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">Discover Weekly Engine</h5>
-                    <p className="text-black dark:text-gray-300 text-sm mb-4">Music Discovery</p>
+                    <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">Professional Project 02</p>
+                    <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">Illuminance Aesthetic</h5>
+                    <p className="text-black dark:text-gray-300 text-sm mb-4">Beauty School LMS</p>
                   </div>
 
                   <div className="mb-8">
                     <div className="border-t border-gray-300 dark:border-gray-700 py-4">
-                      <p className="text-black dark:text-gray-300">Architected and implemented the recommendation engine powering Spotify's Discover Weekly, serving 200M+ users.</p>
+                      <p className="text-black dark:text-gray-300">Designed and built 5+ interactive prototypes using React, TypeScript, and Redux, improving render efficiency and reducing page load times by 40% to enhance user experience for early-stage product testing.</p>
                     </div>
                     <div className="border-t border-gray-300 dark:border-gray-700 py-4">
-                      <p className="text-black dark:text-gray-300">Built microservices using Python, Go, and Kubernetes, reducing latency by 60% and improving user engagement by 35%.</p>
+                      <p className="text-black dark:text-gray-300">Refactored a monolithic Node.js/Express backend into a microservices architecture, introducing asynchronous patterns and Redis caching, which decreased API response latency by 38% and improved system scalability.</p>
                     </div>
                     <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
-                      <p className="text-black dark:text-gray-300">Built microservices using Python, Go, and Kubernetes, reducing latency by 60% and improving user engagement by 35%.</p>
+                      <p className="text-black dark:text-gray-300">Shipped production-ready features using CI/CD pipelines with automated testing frameworks, achieving 95% code coverage, and implemented an event-driven architecture with Kafka to support 10K+ concurrent users.</p>
                     </div>
                   </div>
 
                   <div className="space-y-4">
-                    <div>
-                      <h3 className="text-2xl md:text-3xl text-black dark:text-white font-normal mb-2">Software Development</h3>
-                      <p className="text-sm text-black dark:text-gray-300 leading-relaxed">
-                        Full-stack development with focus on scalable web applications
-                      </p>
+                    <div className="flex flex-wrap gap-3">
+                      {["Next.js", "Node.js", "JavaScript", "TypeScript", "Docker", "Kubernetes", "AWS", "CI/CD", "Terraform", "GitHub Actions"].map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-4 py-1 text-sm rounded-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white font-medium shadow-sm"
+                        >
+                          {skill}
+                        </span>
+                      ))}
                     </div>
                     <p className="text-black dark:text-gray-300 leading-relaxed">
                       Led the technical implementation of Spotify's revolutionary Discover Weekly feature...
@@ -492,11 +500,15 @@ export default function Home() {
                   </div>
 
                   <div className="space-y-4">
-                    <div>
-                      <h3 className="text-2xl md:text-3xl text-black dark:text-white font-normal mb-2">DevOps Excellence</h3>
-                      <p className="text-sm text-black dark:text-gray-300 leading-relaxed">
-                        Scalable infrastructure and deployment automation
-                      </p>
+                    <div className="flex flex-wrap gap-3">
+                      {["Next.js", "Node.js", "JavaScript", "TypeScript", "Docker", "Kubernetes", "AWS", "CI/CD", "Terraform", "GitHub Actions"].map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-4 py-1 text-sm rounded-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white font-medium shadow-sm"
+                        >
+                          {skill}
+                        </span>
+                      ))}
                     </div>
                     <p className="text-black dark:text-gray-300 leading-relaxed">
                       Architected and maintained the infrastructure powering Netflix's global streaming platform...
@@ -514,4 +526,3 @@ export default function Home() {
     </div>
   );
 }
-
