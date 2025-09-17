@@ -398,7 +398,7 @@ export default function TopNavigation() {
             strength={0.4}
             className={isLoaded ? 'nav-logo' : 'opacity-0'}
           >
-            Celestin Ryf
+            Célestin Ryf
           </MagneticLink>
 
           {/* Navigation Links */}

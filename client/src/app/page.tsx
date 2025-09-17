@@ -284,7 +284,7 @@ export default function Home() {
               <div ref={heroTextDesktopRef} className="leading-tight tracking-tight whitespace-nowrap">
                 <h1 
                   className={`leading-none font-normal ${isLoaded ? 'animate-slide-in-1' : 'opacity-0'}`} 
-                  style={{fontSize: 'clamp(1rem, 2vw, 2.75rem)'}}
+                  style={{fontSize: 'clamp(1.5rem, 2vw, 2.75rem)'}}
                 >
                   Software Engineer
                 </h1>
@@ -297,14 +297,8 @@ export default function Home() {
         <div className="absolute bottom-24 left-8 md:hidden">
           <div ref={heroTextMobileRef} className="leading-tight tracking-tight">
             <h1 
-              className={`leading-none font-normal mb-2 ${isLoaded ? 'animate-slide-in-1' : 'opacity-0'}`} 
-              style={{fontSize: 'clamp(1.375rem, 3.5vw, 2.5rem)'}}
-            >
-              Project Manager &
-            </h1>
-            <h1 
               className={`leading-none font-normal ${isLoaded ? 'animate-slide-in-1' : 'opacity-0'}`} 
-              style={{fontSize: 'clamp(1.375rem, 3.5vw, 2.5rem)'}}
+              style={{fontSize: 'clamp(1.5rem, 3.5vw, 2.5rem)'}}
             >
               Software Engineer
             </h1>
@@ -361,16 +355,16 @@ export default function Home() {
                 {/* Top Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                   <div className="text-left">
-                  <h4 className="text-4xl text-black dark:text-white font-normal">Ful Stack Software Enigineer Intern</h4>
+                  <h4 className="text-4xl text-black dark:text-white font-normal">Software Enigineer Intern</h4>
                   <p className="text-m text-black dark:text-gray-300 mb-8">University of Washington</p>
                   </div>
 
                   <div>
                     <div className="border-t border-gray-300 dark:border-gray-700 py-4">
-                      <p className="text-black dark:text-gray-300">Built an ML-powered document ingestion pipeline using OCR (Tesseract) and pattern matching in Python, migrating over 50,000 legacy files to a structured PostgreSQL database and reducing manual data entry by over 90%.</p>
+                      <p className="text-black dark:text-gray-300">Built an ML-powered Document Ingestion pipeline using OCR (Tesseract) and pattern matching in Python, migrating over 50,000 legacy files to a structured PostgreSQL database and reducing manual data entry by over 90%.</p>
                     </div>
                     <div className="border-t border-gray-300 dark:border-gray-700 py-4">
-                      <p className="text-black dark:text-gray-300">Developed a full-stack internal dashboard using React, TypeScript, GraphQL, and REST APIs, enabling real-time data access for 500+ researchers and automating reporting workflows across departments.</p>
+                      <p className="text-black dark:text-gray-300">Developed a Document Search feature full-stack using Next.js, TypeScript, GraphQL, and REST APIs, enabling real-time data access for 500+ professors and automating reporting workflows across departments.</p>
                     </div>
                     <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
                       <p className="text-black dark:text-gray-300">Deployed GitHub Actions CI/CD workflows and engineered backend features in Node.js, increasing code review throughput by 23% and delivering 85% of scoped functionality based on insights from 27 stakeholder interviews.</p>
@@ -378,8 +372,13 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Image */}
-                <div className="w-full h-[600px] bg-gradient-to-br from-orange-100 to-red-100 dark:from-orange-300/10 dark:to-red-300/10 rounded-lg mb-8"></div>
+                <div className="w-full h-[500px] flex items-center justify-center rounded-lg mb-8 overflow-hidden">
+                  <img
+                    src="/assets/SETlib.png"
+                    alt="Description"
+                    className="object-contain max-h-fill"
+                  />
+                </div>
 
                 {/* Bottom Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -390,7 +389,7 @@ export default function Home() {
                   </div>
                   <div className="space-y-4">
                     <div className="flex flex-wrap gap-3">
-                      {["Go", "Java Spring", "Python", "TypeScript", "Docker", "Kubernetes", "AWS", "CI/CD", "next.js", "GitHub Actions"].map((skill) => (
+                      {["Go", "Java Spring", "Python", "TypeScript", "Docker", "Kubernetes", "AWS", "GraphQL", "CI/CD", "next.js", "GitHub Actions"].map((skill) => (
                         <span
                           key={skill}
                           className="px-4 py-1 text-sm rounded-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white font-medium shadow-sm"
@@ -441,7 +440,7 @@ export default function Home() {
 
                   <div className="space-y-4">
                     <div className="flex flex-wrap gap-3">
-                      {["Next.js", "Node.js", "JavaScript", "TypeScript", "Docker", "Kubernetes", "AWS", "CI/CD", "Terraform", "GitHub Actions"].map((skill) => (
+                      {["Next.js", "Node.js", "TypeScript", "Tailwind", "Docker", "Kubernetes", "Redux", "CI/CD", "Stakeholder Communication"].map((skill) => (
                         <span
                           key={skill}
                           className="px-4 py-1 text-sm rounded-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white font-medium shadow-sm"
@@ -476,10 +475,10 @@ export default function Home() {
 
                   <div>
                     <div className="border-t border-gray-300 dark:border-gray-700 py-4">
-                      <p className="text-black dark:text-gray-300">Built and maintained CI/CD pipelines serving 200M+ global users with 99.99% uptime across multiple regions.</p>
+                      <p className="text-black dark:text-gray-300">Manager and Senior Developer for Product Development Consultancy startup founded, funded, and ran by UW students. Leading end-to-end software projects for clients from design through deployment.</p>
                     </div>
                     <div className="border-t border-gray-300 dark:border-gray-700 py-4">
-                      <p className="text-black dark:text-gray-300">Implemented infrastructure as code using Terraform and Kubernetes, reducing deployment time by 80%.</p>
+                      <p className="text-black dark:text-gray-300">Lead organizer and Host of UHackathon, the largest university hackathon south of Seattle. Secured $5,000 in sponsorship funding and oversaw all financial planning, budgeting, and expense tracking. Awarded $10,000 contract for 2 further years.</p>
                     </div>
                     <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
                       <p className="text-black dark:text-gray-300">Implemented infrastructure as code using Terraform and Kubernetes, reducing deployment time by 80%.</p>
@@ -494,14 +493,14 @@ export default function Home() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
-                    <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">03</p>
-                    <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">Global Streaming Platform</h5>
-                    <p className="text-black dark:text-gray-300 text-sm mb-4">Infrastructure & DevOps</p>
+                    <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">Professional Project 03</p>
+                    <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">UHackathon</h5>
+                    <p className="text-black dark:text-gray-300 text-sm mb-4">Largest Ever Hackathon South of Seattle</p>
                   </div>
 
                   <div className="space-y-4">
                     <div className="flex flex-wrap gap-3">
-                      {["Next.js", "Node.js", "JavaScript", "TypeScript", "Docker", "Kubernetes", "AWS", "CI/CD", "Terraform", "GitHub Actions"].map((skill) => (
+                      {["Project Managment", "Leadership", "JavaScript", "TypeScript", "React", "Node.js", "Go", "Docker", "Trello"].map((skill) => (
                         <span
                           key={skill}
                           className="px-4 py-1 text-sm rounded-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white font-medium shadow-sm"
