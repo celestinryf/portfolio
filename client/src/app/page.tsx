@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef, useCallback } from "react";
+import { gsap } from 'gsap';
 
 // Centralized parallax controller to prevent drift between elements
 class ParallaxController {
@@ -80,6 +81,105 @@ function useParallaxScroll<T extends HTMLElement = HTMLElement>(
   }, [speed, smoothness]);
 
   return ref;
+}
+
+// Magnetic Link Component for Case Study Buttons
+interface MagneticLinkProps {
+  href: string;
+  children: React.ReactNode;
+  strength?: number;
+  className?: string;
+  onClick?: () => void;
+  style?: React.CSSProperties;
+}
+
+function MagneticLink({ href, children, strength = 0.3, className = "", onClick }: MagneticLinkProps) {
+  const linkRef = useRef<HTMLAnchorElement>(null);
+  const textRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const link = linkRef.current;
+    const text = textRef.current;
+    
+    if (!link || !text) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = link.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      const deltaX = (e.clientX - centerX) * strength;
+      const deltaY = (e.clientY - centerY) * strength;
+      
+      // Move the link container with matrix3d for hardware acceleration
+      gsap.to(link, {
+        duration: 0.3,
+        x: deltaX,
+        y: deltaY,
+        rotationZ: 0.001,
+        ease: "power2.out",
+        force3D: true
+      });
+      
+      // Move the text with less intensity
+      gsap.to(text, {
+        duration: 0.3,
+        x: deltaX * 0.5,
+        y: deltaY * 0.5,
+        rotationZ: 0.001,
+        ease: "power2.out",
+        force3D: true
+      });
+    };
+
+    const handleMouseLeave = () => {
+      // Return to original position with elastic ease
+      gsap.to(link, {
+        duration: 0.5,
+        x: 0,
+        y: 0,
+        rotationZ: 0.001,
+        ease: "elastic.out(1, 0.3)",
+        force3D: true
+      });
+      
+      gsap.to(text, {
+        duration: 0.5,
+        x: 0,
+        y: 0,
+        rotationZ: 0.001,
+        ease: "elastic.out(1, 0.3)",
+        force3D: true
+      });
+    };
+
+    link.addEventListener('mousemove', handleMouseMove);
+    link.addEventListener('mouseleave', handleMouseLeave);
+
+    // Cleanup
+    return () => {
+      link.removeEventListener('mousemove', handleMouseMove);
+      link.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [strength]);
+
+  return (
+    <a
+      ref={linkRef}
+      href={href}
+      onClick={onClick}
+      className={`inline-block relative cursor-pointer ${className}`}
+      style={{ transform: 'rotate(0.001deg)' }}
+    >
+      <span 
+        ref={textRef}
+        className="block transition-colors duration-200"
+        style={{ transform: 'rotate(0.001deg)' }}
+      >
+        {children}
+      </span>
+    </a>
+  );
 }
 
 // Globe Spinner Component with Tailwind
@@ -283,7 +383,7 @@ export default function Home() {
             <div className="col-start-2 flex flex-col justify-center items-center text-left space-y-6">
               <div ref={heroTextDesktopRef} className="leading-tight tracking-tight whitespace-nowrap">
                 <h1 
-                  className={`leading-none font-normal ${isLoaded ? 'animate-slide-in-1' : 'opacity-0'}`} 
+                  className={`leading-none font-normal text-white ${isLoaded ? 'animate-slide-in-1' : 'opacity-0'}`} 
                   style={{fontSize: 'clamp(1.5rem, 2vw, 2.75rem)'}}
                 >
                   Software Engineer
@@ -297,7 +397,7 @@ export default function Home() {
         <div className="absolute bottom-24 left-8 md:hidden">
           <div ref={heroTextMobileRef} className="leading-tight tracking-tight">
             <h1 
-              className={`leading-none font-normal ${isLoaded ? 'animate-slide-in-1' : 'opacity-0'}`} 
+              className={`leading-none font-normal text-white ${isLoaded ? 'animate-slide-in-1' : 'opacity-0'}`} 
               style={{fontSize: 'clamp(1.5rem, 3.5vw, 2.5rem)'}}
             >
               Software Engineer
@@ -342,6 +442,33 @@ export default function Home() {
           className="w-full max-w-[1880px] px-[5vw] mx-auto"
           style={{ paddingTop: '10vh' }}
         >        
+{/* About Me Introduction */}
+<div ref={contentArea1Ref} className="mb-32 relative">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    {/* Text on the left */}
+    <div className="max-w-2xl">
+      <p className="text-xl md:text-2xl text-black/80 dark:text-white/80 font-light leading-relaxed">
+        I'm a software engineer passionate about building elegant solutions to complex problems. 
+        With expertise in full-stack development and cloud architecture, I help transform ideas into scalable digital experiences.
+      </p>
+    </div>
+    
+    {/* About Me Circular Button on the right */}
+    <div className="flex justify-center md:justify-end">
+      <MagneticLink 
+        href="/about"
+        strength={0.4}
+        className="flex items-center justify-center rounded-full bg-black dark:bg-white text-white dark:text-black hover:scale-105 transition-transform cursor-pointer"
+        style={{
+          width: 'clamp(120px, 12vw, 200px)',
+          height: 'clamp(120px, 12vw, 200px)',
+        }}
+      >
+        <span className="font-medium" style={{ fontSize: 'clamp(14px, 1.1vw, 16px)' }}>About me</span>
+      </MagneticLink>
+    </div>
+  </div>
+</div>
             {/* Experience Header */}
             <div ref={contentArea1Ref} className="mb-20">
               <h2 className="text-5xl md:text-7xl font-light text-black dark:text-white tracking-tight">My experience</h2>
@@ -401,9 +528,13 @@ export default function Home() {
                     <p className="text-black dark:text-gray-300 leading-relaxed">
                       Architected comprehensive cloud migration strategies for enterprise clients, facilitating the seamless transition of legacy systems to AWS infrastructure...
                     </p>
-                    <button className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors mt-4">
+                    <MagneticLink 
+                      href="/projects" 
+                      strength={0.4}
+                      className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors mt-4"
+                    >
                       View Case Study
-                    </button>
+                    </MagneticLink>
                   </div>
                 </div>
               </div>
@@ -416,13 +547,18 @@ export default function Home() {
                 <div className="text-left">
                     <h4 className="text-4xl text-black dark:text-white font-normal">Software Enigineer Intern</h4>
                     <p className="text-m text-black dark:text-gray-300 mb-8">Insights Emerge</p>
-                  <div className="w-full h-[600px] bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-300/10 dark:to-emerald-300/10"></div>
+                  <div className="w-full h-[600px] rounded-lg mb-8 overflow-hidden">                  
+                  <img
+                    src="/assets/lms.png"
+                    alt="Description"
+                    className="object-contain max-h-fill"
+                  /></div>
                 </div>
 
                 <div className="text-left">
                   <div className="mb-8">
                     <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">Professional Project 02</p>
-                    <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">Illuminance Aesthetic</h5>
+                    <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">Illuminance Esthetics</h5>
                     <p className="text-black dark:text-gray-300 text-sm mb-4">Beauty School LMS</p>
                   </div>
 
@@ -452,9 +588,13 @@ export default function Home() {
                     <p className="text-black dark:text-gray-300 leading-relaxed">
                       Led the technical implementation of Spotify's revolutionary Discover Weekly feature...
                     </p>
-                    <button className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors mt-4">
+                    <MagneticLink 
+                      href="/projects" 
+                      strength={0.4}
+                      className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors mt-4"
+                    >
                       View Case Study
-                    </button>
+                    </MagneticLink>
                   </div>
                 </div>
               </div>
@@ -486,9 +626,21 @@ export default function Home() {
                   </div>
                 </div>
 
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                  <div className="w-full h-[600px] bg-gradient-to-br from-red-100 to-pink-100 dark:from-red-300/10 dark:to-pink-300/10"></div>
-                  <div className="w-full h-[600px] bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-300/10 dark:to-purple-300/10"></div>
+                  <div className="w-full h-[600px] rounded-lg mb-8 overflow-hidden">                  
+                  <img
+                    src="/assets/aura farm.png"
+                    alt="Description"
+                    className="object-contain max-h-fill"
+                  /></div>
+                  <div className="w-full h-[600px] rounded-lg mb-8 overflow-hidden">                  
+                    <img
+                      src="/assets/umarket (1).png"
+                      alt="Description"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -512,9 +664,13 @@ export default function Home() {
                     <p className="text-black dark:text-gray-300 leading-relaxed">
                       Architected and maintained the infrastructure powering Netflix's global streaming platform...
                     </p>
-                    <button className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors mt-4">
+                    <MagneticLink 
+                      href="/projects" 
+                      strength={0.4}
+                      className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors mt-4"
+                    >
                       View Case Study
-                    </button>
+                    </MagneticLink>
                   </div>
                 </div>
               </div>

@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { useParallaxScroll } from '../../hooks/useParallaxScroll';
+import { AlignJustify } from 'lucide-react';
 
 // Magnetic Link Component using GSAP
 interface MagneticLinkProps {
@@ -11,9 +12,10 @@ interface MagneticLinkProps {
   strength?: number;
   className?: string;
   onClick?: () => void;
+  underlineStyle?: 'desktop' | 'mobile' | 'none';
 }
 
-function MagneticLink({ href, children, strength = 0.3, className = "", onClick }: MagneticLinkProps) {
+function MagneticLink({ href, children, strength = 0.3, className = "", onClick, underlineStyle = 'none' }: MagneticLinkProps) {
   const linkRef = useRef<HTMLAnchorElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
   const innerTextRef = useRef<HTMLSpanElement>(null);
@@ -85,6 +87,16 @@ function MagneticLink({ href, children, strength = 0.3, className = "", onClick 
     };
   }, [strength]);
 
+  const getTextClasses = () => {
+    let baseClasses = "block transition-colors duration-200 relative";
+    if (underlineStyle === 'desktop') {
+      baseClasses += " nav-link-text";
+    } else if (underlineStyle === 'mobile') {
+      baseClasses += " nav-link-text-mobile";
+    }
+    return baseClasses;
+  };
+
   return (
     <a
       ref={linkRef}
@@ -95,14 +107,14 @@ function MagneticLink({ href, children, strength = 0.3, className = "", onClick 
     >
       <span 
         ref={textRef}
-        className="block transition-colors duration-200"
+        className={getTextClasses()}
         style={{ transform: 'rotate(0.001deg)' }}
       >
         <span 
           ref={innerTextRef}
-          className="block font-medium"
+          className="block font-normal"
           style={{
-            fontSize: 'clamp(1rem, 1.8vw, 1.2rem)', 
+            fontSize: 'clamp(1rem, 1.8vw, 1.2em)', 
             transform: 'translateY(calc(0.8vw - 0.5rem)) rotate(0.001deg)'
           }}
         >
@@ -119,9 +131,11 @@ interface MagneticButtonProps {
   strength?: number;
   className?: string;
   onClick?: () => void;
+  isIcon?: boolean; // Added prop to handle icon content differently
+  style?: React.CSSProperties; // Added style prop for dynamic styling
 }
 
-function MagneticButton({ children, strength = 0.3, className = "", onClick }: MagneticButtonProps) {
+function MagneticButton({ children, strength = 0.3, className = "", onClick, isIcon = false, style }: MagneticButtonProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
   const innerTextRef = useRef<HTMLSpanElement>(null);
@@ -194,7 +208,7 @@ function MagneticButton({ children, strength = 0.3, className = "", onClick }: M
       ref={buttonRef}
       onClick={onClick}
       className={`block relative cursor-pointer bg-transparent border-none ${className}`}
-      style={{ transform: 'rotate(0.001deg)' }}
+      style={{ transform: 'rotate(0.001deg)', ...style }}
     >
       <span 
         ref={textRef}
@@ -203,10 +217,10 @@ function MagneticButton({ children, strength = 0.3, className = "", onClick }: M
       >
         <span 
           ref={innerTextRef}
-          className="block font-medium"
+          className={isIcon ? "flex items-center justify-center w-full h-full" : "block font-medium"}
           style={{
-            fontSize: 'clamp(1rem, 1.8vw, 1.1rem)', 
-            transform: 'translateY(calc(0.8vw - 0.5rem)) rotate(0.001deg)'
+            fontSize: isIcon ? 'inherit' : 'clamp(1rem, 1.8vw, 1.1rem)', 
+            transform: isIcon ? 'none' : 'translateY(calc(0.8vw - 0.5rem)) rotate(0.001deg)'
           }}
         >
           {children}
@@ -219,7 +233,10 @@ function MagneticButton({ children, strength = 0.3, className = "", onClick }: M
 export default function TopNavigation() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [showScrollBurger, setShowScrollBurger] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const scrollBurgerRef = useRef<HTMLDivElement>(null);
   
   // Use the custom hook with default options
   const navRef = useParallaxScroll();
@@ -232,10 +249,23 @@ export default function TopNavigation() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Scroll detection
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const navHeight = 120; // Approximate height of nav + some buffer
+      setIsScrolled(scrollY > navHeight);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
+          scrollBurgerRef.current && !scrollBurgerRef.current.contains(event.target as Node)) {
         setIsMenuOpen(false);
       }
     };
@@ -271,6 +301,50 @@ export default function TopNavigation() {
       );
     }
   }, [isMenuOpen]);
+
+  // Animate scroll burger menu in and out
+  useEffect(() => {
+    const scrollBurger = scrollBurgerRef.current;
+    
+    if (isScrolled && isLoaded) {
+      // Show the burger and animate in
+      setShowScrollBurger(true);
+      
+      // Small delay to ensure element is mounted before animating
+      setTimeout(() => {
+        if (scrollBurger) {
+          gsap.fromTo(scrollBurger,
+            {
+              opacity: 0,
+              scale: 0.8,
+              y: -20
+            },
+            {
+              opacity: 1,
+              scale: 1,
+              y: 0,
+              duration: 0.4,
+              ease: "back.out(1.7)"
+            }
+          );
+        }
+      }, 10);
+    } else if (!isScrolled && showScrollBurger && scrollBurger) {
+      // Animate out
+      gsap.to(scrollBurger, {
+        opacity: 0,
+        scale: 0.8,
+        y: -20,
+        duration: 0.3,
+        ease: "power2.in",
+        onComplete: () => {
+          setShowScrollBurger(false);
+          // Also close the menu if it's open
+          setIsMenuOpen(false);
+        }
+      });
+    }
+  }, [isScrolled, isLoaded, showScrollBurger]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -365,6 +439,54 @@ export default function TopNavigation() {
           animation: dropdownSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
+        /* Navigation link underline animation - attached to text span */
+        .nav-link-text::after {
+          content: '';
+          position: absolute;
+          bottom: -16px;
+          left: 50%;
+          width: 100%;
+          height: 2px;
+          background-color: white;
+          border-radius: 1.5px;
+          transform: translateX(-50%) scaleX(0);
+          transform-origin: center;
+          transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .nav-link:hover .nav-link-text::after {
+          transform: translateX(-50%) scaleX(1);
+        }
+
+        /* Mobile dropdown link styles - attached to text span */
+        .nav-link-text-mobile::after {
+          content: '';
+          position: absolute;
+          bottom: -16px;
+          left: 50%;
+          width: 100%;
+          height: 2px;
+          background-color: #374151;
+          border-radius: 1.5px;
+          transform: translateX(-50%) scaleX(0);
+          transform-origin: center;
+          transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .nav-link-mobile:hover .nav-link-text-mobile::after {
+          transform: translateX(-50%) scaleX(1);
+        }
+
+        /* Scroll burger menu styles */
+        .scroll-burger-button {
+          backdrop-filter: blur(12px);
+          transition: all 0.3s ease;
+        }
+
+        .scroll-burger-button:hover {
+          transform: scale(1.05);
+        }
+
         /* Subtle hover glow effect */
         @keyframes navGlow {
           0%, 100% {
@@ -387,9 +509,10 @@ export default function TopNavigation() {
         }
       `}</style>
 
+      {/* Main Navigation */}
       <nav 
         ref={navRef} 
-        className={`fixed top-0 left-0 right-0 z-20 py-6 px-12 ${isLoaded ? 'nav-container' : 'opacity-0'}`}
+        className={`fixed top-0 left-0 right-0 z-20 py-6 px-12 text-white ${isLoaded ? 'nav-container' : 'opacity-0'}`}
       >
         <div className="flex justify-between items-center max-w-8xl mx-auto">
           {/* Name/Logo */}
@@ -401,49 +524,65 @@ export default function TopNavigation() {
             Célestin Ryf
           </MagneticLink>
 
-          {/* Navigation Links */}
-          <div className="hidden md:flex space-x-10">
+          {/* Navigation Links - Hidden when scrolled */}
+          <div className={`hidden md:flex space-x-10 transition-opacity duration-300 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
             <MagneticLink 
               href="#work" 
               strength={0.4}
-              className={isLoaded ? 'nav-item-1' : 'opacity-0'}
+              className={`nav-link ${isLoaded ? 'nav-item-1' : 'opacity-0'}`}
+              underlineStyle="desktop"
             >
               Work
             </MagneticLink>
             <MagneticLink 
               href="#about" 
               strength={0.4}
-              className={isLoaded ? 'nav-item-2' : 'opacity-0'}
+              className={`nav-link ${isLoaded ? 'nav-item-2' : 'opacity-0'}`}
+              underlineStyle="desktop"
             >
               About
             </MagneticLink>
             <MagneticLink 
               href="#contact" 
               strength={0.4}
-              className={isLoaded ? 'nav-item-3' : 'opacity-0'}
+              className={`nav-link ${isLoaded ? 'nav-item-3' : 'opacity-0'}`}
+              underlineStyle="desktop"
             >
               Contact
             </MagneticLink>
           </div>
 
-          {/* Mobile Menu Button with Dropdown */}
+          {/* Mobile Menu Button - Always visible on mobile */}
           <div className={`md:hidden relative ${isLoaded ? 'nav-menu' : 'opacity-0'}`} ref={dropdownRef}>
             <MagneticButton 
               onClick={toggleMenu}
               strength={0.3}
-              className="text-inherit"
+              isIcon={true}
+              className="rounded-full flex items-center justify-center !bg-black dark:!bg-white border border-white/10 dark:border-black/10 hover:!bg-gray-900 dark:hover:!bg-gray-100 transition-all duration-300"
+              style={{
+                width: 'clamp(50px, 10vw, 60px)',
+                height: 'clamp(50px, 10vw, 60px)',
+              }}
             >
-              Menu
+              <AlignJustify 
+                size={20}
+                className="text-white dark:text-black"
+                style={{
+                  width: 'clamp(18px, 4vw, 22px)',
+                  height: 'clamp(18px, 4vw, 22px)',
+                }}
+              />
             </MagneticButton>
 
             {/* Dropdown Menu */}
             {isMenuOpen && (
-              <div className="dropdown-menu absolute right-0 top-full mt-4 py-4 px-6 bg-white/90 dropdown-backdrop rounded-lg shadow-lg border border-gray-100/50 min-w-[120px]">
+              <div className="dropdown-menu absolute right-0 top-full mt-2 py-4 px-6 bg-white/90 dropdown-backdrop rounded-lg border border-gray-100/50 min-w-[120px]">
                 <div className="flex flex-col space-y-3">
                   <MagneticLink 
                     href="#work" 
                     strength={0.2}
-                    className="text-sm transition-colors"
+                    className="nav-link-mobile text-sm transition-colors"
+                    underlineStyle="mobile"
                     onClick={closeMenu}
                   >
                     Work
@@ -451,7 +590,8 @@ export default function TopNavigation() {
                   <MagneticLink 
                     href="#about" 
                     strength={0.2}
-                    className="text-sm transition-colors"
+                    className="nav-link-mobile text-sm transition-colors"
+                    underlineStyle="mobile"
                     onClick={closeMenu}
                   >
                     About
@@ -459,7 +599,8 @@ export default function TopNavigation() {
                   <MagneticLink 
                     href="#contact" 
                     strength={0.2}
-                    className="text-sm hover:text-gray-600 transition-colors"
+                    className="nav-link-mobile text-sm transition-colors"
+                    underlineStyle="mobile"
                     onClick={closeMenu}
                   >
                     Contact
@@ -470,6 +611,69 @@ export default function TopNavigation() {
           </div>
         </div>
       </nav>
+
+      {/* Scroll Burger Menu - Appears when scrolled on desktop */}
+      {showScrollBurger && (
+        <div 
+          ref={scrollBurgerRef}
+          className="fixed top-6 right-6 z-30 hidden md:block"
+        >
+          <MagneticButton
+            onClick={toggleMenu}
+            strength={0.3}
+            isIcon={true}
+            className="scroll-burger-button rounded-full flex items-center justify-center !bg-black dark:!bg-white border border-white/10 dark:border-black/10 hover:!bg-gray-900 dark:hover:!bg-gray-100 transition-all duration-300"
+            style={{
+              width: 'clamp(60px, 6vw, 90px)',
+              height: 'clamp(60px, 6vw, 90px)',
+            }}
+          >
+            <AlignJustify 
+              size={24}
+              className="text-white dark:text-black"
+              style={{
+                width: 'clamp(18px, 1.5vw, 26px)',
+                height: 'clamp(18px, 1.5vw, 26px)',
+              }}
+            />
+          </MagneticButton>
+
+          {/* Scroll Burger Dropdown */}
+          {isMenuOpen && (
+            <div className="dropdown-menu absolute right-0 top-full mt-4 py-4 px-6 bg-white/90 dropdown-backdrop rounded-lg border border-gray-100/50 min-w-[120px]">
+              <div className="flex flex-col space-y-3">
+                <MagneticLink 
+                  href="#work" 
+                  strength={0.2}
+                  className="nav-link-mobile text-sm transition-colors"
+                  underlineStyle="mobile"
+                  onClick={closeMenu}
+                >
+                  Work
+                </MagneticLink>
+                <MagneticLink 
+                  href="#about" 
+                  strength={0.2}
+                  className="nav-link-mobile text-sm transition-colors"
+                  underlineStyle="mobile"
+                  onClick={closeMenu}
+                >
+                  About
+                </MagneticLink>
+                <MagneticLink 
+                  href="#contact" 
+                  strength={0.2}
+                  className="nav-link-mobile text-sm transition-colors"
+                  underlineStyle="mobile"
+                  onClick={closeMenu}
+                >
+                  Contact
+                </MagneticLink>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </>
   );
 }
