@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback } from "react";
 import { gsap } from 'gsap';
+import { useRouter } from 'next/navigation';
 
 // Centralized parallax controller to prevent drift between elements
 class ParallaxController {
@@ -182,6 +183,109 @@ function MagneticLink({ href, children, strength = 0.3, className = "", onClick 
   );
 }
 
+interface MagneticButtonProps {
+  children: React.ReactNode;
+  strength?: number;
+  className?: string;
+  onClick?: () => void;
+  isIcon?: boolean;
+  style?: React.CSSProperties;
+}
+
+function MagneticButton({ children, strength = 0.3, className = "", onClick, isIcon = false, style }: MagneticButtonProps) {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const textRef = useRef<HTMLSpanElement>(null);
+  const innerTextRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const button = buttonRef.current;
+    const text = textRef.current;
+    const innerText = innerTextRef.current;
+    
+    if (!button || !text || !innerText) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = button.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      const deltaX = (e.clientX - centerX) * strength;
+      const deltaY = (e.clientY - centerY) * strength;
+      
+      gsap.to(button, {
+        duration: 0.3,
+        x: deltaX,
+        y: deltaY,
+        rotationZ: 0.001,
+        ease: "power2.out",
+        force3D: true
+      });
+      
+      gsap.to(text, {
+        duration: 0.3,
+        x: deltaX * 0.5,
+        y: deltaY * 0.5,
+        rotationZ: 0.001,
+        ease: "power2.out",
+        force3D: true
+      });
+    };
+
+    const handleMouseLeave = () => {
+      gsap.to(button, {
+        duration: 0.5,
+        x: 0,
+        y: 0,
+        rotationZ: 0.001,
+        ease: "elastic.out(1, 0.3)",
+        force3D: true
+      });
+      
+      gsap.to(text, {
+        duration: 0.5,
+        x: 0,
+        y: 0,
+        rotationZ: 0.001,
+        ease: "elastic.out(1, 0.3)",
+        force3D: true
+      });
+    };
+
+    button.addEventListener('mousemove', handleMouseMove);
+    button.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      button.removeEventListener('mousemove', handleMouseMove);
+      button.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [strength]);
+
+  return (
+    <button
+      ref={buttonRef}
+      onClick={onClick}
+      className={`block relative cursor-pointer bg-transparent border-none ${className}`}
+      style={{ transform: 'rotate(0.001deg)', ...style }}
+    >
+      <span 
+        ref={textRef}
+        className="block transition-colors duration-200"
+        style={{ transform: 'rotate(0.001deg)' }}
+      >
+        <span 
+          ref={innerTextRef}
+          className={isIcon ? "flex items-center justify-center w-full h-full" : "block font-medium"}
+          style={{
+            fontSize: isIcon ? 'inherit' : 'clamp(1rem, 1.8vw, 1.1rem)', 
+          }}
+        >
+          {children}
+        </span>
+      </span>
+    </button>
+  );
+}
+
 // Globe Spinner Component with Tailwind
 const GlobeSpinner = ({ className = "" }) => {
   return (
@@ -265,6 +369,7 @@ export default function Home() {
   const heroTextDesktopRef = useParallaxScroll<HTMLDivElement>({ speed: 0.4 });
   const heroTextMobileRef = useParallaxScroll<HTMLDivElement>({ speed: 0.6 });
   const locationPillRef = useParallaxScroll<HTMLDivElement>({ speed: 0.8 });
+  const aboutSectionRef = useParallaxScroll<HTMLDivElement>({ speed: 0.3 }); // Same speed as experience section
   const contentArea1Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.3});
   const contentArea2Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.3 });
   const project1Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.3 });
@@ -299,7 +404,7 @@ export default function Home() {
       clearTimeout(heightTimer);
       parallaxController.stop();
     };
-  }, []);
+  }, []);const router = useRouter();
 
   return (
     <div className="relative min-h-screen overflow-hidden pointer-events-none">
@@ -422,14 +527,11 @@ export default function Home() {
         </div>
       </div>
       
-      {/* Content Section - White Background with Parallax Gap Fix */}
       <div className="relative">
-        {/* White Background with Dynamic Height to Prevent Gaps */}
         <div 
           ref={contentBackgroundRef} 
           className="absolute inset-0 bg-white dark:bg-black z-11 pointer-events-none"
           style={{ 
-            // height: contentHeight, // Dynamic height based on parallax movement
             minHeight: '1000vh' // Fallback minimum coverage
           }}
         />
@@ -442,33 +544,34 @@ export default function Home() {
           className="w-full max-w-[1880px] px-[5vw] mx-auto"
           style={{ paddingTop: '10vh' }}
         >        
-{/* About Me Introduction */}
-<div ref={contentArea1Ref} className="mb-32 relative">
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-    {/* Text on the left */}
-    <div className="max-w-2xl">
-      <p className="text-xl md:text-2xl text-black/80 dark:text-white/80 font-light leading-relaxed">
-        I'm a software engineer passionate about building elegant solutions to complex problems. 
-        With expertise in full-stack development and cloud architecture, I help transform ideas into scalable digital experiences.
-      </p>
-    </div>
-    
-    {/* About Me Circular Button on the right */}
-    <div className="flex justify-center md:justify-end">
-      <MagneticLink 
-        href="/about"
-        strength={0.4}
-        className="flex items-center justify-center rounded-full bg-black dark:bg-white text-white dark:text-black hover:scale-105 transition-transform cursor-pointer"
-        style={{
-          width: 'clamp(120px, 12vw, 200px)',
-          height: 'clamp(120px, 12vw, 200px)',
-        }}
-      >
-        <span className="font-medium" style={{ fontSize: 'clamp(14px, 1.1vw, 16px)' }}>About me</span>
-      </MagneticLink>
-    </div>
-  </div>
-</div>
+            {/* About Me Introduction */}
+            <div ref={aboutSectionRef} className="mb-32 relative">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                {/* Text on the left */}
+                <div className="max-w-4xl">
+                  <p className="text-black/80 dark:text-white/80 font-normal leading-relaxed" style={{ fontSize: 'clamp(25px, 1.1vw, 30px)' }}>
+                    I'm a software engineer with experience in designing, developing, and maintaining scalable applications. 
+                    I elevate teams, architect solutions for clients, and put users first in an agent centered world.
+                  </p>
+                </div>
+                
+                {/* About Me Circular Button on the right */}
+                <div ref={aboutSectionRef} className="flex justify-center md:justify-end">
+                  <MagneticButton 
+                    onClick={() => router.push('/about')}
+                    strength={0.4}
+                    className="flex items-center justify-center rounded-full !bg-black dark:!bg-white text-white dark:text-black hover:scale-105 transition-all cursor-pointer"
+                    style={{
+                      width: 'clamp(120px, 12vw, 225px)',
+                      height: 'clamp(120px, 12vw, 225px)',
+                    }}
+                  >
+                    <span className="font-medium" style={{ fontSize: 'clamp(14px, 1.1vw, 20px)' }}>About me</span>
+                  </MagneticButton>
+                </div>
+              </div>
+            </div>
+
             {/* Experience Header */}
             <div ref={contentArea1Ref} className="mb-20">
               <h2 className="text-5xl md:text-7xl font-light text-black dark:text-white tracking-tight">My experience</h2>
@@ -482,7 +585,7 @@ export default function Home() {
                 {/* Top Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                   <div className="text-left">
-                  <h4 className="text-4xl text-black dark:text-white font-normal">Software Enigineer Intern</h4>
+                  <h4 className="text-4xl text-black dark:text-white font-normal">Software Engineer Intern</h4>
                   <p className="text-m text-black dark:text-gray-300 mb-8">University of Washington</p>
                   </div>
 
@@ -494,7 +597,7 @@ export default function Home() {
                       <p className="text-black dark:text-gray-300">Developed a Document Search feature full-stack using Next.js, TypeScript, GraphQL, and REST APIs, enabling real-time data access for 500+ professors and automating reporting workflows across departments.</p>
                     </div>
                     <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
-                      <p className="text-black dark:text-gray-300">Deployed GitHub Actions CI/CD workflows and engineered backend features in Node.js, increasing code review throughput by 23% and delivering 85% of scoped functionality based on insights from 27 stakeholder interviews.</p>
+                      <p className="text-black dark:text-gray-300">actual development experience, feature or architecture decision</p>
                     </div>
                   </div>
                 </div>
@@ -526,7 +629,7 @@ export default function Home() {
                       ))}
                     </div>
                     <p className="text-black dark:text-gray-300 leading-relaxed">
-                      Architected comprehensive cloud migration strategies for enterprise clients, facilitating the seamless transition of legacy systems to AWS infrastructure...
+                      Approached by the Chair & Co-Chair of UW's CS program to build SETlib for their Seminar courses on a 12-month contract.
                     </p>
                     <MagneticLink 
                       href="/projects" 
@@ -545,7 +648,7 @@ export default function Home() {
               <div className="border-t border-gray-300 dark:border-gray-700 py-8"></div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="text-left">
-                    <h4 className="text-4xl text-black dark:text-white font-normal">Software Enigineer Intern</h4>
+                    <h4 className="text-4xl text-black dark:text-white font-normal">Software Engineer Intern</h4>
                     <p className="text-m text-black dark:text-gray-300 mb-8">Insights Emerge</p>
                   <div className="w-full h-[600px] rounded-lg mb-8 overflow-hidden">                  
                   <img
@@ -567,7 +670,7 @@ export default function Home() {
                       <p className="text-black dark:text-gray-300">Designed and built 5+ interactive prototypes using React, TypeScript, and Redux, improving render efficiency and reducing page load times by 40% to enhance user experience for early-stage product testing.</p>
                     </div>
                     <div className="border-t border-gray-300 dark:border-gray-700 py-4">
-                      <p className="text-black dark:text-gray-300">Refactored a monolithic Node.js/Express backend into a microservices architecture, introducing asynchronous patterns and Redis caching, which decreased API response latency by 38% and improved system scalability.</p>
+                      <p className="text-black dark:text-gray-300">Engineered monolithic Node.js/Express backend into a microservices architecture, introducing asynchronous patterns and Redis caching, which decreased API response latency by 38% and improved system scalability.</p>
                     </div>
                     <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
                       <p className="text-black dark:text-gray-300">Shipped production-ready features using CI/CD pipelines with automated testing frameworks, achieving 95% code coverage, and implemented an event-driven architecture with Kafka to support 10K+ concurrent users.</p>
@@ -615,10 +718,10 @@ export default function Home() {
 
                   <div>
                     <div className="border-t border-gray-300 dark:border-gray-700 py-4">
-                      <p className="text-black dark:text-gray-300">Manager and Senior Developer for Product Development Consultancy startup founded, funded, and ran by UW students. Leading end-to-end software projects for clients from design through deployment.</p>
+                      <p className="text-black dark:text-gray-300">Manager and Senior Developer for Software Development Consultancy startup founded, funded, and ran by UW students. Leading end-to-end software projects for clients from design through deployment.</p>
                     </div>
                     <div className="border-t border-gray-300 dark:border-gray-700 py-4">
-                      <p className="text-black dark:text-gray-300">Lead organizer and Host of UHackathon, the largest university hackathon south of Seattle. Secured $5,000 in sponsorship funding and oversaw all financial planning, budgeting, and expense tracking. Awarded $10,000 contract for 2 further years.</p>
+                      <p className="text-black dark:text-gray-300">Lead organizer and Host of UHackathon, the largest ever hackathon south of Seattle. Secured $5,000 in sponsorship funding and oversaw all financial planning, budgeting, and expense tracking. Awarded $10,000 contract for 2 further years.</p>
                     </div>
                     <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
                       <p className="text-black dark:text-gray-300">Implemented infrastructure as code using Terraform and Kubernetes, reducing deployment time by 80%.</p>
