@@ -38,10 +38,32 @@ const projects: Project[] = [
     year: "2024",
     slug: "illuminance-esthetics",
   },
-  {
+    {
     id: "03",
+    title: "AWS Cost Optimization",
+    category: "Beauty School LMS",
+    description:
+      "Engineered a monolithic Node.js backend into microservices architecture, improving API response latency by 38%. Built interactive prototypes with React and Redux, reducing page load times by 40% for production deployment.",
+    image: "/assets/lms.png",
+    tags: ["React", "Node.js", "Redux", "Microservices", "CI/CD"],
+    year: "2024",
+    slug: "illuminance-esthetics",
+  },
+    {
+    id: "04",
+    title: "Unix Sheel in C",
+    category: "Beauty School LMS",
+    description:
+      "Engineered a monolithic Node.js backend into microservices architecture, improving API response latency by 38%. Built interactive prototypes with React and Redux, reducing page load times by 40% for production deployment.",
+    image: "/assets/lms.png",
+    tags: ["React", "Node.js", "Redux", "Microservices", "CI/CD"],
+    year: "2024",
+    slug: "illuminance-esthetics",
+  },
+  {
+    id: "05",
     title: "UHackathon",
-    category: "Event Platform",
+    category: "Largest Ever South of Seattle",
     description:
       "Founded and led the largest hackathon south of Seattle, securing $5,000 in sponsorships and managing end-to-end software development for the event platform. Awarded $10,000 contract for continued development.",
     image: "/assets/aura farm.png",
@@ -50,7 +72,29 @@ const projects: Project[] = [
     slug: "uhackathon",
   },
   {
-    id: "04",
+    id: "06",
+    title: "UMarket",
+    category: "Student Marketplace",
+    description:
+      "Developed a peer-to-peer marketplace platform for university students to buy, sell, and trade textbooks and supplies. Implemented secure payment processing and real-time chat functionality.",
+    image: "/assets/umarket (1).png",
+    tags: ["TypeScript", "Next.js", "Stripe", "WebSocket"],
+    year: "2023",
+    slug: "umarket",
+  },
+    {
+    id: "07",
+    title: "Universal Wealth",
+    category: "Stock Tracking App",
+    description:
+      "Developed a peer-to-peer marketplace platform for university students to buy, sell, and trade textbooks and supplies. Implemented secure payment processing and real-time chat functionality.",
+    image: "/assets/umarket (1).png",
+    tags: ["TypeScript", "Next.js", "Stripe", "WebSocket"],
+    year: "2023",
+    slug: "umarket",
+  },
+    {
+    id: "08",
     title: "UMarket",
     category: "Student Marketplace",
     description:
@@ -308,25 +352,38 @@ export default function Projects() {
       <div className="pt-32 pb-20 px-8 md:px-16">
         <div className="max-w-7xl mx-auto">
           <h1
-            className={`text-6xl md:text-8xl font-light text-black dark:text-white tracking-tight mb-6 ${
+            className={`text-6xl md:text-9xl font-normal mt-16 text-black dark:text-white tracking-tight mb-6 ${
               isLoaded ? "animate-fade-in-up" : "opacity-0"
             }`}
           >
-            Projects
+            Creating next level
+            digital products
           </h1>
-          <p
-            className={`text-xl text-black/60 dark:text-white/60 max-w-2xl ${
-              isLoaded ? "animate-fade-in-up stagger-1" : "opacity-0"
-            }`}
-          >
-            A selection of projects I've worked on, from enterprise solutions to
-            experimental prototypes.
-          </p>
         </div>
       </div>
 
+
       {/* Projects List */}
       <div className="max-w-7xl mx-auto relative z-10">
+        {/* Table Headers */}
+        <div className="border-b border-gray-200 dark:border-gray-800">
+          <div className="grid grid-cols-12 gap-8 py-6 px-8 mb-4 md:px-16">
+            <div className="col-span-12 md:col-span-5 flex items-center gap-6">
+              <span className="text-sm font-medium text-gray-500 dark:text-gray-400" style={{ minWidth: "30px" }}>
+                #
+              </span>
+              <h2 className="text-sm font-medium !text-gray-500 dark:text-gray-100 uppercase tracking-wider">
+                Project
+              </h2>
+            </div>
+            <div className="col-span-12 md:col-span-7 pl-0 md:pl-12">
+              <h2 className="text-sm font-medium !text-gray-500 dark:text-gray-100 uppercase tracking-wider">
+                Description & Tech Stack
+              </h2>
+            </div>
+          </div>
+        </div>
+        
         <div className="divide-y divide-gray-200 dark:divide-gray-800">
           {projects.map((project, index) => (
             <div
@@ -356,22 +413,6 @@ export default function Projects() {
         src={hoveredProjectImage}
         isActive={hoveredProject !== null}
       />
-
-      {/* Footer CTA */}
-      <div className="py-32 px-8 md:px-16">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-lg text-black/60 dark:text-white/60 mb-8">
-            Interested in working together?
-          </p>
-          <button
-            onClick={() => (window.location.href = "mailto:your.email@example.com")}
-            className="inline-flex items-center gap-2 bg-black dark:bg-white text-white dark:text-black px-8 py-4 rounded-full text-lg font-medium hover:scale-105 transition-transform"
-          >
-            Get in touch
-            <span className="text-2xl">→</span>
-          </button>
-        </div>
-      </div>
     </div>
   );
 }
