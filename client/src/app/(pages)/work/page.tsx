@@ -24,7 +24,7 @@ const projects: Project[] = [
       "Built an ML-powered document ingestion pipeline for the University of Washington CS department, migrating over 50,000 legacy files and reducing manual data entry by 90%. Developed full-stack features using Next.js, TypeScript, and GraphQL.",
     image: "/assets/SETlib.png",
     tags: ["Go", "Python", "TypeScript", "PostgreSQL", "GraphQL"],
-    year: "2024",
+    year: "2025",
     slug: "setlib",
   },
   {
@@ -35,7 +35,7 @@ const projects: Project[] = [
       "Engineered a monolithic Node.js backend into microservices architecture, improving API response latency by 38%. Built interactive prototypes with React and Redux, reducing page load times by 40% for production deployment.",
     image: "/assets/lms.png",
     tags: ["React", "Node.js", "Redux", "Microservices", "CI/CD"],
-    year: "2024",
+    year: "2025",
     slug: "illuminance-esthetics",
   },
     {
@@ -46,7 +46,7 @@ const projects: Project[] = [
       "Engineered a monolithic Node.js backend into microservices architecture, improving API response latency by 38%. Built interactive prototypes with React and Redux, reducing page load times by 40% for production deployment.",
     image: "/assets/lms.png",
     tags: ["React", "Node.js", "Redux", "Microservices", "CI/CD"],
-    year: "2024",
+    year: "2025",
     slug: "illuminance-esthetics",
   },
     {
@@ -57,7 +57,7 @@ const projects: Project[] = [
       "Engineered a monolithic Node.js backend into microservices architecture, improving API response latency by 38%. Built interactive prototypes with React and Redux, reducing page load times by 40% for production deployment.",
     image: "/assets/lms.png",
     tags: ["React", "Node.js", "Redux", "Microservices", "CI/CD"],
-    year: "2024",
+    year: "2025",
     slug: "illuminance-esthetics",
   },
   {
@@ -68,7 +68,7 @@ const projects: Project[] = [
       "Founded and led the largest hackathon south of Seattle, securing $5,000 in sponsorships and managing end-to-end software development for the event platform. Awarded $10,000 contract for continued development.",
     image: "/assets/aura farm.png",
     tags: ["Leadership", "JavaScript", "React", "Project Management"],
-    year: "2023",
+    year: "2025",
     slug: "uhackathon",
   },
   {
@@ -79,28 +79,28 @@ const projects: Project[] = [
       "Developed a peer-to-peer marketplace platform for university students to buy, sell, and trade textbooks and supplies. Implemented secure payment processing and real-time chat functionality.",
     image: "/assets/umarket (1).png",
     tags: ["TypeScript", "Next.js", "Stripe", "WebSocket"],
-    year: "2023",
+    year: "2025",
+    slug: "umarket",
+  },
+  {
+    id: "08",
+    title: "SwiftHire",
+    category: "AI HR Tool",
+    description:
+      "Developed a peer-to-peer marketplace platform for university students to buy, sell, and trade textbooks and supplies. Implemented secure payment processing and real-time chat functionality.",
+    image: "/assets/umarket (1).png",
+    tags: ["Python", "", "JavaScript", ""],
+    year: "2024",
     slug: "umarket",
   },
     {
     id: "07",
-    title: "Universal Wealth",
+    title: "Market Watch",
     category: "Stock Tracking App",
     description:
       "Developed a peer-to-peer marketplace platform for university students to buy, sell, and trade textbooks and supplies. Implemented secure payment processing and real-time chat functionality.",
     image: "/assets/umarket (1).png",
-    tags: ["TypeScript", "Next.js", "Stripe", "WebSocket"],
-    year: "2023",
-    slug: "umarket",
-  },
-    {
-    id: "08",
-    title: "UMarket",
-    category: "Student Marketplace",
-    description:
-      "Developed a peer-to-peer marketplace platform for university students to buy, sell, and trade textbooks and supplies. Implemented secure payment processing and real-time chat functionality.",
-    image: "/assets/umarket (1).png",
-    tags: ["TypeScript", "Next.js", "Stripe", "WebSocket"],
+    tags: ["React", "JavaScript", "Node.js", "Express", "PostgreSQL", "REST APIs"],
     year: "2023",
     slug: "umarket",
   },
