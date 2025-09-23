@@ -1,14 +1,12 @@
-@import "tailwindcss";
-
-/* Add this custom variant for class-based dark mode */
-@variant dark (&:where(.dark *));
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-/* Use class-based selectors instead of media queries */
 :root.dark {
   --background: #0a0a0a;
   --foreground: #ededed;
@@ -21,56 +19,43 @@
 html {
   -ms-overflow-style: none;
   scrollbar-width: none;
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
 }
 
-/* Add these styles to your globals.css */
-
-/* Ensure smooth scrolling behavior */
-html {
-  scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
-}
-
-body {
-  overflow-x: hidden; /* Prevent horizontal scroll during parallax */
-}
-
-/* Ensure the footer stays properly positioned */
 footer {
-  /* The footer positioning is handled in the Footer component itself */
-  pointer-events: auto; /* Ensure footer links are clickable */
+  pointer-events: auto;
 }
 
-/* Make sure content can scroll over footer */
 main {
   position: relative;
   z-index: 10;
 }
 
-/* Optional: Add a subtle indicator when footer is being revealed */
 @media (min-width: 768px) {
   html {
     scroll-snap-type: y proximity;
   }
 }
 
-/* Smooth transitions for dark mode */
 * {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Ensure parallax elements don't interfere with interactivity */
 .parallax-element {
   pointer-events: auto;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-/* Optional: Add a scroll indicator for the footer reveal */
 .scroll-indicator {
   position: fixed;
   bottom: 2rem;
@@ -82,11 +67,4 @@ main {
 
 .scroll-indicator.show {
   opacity: 1;
-}
-
-/* Improve performance for parallax animations */
-.parallax-element {
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
