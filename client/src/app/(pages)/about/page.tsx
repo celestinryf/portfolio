@@ -90,7 +90,7 @@ function useParallaxScroll<T extends HTMLElement = HTMLElement>(
 const gallery = [
   { src: "/assets/mock1.png", alt: "SETlib Document Management", aspect: "aspect-[4/3]" },
   { src: "/assets/lms.png", alt: "Learning Management System", aspect: "aspect-[4/3]" },
-  { src: "/assets/hack.png", alt: "Aura Farm Project", aspect: "aspect-[4/3]" },
+  { src: "/assets/HACK.png", alt: "Aura Farm Project", aspect: "aspect-[4/3]" },
   { src: "/assets/umarket1.png", alt: "UMarket Platform", aspect: "aspect-[4/3]" },
   { src: "/assets/stock1.png", alt: "Development Setup", aspect: "aspect-[4/3]" },
   { src: "/assets/mock.png", alt: "UHackathon Team", aspect: "aspect-[4/3]" },
@@ -341,7 +341,6 @@ export default function AboutPage() {
       <div className="relative">
         {/* Intro background layer */}
         <div ref={introBackgroundRef} className="absolute inset-0 pointer-events-none" />
-<img src="/assets/HACK.png" alt="Aura Farm Project" />
         
         <main
           ref={introContentRef}
