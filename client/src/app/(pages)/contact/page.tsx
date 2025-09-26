@@ -438,7 +438,7 @@ const ContactPage: React.FC = () => {
               <div>
                 <h1 className="text-6xl md:text-7xl font-normal leading-tight mb-6">
                   <div className="flex items-center mb-2">
-                    Let's build a
+                    Let&apos;s build a
                   </div>
                   <span className="block">project together</span>
                 </h1>
@@ -476,7 +476,7 @@ const ContactPage: React.FC = () => {
                     </div>
                     <div className="col-span-10">
                       <label htmlFor="name" className="block text-xl text-neutral-400 mb-4">
-                        What's your name?
+                        What&apos;s your name?
                       </label>
                       <input
                         type="text"
@@ -502,7 +502,7 @@ const ContactPage: React.FC = () => {
                     </div>
                     <div className="col-span-10">
                       <label htmlFor="email" className="block text-xl text-neutral-400 mb-4">
-                        What's your email?
+                        What&apos;s your email?
                       </label>
                       <input
                         type="email"
@@ -528,7 +528,7 @@ const ContactPage: React.FC = () => {
                     </div>
                     <div className="col-span-10">
                       <label htmlFor="company" className="block text-xl text-neutral-400 mb-4">
-                        What's the name of your organization?
+                        What&apos;s the name of your organization?
                       </label>
                       <input
                         type="text"
@@ -617,7 +617,7 @@ const ContactPage: React.FC = () => {
                   
                   {submitStatus === 'success' && (
                     <div className="mt-4 text-green-400 text-sm animate-fade-in">
-                      Message sent successfully! I'll get back to you soon.
+                      Message sent successfully! I&apos;ll get back to you soon.
                     </div>
                   )}
                   

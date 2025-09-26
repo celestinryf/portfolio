@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
 import { gsap } from 'gsap';
 import { useRouter } from 'next/navigation';
 
@@ -442,7 +442,6 @@ export default function Home() {
   const locationPillRef = useParallaxScroll<HTMLDivElement>({ speed: 0.7 });
   const aboutSectionRef = useParallaxScroll<HTMLDivElement>({ speed: 0.2 }); // Same speed as experience section
   const contentArea1Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2});
-  const contentArea2Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2 });
   const project1Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2 });
   const project2Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2 });
   const project3Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2 });

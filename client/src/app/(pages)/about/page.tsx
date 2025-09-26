@@ -141,10 +141,9 @@ interface GalleryItem {
 
 interface MagneticGalleryItemProps {
   item: GalleryItem;
-  index: number;
 }
 
-function MagneticGalleryItem({ item, index }: MagneticGalleryItemProps) {
+function MagneticGalleryItem({ item}: MagneticGalleryItemProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -297,7 +296,6 @@ export default function AboutPage() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  const dayRole = DAY_ROLES[dayIdx % DAY_ROLES.length];
   const dayImg = DAY_MEDIA[dayIdx % DAY_MEDIA.length];
 
   const nightRole = NIGHT_ROLES[nightIdx % NIGHT_ROLES.length];
@@ -605,7 +603,6 @@ export default function AboutPage() {
                 >
                   <MagneticGalleryItem 
                     item={item} 
-                    index={index}
                   />
                 </div>
               ))}
