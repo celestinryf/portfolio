@@ -632,7 +632,7 @@ export default function Home() {
                 {/* Text on the left */}
                 <div className="max-w-4xl">
                   <p className="text-black/80 dark:text-white/80 font-normal leading-relaxed" style={{ fontSize: 'clamp(25px, 1.1vw, 30px)' }}>
-                    I'm a software engineer with experience in designing, developing, and maintaining scalable applications. 
+                    I&apos;m a software engineer with experience in designing, developing, and maintaining scalable applications. 
                     I elevate teams, architect solutions for clients, and put users first in an agent centered world.
                   </p>
                 </div>
@@ -711,7 +711,7 @@ export default function Home() {
                       ))}
                     </div>
                     <p className="text-black dark:text-gray-300 leading-relaxed">
-                      Approached by the Chair & Co-Chair of UW's CS program to build SETlib for their Seminar courses on a 12-month contract.
+                      Approached by the Chair & Co-Chair of UW&apos;s CS program to build SETlib for their Seminar courses on a 12-month contract.
                     </p>
                     <MagneticLink 
                       href="/SETlib" 
@@ -771,7 +771,7 @@ export default function Home() {
                       ))}
                     </div>
                     <p className="text-black dark:text-gray-300 leading-relaxed">
-                      Led the technical implementation of Spotify's revolutionary Discover Weekly feature...
+                      Led the technical implementation of Spotify&apos;s revolutionary Discover Weekly feature...
                     </p>
                     <MagneticLink 
                       href="/work" 
@@ -847,7 +847,7 @@ export default function Home() {
                       ))}
                     </div>
                     <p className="text-black dark:text-gray-300 leading-relaxed">
-                      Architected and maintained the infrastructure powering Netflix's global streaming platform...
+                      Architected and maintained the infrastructure powering Netflix&apos;s global streaming platform...
                     </p>
                     <MagneticLink 
                       href="/work" 
