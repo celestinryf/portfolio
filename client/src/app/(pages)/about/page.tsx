@@ -104,11 +104,11 @@ const NIGHT_ROLES = ["Organizer", "Founder", "Community Builder"];
 const DAY_MEDIA = [
   { src: "/assets/mock1.png", alt: "Backend Development" },
   { src: "/assets/mock.png", alt: "Full-Stack Application" },
-  { src: "/assets/umarket (1).png", alt: "System Architecture" },
+  { src: "/assets/umarket1.png", alt: "System Architecture" },
 ];
 const NIGHT_MEDIA = [
   { src: "/assets/hackflyer.png", alt: "Open Source" },
-  { src: "/assets/meeting2.jpg", alt: "Tech Community" },
+  { src: "/assets/meeting2.png", alt: "Tech Community" },
   { src: "/assets/room.png", alt: "Problem Solving" },
 ];
 

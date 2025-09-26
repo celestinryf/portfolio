@@ -77,7 +77,7 @@ const projects: Project[] = [
     category: "Student Marketplace",
     description:
       "Developed a peer-to-peer marketplace platform for university students to buy, sell, and trade textbooks and supplies. Implemented secure payment processing and real-time chat functionality.",
-    image: "/assets/umarket (1).png",
+    image: "/assets/umarket1.png",
     tags: ["TypeScript", "Next.js", "Go", "PostgreSQL", "AWS S3", "Postman", "Docker", "Kubernetes", "Redis"],
     year: "2024",
     slug: "umarket",
