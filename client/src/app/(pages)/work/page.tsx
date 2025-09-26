@@ -66,7 +66,7 @@ const projects: Project[] = [
     category: "Largest Ever South of Seattle",
     description:
       "Founded and led the largest hackathon south of Seattle, securing $5,000 in sponsorships and managing end-to-end software development for the event platform. Awarded $10,000 contract for continued development.",
-    image: "/assets/hack.png",
+    image: "/assets/HACK.png",
     tags: ["Leadership", "Project Management"],
     year: "2025",
     slug: "uhackathon",
