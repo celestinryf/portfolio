@@ -261,7 +261,7 @@ export default function Footer() {
                   )}
                 </div>
                 <h1 className="footer-heading ">
-                  <span>Let's work</span>
+                  <span>Let&apos;s work</span>
                 </h1>
               </div>
               <h1 className="footer-heading" style={{ marginTop: '0.25em' }}>
