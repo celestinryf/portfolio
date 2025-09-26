@@ -341,6 +341,7 @@ export default function AboutPage() {
       <div className="relative">
         {/* Intro background layer */}
         <div ref={introBackgroundRef} className="absolute inset-0 pointer-events-none" />
+<img src="/assets/hack.png" alt="Aura Farm Project" />
         
         <main
           ref={introContentRef}
