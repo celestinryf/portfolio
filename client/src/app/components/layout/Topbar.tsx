@@ -439,8 +439,31 @@ export default function TopNavigation() {
           animation: dropdownSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* Navigation link underline animation - attached to text span */
+        /* Navigation link underline animation - desktop */
         .nav-link-text::after {
+          content: '';
+          position: absolute;
+          bottom: -16px;
+          left: 50%;
+          width: 100%;
+          height: 2px;
+          background-color: black;
+          border-radius: 1.5px;
+          transform: translateX(-50%) scaleX(0);
+          transform-origin: center;
+          transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .dark .nav-link-text::after {
+          background-color: white;
+        }
+
+        .nav-link:hover .nav-link-text::after {
+          transform: translateX(-50%) scaleX(1);
+        }
+
+        /* Mobile dropdown link styles */
+        .nav-link-text-mobile::after {
           content: '';
           position: absolute;
           bottom: -16px;
@@ -454,23 +477,8 @@ export default function TopNavigation() {
           transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .nav-link:hover .nav-link-text::after {
-          transform: translateX(-50%) scaleX(1);
-        }
-
-        /* Mobile dropdown link styles - attached to text span */
-        .nav-link-text-mobile::after {
-          content: '';
-          position: absolute;
-          bottom: -16px;
-          left: 50%;
-          width: 100%;
-          height: 2px;
-          background-color: #374151;
-          border-radius: 1.5px;
-          transform: translateX(-50%) scaleX(0);
-          transform-origin: center;
-          transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        .dark .nav-link-text-mobile::after {
+          background-color: black;
         }
 
         .nav-link-mobile:hover .nav-link-text-mobile::after {
@@ -505,19 +513,23 @@ export default function TopNavigation() {
         /* Backdrop blur effect */
         .dropdown-backdrop {
           backdrop-filter: blur(8px);
-          background: rgba(0, 0, 0, 0.05);
+          background: black;
+        }
+
+        .dark .dropdown-backdrop {
+          background: white;
         }
       `}</style>
 
       {/* Main Navigation */}
       <nav 
         ref={navRef} 
-        className={`fixed top-0 left-0 right-0 z-20 py-6 px-12 text-white ${isLoaded ? 'nav-container' : 'opacity-0'}`}
+        className={`fixed top-0 left-0 right-0 z-20 py-6 px-12 text-black dark:text-white ${isLoaded ? 'nav-container' : 'opacity-0'}`}
       >
         <div className="flex justify-between items-center max-w-8xl mx-auto">
           {/* Name/Logo */}
           <MagneticLink 
-            href="#" 
+            href="/" 
             strength={0.4}
             className={isLoaded ? 'nav-logo' : 'opacity-0'}
           >
@@ -527,7 +539,7 @@ export default function TopNavigation() {
           {/* Navigation Links - Hidden when scrolled */}
           <div className={`hidden md:flex space-x-10 transition-opacity duration-300 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
             <MagneticLink 
-              href="#work" 
+              href="/work" 
               strength={0.4}
               className={`nav-link ${isLoaded ? 'nav-item-1' : 'opacity-0'}`}
               underlineStyle="desktop"
@@ -535,7 +547,7 @@ export default function TopNavigation() {
               Work
             </MagneticLink>
             <MagneticLink 
-              href="#about" 
+              href="/about" 
               strength={0.4}
               className={`nav-link ${isLoaded ? 'nav-item-2' : 'opacity-0'}`}
               underlineStyle="desktop"
@@ -543,7 +555,7 @@ export default function TopNavigation() {
               About
             </MagneticLink>
             <MagneticLink 
-              href="#contact" 
+              href="/contact" 
               strength={0.4}
               className={`nav-link ${isLoaded ? 'nav-item-3' : 'opacity-0'}`}
               underlineStyle="desktop"
@@ -558,7 +570,7 @@ export default function TopNavigation() {
               onClick={toggleMenu}
               strength={0.3}
               isIcon={true}
-              className="rounded-full flex items-center justify-center !bg-black dark:!bg-white border border-white/10 dark:border-black/10 hover:!bg-gray-900 dark:hover:!bg-gray-100 transition-all duration-300"
+              className="rounded-full flex items-center justify-center !bg-black dark:!bg-white border border-white/10 dark:border-black/10 transition-all duration-300"
               style={{
                 width: 'clamp(50px, 10vw, 60px)',
                 height: 'clamp(50px, 10vw, 60px)',
@@ -576,30 +588,30 @@ export default function TopNavigation() {
 
             {/* Dropdown Menu */}
             {isMenuOpen && (
-              <div className="dropdown-menu absolute right-0 top-full mt-2 py-4 px-6 bg-white/90 dropdown-backdrop rounded-lg border border-gray-100/50 min-w-[120px]">
+              <div className="dropdown-menu absolute right-0 top-full mt-2 py-4 px-6 bg-white/90 dark:bg-black/90 dropdown-backdrop rounded-lg border border-gray-100/50 dark:border-gray-800/50 min-w-[120px]">
                 <div className="flex flex-col space-y-3">
                   <MagneticLink 
-                    href="#work" 
+                    href="/work" 
                     strength={0.2}
-                    className="nav-link-mobile text-sm transition-colors"
+                    className="nav-link-mobile text-sm text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors"
                     underlineStyle="mobile"
                     onClick={closeMenu}
                   >
                     Work
                   </MagneticLink>
                   <MagneticLink 
-                    href="#about" 
+                    href="/about" 
                     strength={0.2}
-                    className="nav-link-mobile text-sm transition-colors"
+                    className="nav-link-mobile text-sm text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors"
                     underlineStyle="mobile"
                     onClick={closeMenu}
                   >
                     About
                   </MagneticLink>
                   <MagneticLink 
-                    href="#contact" 
+                    href="/contact" 
                     strength={0.2}
-                    className="nav-link-mobile text-sm transition-colors"
+                    className="nav-link-mobile text-sm text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors"
                     underlineStyle="mobile"
                     onClick={closeMenu}
                   >
@@ -622,7 +634,7 @@ export default function TopNavigation() {
             onClick={toggleMenu}
             strength={0.3}
             isIcon={true}
-            className="scroll-burger-button rounded-full flex items-center justify-center !bg-black dark:!bg-white border border-white/10 dark:border-black/10 hover:!bg-gray-900 dark:hover:!bg-gray-100 transition-all duration-300"
+            className="scroll-burger-button rounded-full flex items-center justify-center !bg-black dark:!bg-white border border-white/10 dark:border-black/10 transition-all duration-300"
             style={{
               width: 'clamp(60px, 6vw, 90px)',
               height: 'clamp(60px, 6vw, 90px)',
@@ -640,30 +652,30 @@ export default function TopNavigation() {
 
           {/* Scroll Burger Dropdown */}
           {isMenuOpen && (
-            <div className="dropdown-menu absolute right-0 top-full mt-4 py-4 px-6 bg-white/90 dropdown-backdrop rounded-lg border border-gray-100/50 min-w-[120px]">
+            <div className="dropdown-menu absolute right-0 top-full mt-4 py-4 px-6 bg-white/90 dark:bg-white/90 dropdown-backdrop rounded-lg border border-gray-100/50 dark:border-gray-800/50 min-w-[120px]">
               <div className="flex flex-col space-y-3">
                 <MagneticLink 
-                  href="#work" 
+                  href="/work" 
                   strength={0.2}
-                  className="nav-link-mobile text-sm transition-colors"
+                  className="nav-link-mobile text-sm text-white dark:text-black transition-colors"
                   underlineStyle="mobile"
                   onClick={closeMenu}
                 >
                   Work
                 </MagneticLink>
                 <MagneticLink 
-                  href="#about" 
+                  href="/about" 
                   strength={0.2}
-                  className="nav-link-mobile text-sm transition-colors"
+                  className="nav-link-mobile text-sm text-white dark:text-black transition-colors"
                   underlineStyle="mobile"
                   onClick={closeMenu}
                 >
                   About
                 </MagneticLink>
                 <MagneticLink 
-                  href="#contact" 
+                  href="/contact" 
                   strength={0.2}
-                  className="nav-link-mobile text-sm transition-colors"
+                  className="nav-link-mobile text-sm text-white dark:text-black transition-colors"
                   underlineStyle="mobile"
                   onClick={closeMenu}
                 >

@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from 'next/image'
 
 // Register GSAP plugins
 if (typeof window !== "undefined") {
@@ -143,18 +142,18 @@ function MagneticLink({ href, children, strength = 0.3, className = "", onClick 
       href={href}
       onClick={onClick}
       className={`relative cursor-pointer ${className}`}
-      style={{ transform: 'rotate(0.001deg)' }}
+      // style={{ transform: 'rotate(0.001deg)' }}
       target={href.startsWith('http') ? '_blank' : undefined}
       rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
     >
       <span 
         ref={textRef}
         className="transition-colors duration-200"
-        style={{ transform: 'rotate(0.001deg)' }}
+        // style={{ transform: 'rotate(0.001deg)' }}
       >
         <span 
           ref={innerTextRef}
-          style={{ transform: 'rotate(0.001deg)' }}
+          // style={{ transform: 'rotate(0.001deg)' }}
         >
           {children}
         </span>
@@ -251,15 +250,14 @@ export default function Footer() {
                 {/* Profile picture */}
                 <div className="footer-profile translate-y-1/10 rounded-full flex-shrink-0 overflow-hidden">
                   {!imageError ? (
-                    <Image 
-                      src="/pfp.jpg" 
+                    <img 
+                      src="/assets/pfp.jpg" 
                       alt="Profile" 
-                      fill
-                      className="rounded-full object-cover"
+                      className="w-full h-full rounded-full object-cover"
                       onError={() => setImageError(true)}
                     />
                   ) : (
-                    <div className=" h-full rounded-full bg-gradient-to-br from-white/30 to-white/10 dark:from-black/30 dark:to-black/10"></div>
+                    <div className="w-full h-full rounded-full bg-gradient-to-br from-white/30 to-white/10 dark:from-black/30 dark:to-black/10"></div>
                   )}
                 </div>
                 <h1 className="footer-heading ">

@@ -365,16 +365,16 @@ export default function Home() {
   
   // Parallax refs with consistent smoothness and strategic speeds
   const heroBackgroundRef = useParallaxScroll<HTMLDivElement>({ speed: 0 });
-  const contentBackgroundRef = useParallaxScroll<HTMLDivElement>({ speed: 0.4 }); // Independent white background parallax
-  const heroTextDesktopRef = useParallaxScroll<HTMLDivElement>({ speed: 0.4 });
-  const heroTextMobileRef = useParallaxScroll<HTMLDivElement>({ speed: 0.6 });
-  const locationPillRef = useParallaxScroll<HTMLDivElement>({ speed: 0.8 });
-  const aboutSectionRef = useParallaxScroll<HTMLDivElement>({ speed: 0.3 }); // Same speed as experience section
-  const contentArea1Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.3});
-  const contentArea2Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.3 });
-  const project1Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.3 });
-  const project2Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.3 });
-  const project3Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.3 });
+  const contentBackgroundRef = useParallaxScroll<HTMLDivElement>({ speed: 0.3 }); // Independent white background parallax
+  const heroTextDesktopRef = useParallaxScroll<HTMLDivElement>({ speed: 0.3 });
+  const heroTextMobileRef = useParallaxScroll<HTMLDivElement>({ speed: 0.5 });
+  const locationPillRef = useParallaxScroll<HTMLDivElement>({ speed: 0.7 });
+  const aboutSectionRef = useParallaxScroll<HTMLDivElement>({ speed: 0.2 }); // Same speed as experience section
+  const contentArea1Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2});
+  const contentArea2Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2 });
+  const project1Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2 });
+  const project2Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2 });
+  const project3Ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2 });
 
   useEffect(() => {
     // Start the centralized parallax controller
@@ -530,9 +530,9 @@ export default function Home() {
       <div className="relative">
         <div 
           ref={contentBackgroundRef} 
-          className="absolute inset-0 bg-white dark:bg-black z-11 pointer-events-none"
+          className="absolute inset-0 bg-white dark:bg-black z-20 pointer-events-none"
           style={{ 
-            minHeight: '1000vh' // Fallback minimum coverage
+            minHeight: '1000vh', // Fallback minimum coverage
           }}
         />
         
@@ -632,7 +632,7 @@ export default function Home() {
                       Approached by the Chair & Co-Chair of UW's CS program to build SETlib for their Seminar courses on a 12-month contract.
                     </p>
                     <MagneticLink 
-                      href="/projects" 
+                      href="/work" 
                       strength={0.4}
                       className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors mt-4"
                     >
@@ -692,7 +692,7 @@ export default function Home() {
                       Led the technical implementation of Spotify's revolutionary Discover Weekly feature...
                     </p>
                     <MagneticLink 
-                      href="/projects" 
+                      href="/work" 
                       strength={0.4}
                       className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors mt-4"
                     >
@@ -768,7 +768,7 @@ export default function Home() {
                       Architected and maintained the infrastructure powering Netflix's global streaming platform...
                     </p>
                     <MagneticLink 
-                      href="/projects" 
+                      href="/work" 
                       strength={0.4}
                       className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors mt-4"
                     >

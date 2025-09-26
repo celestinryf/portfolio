@@ -44,7 +44,7 @@ const projects: Project[] = [
     category: "Beauty School LMS",
     description:
       "Engineered a monolithic Node.js backend into microservices architecture, improving API response latency by 38%. Built interactive prototypes with React and Redux, reducing page load times by 40% for production deployment.",
-    image: "/assets/lms.png",
+    image: "/assets/mock1.png",
     tags: ["React", "Node.js", "Redux", "Microservices", "CI/CD"],
     year: "2025",
     slug: "illuminance-esthetics",
@@ -356,8 +356,7 @@ export default function Projects() {
               isLoaded ? "animate-fade-in-up" : "opacity-0"
             }`}
           >
-            Creating next level
-            digital products
+            Featured Works
           </h1>
         </div>
       </div>

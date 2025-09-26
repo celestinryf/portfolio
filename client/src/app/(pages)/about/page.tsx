@@ -88,12 +88,12 @@ function useParallaxScroll<T extends HTMLElement = HTMLElement>(
 
 /* ---- gallery below the sections ---- */
 const gallery = [
-  { src: "/assets/SETlib.png", alt: "SETlib Document Management", aspect: "aspect-[4/3]" },
+  { src: "/assets/mock1.png", alt: "SETlib Document Management", aspect: "aspect-[4/3]" },
   { src: "/assets/lms.png", alt: "Learning Management System", aspect: "aspect-[4/3]" },
   { src: "/assets/aura farm.png", alt: "Aura Farm Project", aspect: "aspect-[4/3]" },
   { src: "/assets/umarket (1).png", alt: "UMarket Platform", aspect: "aspect-[4/3]" },
-  { src: "/coding-setup.jpg", alt: "Development Setup", aspect: "aspect-[4/3]" },
-  { src: "/hackathon-team.jpg", alt: "UHackathon Team", aspect: "aspect-[4/3]" },
+  { src: "/assets/stock1.png", alt: "Development Setup", aspect: "aspect-[4/3]" },
+  { src: "/assets/mock.png", alt: "UHackathon Team", aspect: "aspect-[4/3]" },
 ];
 
 const ROTATE_MS = 5000;
@@ -102,22 +102,22 @@ const DAY_ROLES = ["Backend Engineer", "Full-Stack Developer", "Systems Architec
 const NIGHT_ROLES = ["Organizer", "Founder", "Community Builder"];
 
 const DAY_MEDIA = [
-  { src: "/backend-code.jpg", alt: "Backend Development" },
-  { src: "/fullstack-dashboard.jpg", alt: "Full-Stack Application" },
-  { src: "/system-architecture.jpg", alt: "System Architecture" },
+  { src: "/assets/mock1.png", alt: "Backend Development" },
+  { src: "/assets/mock.png", alt: "Full-Stack Application" },
+  { src: "/assets/umarket (1).png", alt: "System Architecture" },
 ];
 const NIGHT_MEDIA = [
-  { src: "/open-source.jpg", alt: "Open Source" },
-  { src: "/community-event.jpg", alt: "Tech Community" },
-  { src: "/problem-solving.jpg", alt: "Problem Solving" },
+  { src: "/assets/hackflyer.png", alt: "Open Source" },
+  { src: "/assets/meeting2.jpg", alt: "Tech Community" },
+  { src: "/assets/room.png", alt: "Problem Solving" },
 ];
 
 /** Intro carousel slides */
 const ABOUT_SLIDES = [
-  { src: "/celestin-professional.jpg", alt: "Celestin - Professional" },
-  { src: "/celestin-hackathon.jpg", alt: "Celestin at UHackathon" },
-  { src: "/celestin-coding.jpg", alt: "Celestin coding" },
-  { src: "/celestin-team.jpg", alt: "Celestin with team" },
+  { src: "/assets/aura farm.png", alt: "Celestin - Professional" },
+  { src: "/assets/room.png", alt: "Celestin at UHackathon" },
+  { src: "/assets/Meeting.png", alt: "Celestin coding" },
+  { src: "/assets/DSC_0214.jpg", alt: "Celestin with team" },
 ];
 
 /** Motion variants */
@@ -256,16 +256,16 @@ export default function AboutPage() {
   const introTextRef = useParallaxScroll<HTMLDivElement>({ speed: 0.2 });
   const introImageRef = useParallaxScroll<HTMLDivElement>({ speed: 0.2 });
   
-  const dayBackgroundRef = useParallaxScroll<HTMLDivElement>({ speed: 0.6 });
-  const daySectionRef = useParallaxScroll<HTMLElement>({ speed: 0.6 });
+  const dayBackgroundRef = useParallaxScroll<HTMLDivElement>({ speed: 0.3 });
+  const daySectionRef = useParallaxScroll<HTMLElement>({ speed: 0.4 });
   const dayContentRef = useParallaxScroll<HTMLDivElement>({ speed: 0 });
   
-  const nightBackgroundRef = useParallaxScroll<HTMLDivElement>({ speed: 0.7 });
-  const nightSectionRef = useParallaxScroll<HTMLElement>({ speed: 0.7 });
+  const nightBackgroundRef = useParallaxScroll<HTMLDivElement>({ speed: 0.4 });
+  const nightSectionRef = useParallaxScroll<HTMLElement>({ speed: 0.4 });
   const nightContentRef = useParallaxScroll<HTMLDivElement>({ speed: 0 });
   
-  const galleryBackgroundRef = useParallaxScroll<HTMLDivElement>({ speed: 0.6 });
-  const gallerySectionRef = useParallaxScroll<HTMLElement>({ speed: 0.4});
+  const galleryBackgroundRef = useParallaxScroll<HTMLDivElement>({ speed: 0.3 });
+  const gallerySectionRef = useParallaxScroll<HTMLElement>({ speed: 0.2});
   const galleryHeaderRef = useParallaxScroll<HTMLDivElement>({ speed: 0 });
 
   useEffect(() => {
@@ -357,14 +357,14 @@ export default function AboutPage() {
           <section className="grid grid-cols-12 gap-8 sm:gap-12 lg:gap-32 items-center">
             {/* Left: copy */}
             <div ref={introTextRef} className="col-span-12 md:col-span-7 space-y-4 sm:space-y-6">
-              <h1 className="text-3xl md:text-4xl font-semibold">I&apos;m Celestin</h1>
-              <p className="text-neutral-700">
+              <h1 className="text-3xl md:text-4xl font-semibold">I&apos;m Célestin</h1>
+              <p className="text-neutral-700 dark:text-neutral-400">
                 A software engineer with a passion for building scalable systems and solving complex problems. 
                 My experience spans from machine learning pipelines to full-stack applications, always with a focus 
                 on clean architecture and user-centered solutions. I approach engineering challenges with both 
                 technical rigor and creative problem-solving.
               </p>
-              <p className="text-neutral-700">
+              <p className="text-neutral-700 dark:text-neutral-400">
                 With American and French citizenship, I bring a global perspective to my work. When I&apos;m not coding, 
                 you&apos;ll find me organizing hackathons, contributing to open source projects, or exploring the latest 
                 in distributed systems and cloud architecture. I&apos;m passionate about building tech communities and 
@@ -452,14 +452,14 @@ export default function AboutPage() {
                         animate="center"
                         exit="exit"
                         transition={{ duration: 0.35, ease: "easeOut" }}
-                        className="absolute inset-0 whitespace-nowrap"
+                        className="absolute inset-0 whitespace-nowrap text-black"
                       >
                         {DAY_ROLES[dayIdx % DAY_ROLES.length]}
                       </motion.span>
                     </AnimatePresence>
                     <span aria-hidden className="invisible">{LONGEST_DAY_ROLE}</span>
                   </h2>
-                  <span className="text-neutral-500">by day</span>
+                  <span className="text-neutral-700 dark:text-neutral-400">by day</span>
                 </div>
 
                 <p className="text-neutral-700 max-w-prose">
@@ -579,9 +579,7 @@ export default function AboutPage() {
         </section>
       </div>
 
-      {/* Back to container: Gallery with Magnetic Effects */}
       <div className="relative">
-        {/* Gallery background layer */}
         <div ref={galleryBackgroundRef} className="absolute inset-0 pointer-events-none" />
         
         <main ref={gallerySectionRef} className="container mx-auto px-5 sm:px-6 py-12 sm:py-0">
