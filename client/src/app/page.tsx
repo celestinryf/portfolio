@@ -4,6 +4,77 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { gsap } from 'gsap';
 import { useRouter } from 'next/navigation';
 
+type BigNameProps = {
+  names: string[];
+  speed?: number;
+  className?: string;
+};
+
+function BigName({ names, speed = 50, className = "" }: BigNameProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<gsap.core.Tween | null>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const nameWrap = container.querySelector(".name-wrap") as HTMLElement;
+    if (!nameWrap) return;
+
+    const width = nameWrap.offsetWidth;
+
+    animationRef.current?.kill();
+    animationRef.current = gsap.to(container, {
+      x: -width,
+      ease: "linear",
+      duration: width / speed,
+      repeat: -1,
+      modifiers: {
+        x: (x) => {
+          const val = parseFloat(x);
+          return (val % -width) + "px";
+        },
+      },
+    });
+
+    return () => {
+      animationRef.current?.kill();
+    };
+  }, [speed, names]);
+
+  // Render the full sequence of names separated by —
+  const sequence = (
+    <div
+      className="name-wrap"
+      style={{ userSelect: "none", whiteSpace: "nowrap" }}
+    >
+      {names.map((n, idx) => (
+        <h1
+          key={idx}
+          className="inline-block text-[clamp(3rem,13vw,25rem)] font-normal text-black dark:text-white leading-none"
+        >
+          {n}
+          <span className="mx-8">—</span>
+        </h1>
+      ))}
+    </div>
+  );
+
+  return (
+    <div
+      className={`big-name relative overflow-hidden whitespace-nowrap select-none ${className}`}
+      style={{ willChange: "transform" }}
+    >
+      <div ref={containerRef} className="flex" style={{ transform: "translate3d(0,0,0)" }}>
+        {/* Duplicate sequence twice for infinite scroll */}
+        {sequence}
+        {sequence}
+      </div>
+    </div>
+  );
+}
+
+
 // Centralized parallax controller to prevent drift between elements
 class ParallaxController {
   private elements: Map<HTMLElement, { speed: number; smoothness: number; currentY: number; targetY: number }> = new Map();
@@ -481,14 +552,17 @@ export default function Home() {
       `}</style>
 
       {/* Hero Section - Gray Background with Parallax */}
-      <div ref={heroBackgroundRef} className="relative z-10 min-h-screen bg-stone-400 snap-section">
+      <div ref={heroBackgroundRef}   className="relative z-10 min-h-screen bg-stone-300 bg-cover bg-center snap-section"
+        style={{ backgroundImage: "url('/assets/aurafarmingcelestin.jpg')" }}
+      >
         <div className="w-full max-w-8xl mx-auto">
           <div className="hidden md:grid grid-cols-2 gap-0 items-center min-h-screen">
+            
             {/* Hero Text - Desktop with Parallax */}
             <div className="col-start-2 flex flex-col justify-center items-center text-left space-y-6">
               <div ref={heroTextDesktopRef} className="leading-tight tracking-tight whitespace-nowrap">
                 <h1 
-                  className={`leading-none font-normal text-white ${isLoaded ? 'animate-slide-in-1' : 'opacity-0'}`} 
+                  className={`leading-none font-normal text-black dark:text-white ${isLoaded ? 'animate-slide-in-1' : 'opacity-0'}`} 
                   style={{fontSize: 'clamp(1.5rem, 2vw, 2.75rem)'}}
                 >
                   Software Engineer
@@ -509,6 +583,14 @@ export default function Home() {
             </h1>
           </div>
         </div>
+
+          <div className="absolute bottom-35 md:bottom-40 z-50">
+            <BigName 
+              names={["Organizer", "President", "Systems Architect"]} 
+              speed={150} 
+              className="opacity-200"
+            />
+          </div>
         
         {/* Location Pill with Globe - Using Tailwind */}
         <div 
@@ -632,7 +714,7 @@ export default function Home() {
                       Approached by the Chair & Co-Chair of UW's CS program to build SETlib for their Seminar courses on a 12-month contract.
                     </p>
                     <MagneticLink 
-                      href="/work" 
+                      href="/SETlib" 
                       strength={0.4}
                       className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors mt-4"
                     >
@@ -733,7 +815,7 @@ export default function Home() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                   <div className="w-full h-[600px] rounded-lg mb-8 overflow-hidden">                  
                   <img
-                    src="/assets/aura farm.png"
+                    src="/assets/meeting4.jpg"
                     alt="Description"
                     className="object-contain max-h-fill"
                   /></div>

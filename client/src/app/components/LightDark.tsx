@@ -8,27 +8,37 @@ export default function DarkModeToggle() {
 
   useEffect(() => {
     setMounted(true)
-    
-    // Check system preference (localStorage not supported in Claude.ai)
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    
-    if (systemDark) {
+
+    // Check saved preference first
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme === 'dark') {
       document.documentElement.classList.add('dark')
       setIsDark(true)
-    } else {
+    } else if (savedTheme === 'light') {
       document.documentElement.classList.remove('dark')
       setIsDark(false)
+    } else {
+      // No saved preference, fallback to system
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      if (systemDark) {
+        document.documentElement.classList.add('dark')
+        setIsDark(true)
+      } else {
+        document.documentElement.classList.remove('dark')
+        setIsDark(false)
+      }
     }
   }, [])
 
   const toggleTheme = () => {
     const newIsDark = !isDark
-    
     if (newIsDark) {
       document.documentElement.classList.add('dark')
+      localStorage.setItem('theme', 'dark')
       setIsDark(true)
     } else {
       document.documentElement.classList.remove('dark')
+      localStorage.setItem('theme', 'light')
       setIsDark(false)
     }
   }

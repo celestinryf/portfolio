@@ -99,7 +99,7 @@ function MagneticLink({
     <a
       ref={linkRef}
       href={href}
-      className={`inline-block relative cursor-pointer ${className}`}
+      className={`magnetic-link inline-block relative cursor-pointer ${className}`}
       style={{ transform: 'rotate(0.001deg)' }}
       {...externalProps}
     >
@@ -108,10 +108,7 @@ function MagneticLink({
         className="magnetic-link-text inline-block transition-colors duration-200 relative"
         style={{ transform: 'rotate(0.001deg)' }}
       >
-        <span 
-          ref={innerTextRef}
-          className="inline-block"
-        >
+        <span ref={innerTextRef} className="inline-block">
           {children}
         </span>
       </span>
@@ -353,23 +350,27 @@ const ContactPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-black">
       <style jsx global>{`
-        /* Magnetic link underline animation */
+        /* MagneticLink underline animation — same as nav-link */
         .magnetic-link-text::after {
           content: '';
           position: absolute;
-          bottom: -4px;
-          left: 0;
+          bottom: -4px; /* or adjust to -16px to match navbar */
+          left: 50%;
           width: 100%;
           height: 2px;
-          border-radius: 1px;
-          transform: scaleX(0);
-          transform-origin: right;
+          background-color: black;
+          border-radius: 1.5px;
+          transform: translateX(-50%) scaleX(0);
+          transform-origin: center;
           transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
+        .dark .magnetic-link-text::after {
+          background-color: white;
+        }
+
         .magnetic-link:hover .magnetic-link-text::after {
-          transform: scaleX(1);
-          transform-origin: left;
+          transform: translateX(-50%) scaleX(1);
         }
 
         /* Submit button styles - matching footer's "Get in touch" button */
@@ -593,26 +594,26 @@ const ContactPage: React.FC = () => {
 
                 {/* Submit Button */}
                 <div className="relative z-10 border-t border-neutral-700">
-                  <button
-                    ref={submitButtonRef}
-                    type="button"
-                    disabled={isSubmitting}
-                    onClick={handleSubmit}
-                    className="submit-button w-48 h-48 rounded-full !-translate-y-1/2 !translate-x-1/2 font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                    style={{ transform: 'rotate(0.001deg)' }}
-                  >
-                    <div 
-                      ref={submitTextRef}
-                      className="submit-button-text flex items-center justify-center h-full"
-                      style={{ transform: 'rotate(0.001deg)' }}
+                    <button
+                      ref={submitButtonRef}
+                      type="button"
+                      disabled={isSubmitting}
+                      onClick={handleSubmit}
+                      className="submit-button w-48 h-48 rounded-full font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                      style={{ transform: 'translate(50%, -50%) rotate(0.001deg)' }}
                     >
-                      {isSubmitting ? (
-                        <div className="animate-spin w-6 h-6 rounded-full" />
-                      ) : (
-                        <>Send it!</>
-                      )}
-                    </div>
-                  </button>
+                      <div
+                        ref={submitTextRef}
+                        className="submit-button-text flex items-center justify-center h-full"
+                        style={{ transform: 'rotate(0.001deg)' }}
+                      >
+                        {isSubmitting ? (
+                          <div className="animate-spin w-6 h-6 rounded-full" />
+                        ) : (
+                          <>Send it!</>
+                        )}
+                      </div>
+                    </button>
                   
                   {submitStatus === 'success' && (
                     <div className="mt-4 text-green-400 text-sm animate-fade-in">

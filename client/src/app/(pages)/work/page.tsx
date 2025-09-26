@@ -25,7 +25,7 @@ const projects: Project[] = [
     image: "/assets/mock.png",
     tags: ["Go", "Python", "TypeScript", "PostgreSQL", "GraphQL"],
     year: "2025",
-    slug: "setlib",
+    slug: "SETlib",
   },
   {
     id: "02",
@@ -248,7 +248,7 @@ function ProjectItem({
   }, [onHover]);
 
   const handleClick = () => {
-    router.push(`/projects/${project.slug}`);
+    router.push(`/${project.slug}`);
   };
 
   return (

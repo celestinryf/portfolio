@@ -588,12 +588,12 @@ export default function TopNavigation() {
 
             {/* Dropdown Menu */}
             {isMenuOpen && (
-              <div className="dropdown-menu absolute right-0 top-full mt-2 py-4 px-6 bg-white/90 dark:bg-black/90 dropdown-backdrop rounded-lg border border-gray-100/50 dark:border-gray-800/50 min-w-[120px]">
+              <div className="dropdown-menu absolute right-0 top-full mt-2 py-4 px-6 bg-white/90 dark:bg-black/90 dropdown-backdrop rounded-lg min-w-[120px]">
                 <div className="flex flex-col space-y-3">
                   <MagneticLink 
                     href="/work" 
                     strength={0.2}
-                    className="nav-link-mobile text-sm text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors"
+                    className="nav-link-mobile text-sm text-white dark:text-black transition-colors"
                     underlineStyle="mobile"
                     onClick={closeMenu}
                   >
@@ -602,7 +602,7 @@ export default function TopNavigation() {
                   <MagneticLink 
                     href="/about" 
                     strength={0.2}
-                    className="nav-link-mobile text-sm text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors"
+                    className="nav-link-mobile text-sm text-white dark:text-black transition-colors"
                     underlineStyle="mobile"
                     onClick={closeMenu}
                   >
@@ -611,7 +611,7 @@ export default function TopNavigation() {
                   <MagneticLink 
                     href="/contact" 
                     strength={0.2}
-                    className="nav-link-mobile text-sm text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors"
+                    className="nav-link-mobile text-sm text-white dark:text-black transition-colors"
                     underlineStyle="mobile"
                     onClick={closeMenu}
                   >
@@ -634,7 +634,7 @@ export default function TopNavigation() {
             onClick={toggleMenu}
             strength={0.3}
             isIcon={true}
-            className="scroll-burger-button rounded-full flex items-center justify-center !bg-black dark:!bg-white border border-white/10 dark:border-black/10 transition-all duration-300"
+            className="scroll-burger-button rounded-full flex items-center justify-center !bg-black dark:!bg-white transition-all duration-300"
             style={{
               width: 'clamp(60px, 6vw, 90px)',
               height: 'clamp(60px, 6vw, 90px)',
@@ -652,8 +652,8 @@ export default function TopNavigation() {
 
           {/* Scroll Burger Dropdown */}
           {isMenuOpen && (
-            <div className="dropdown-menu absolute right-0 top-full mt-4 py-4 px-6 bg-white/90 dark:bg-white/90 dropdown-backdrop rounded-lg border border-gray-100/50 dark:border-gray-800/50 min-w-[120px]">
-              <div className="flex flex-col space-y-3">
+            <div className="dropdown-menu absolute right-0 top-full mt-4 py-4 px-6 bg-white/90 dark:bg-white/90 dropdown-backdrop rounded-lg min-w-[120px]">
+              <div className="flex flex-col -mt-2 mb-4 space-y-3">
                 <MagneticLink 
                   href="/work" 
                   strength={0.2}
