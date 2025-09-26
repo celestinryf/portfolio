@@ -91,7 +91,7 @@ const gallery = [
   { src: "/assets/mock1.png", alt: "SETlib Document Management", aspect: "aspect-[4/3]" },
   { src: "/assets/lms.png", alt: "Learning Management System", aspect: "aspect-[4/3]" },
   { src: "/assets/hack.png", alt: "Aura Farm Project", aspect: "aspect-[4/3]" },
-  { src: "/assets/umarket (1).png", alt: "UMarket Platform", aspect: "aspect-[4/3]" },
+  { src: "/assets/umarket1.png", alt: "UMarket Platform", aspect: "aspect-[4/3]" },
   { src: "/assets/stock1.png", alt: "Development Setup", aspect: "aspect-[4/3]" },
   { src: "/assets/mock.png", alt: "UHackathon Team", aspect: "aspect-[4/3]" },
 ];
@@ -117,7 +117,7 @@ const ABOUT_SLIDES = [
   { src: "/assets/aura farm.png", alt: "Celestin - Professional" },
   { src: "/assets/room.png", alt: "Celestin at UHackathon" },
   { src: "/assets/Meeting.png", alt: "Celestin coding" },
-  { src: "/assets/DSC_0214.jpg", alt: "Celestin with team" },
+  { src: "/assets/DSC_0214.png", alt: "Celestin with team" },
 ];
 
 /** Motion variants */
