@@ -55,7 +55,7 @@ const projects: Project[] = [
     category: "Beauty School LMS",
     description:
       "Engineered a monolithic Node.js backend into microservices architecture, improving API response latency by 38%. Built interactive prototypes with React and Redux, reducing page load times by 40% for production deployment.",
-    image: "/assets/lms.png",
+    image: "/assets/shell.png",
     tags: ["React", "Node.js", "Redux", "Microservices", "CI/CD"],
     year: "2025",
     slug: "illuminance-esthetics",
@@ -79,7 +79,7 @@ const projects: Project[] = [
       "Developed a peer-to-peer marketplace platform for university students to buy, sell, and trade textbooks and supplies. Implemented secure payment processing and real-time chat functionality.",
     image: "/assets/umarket (1).png",
     tags: ["TypeScript", "Next.js", "Go", "PostgreSQL", "AWS S3", "Postman", "Docker", "Kubernetes", "Redis"],
-    year: "2025",
+    year: "2024",
     slug: "umarket",
   },
   {

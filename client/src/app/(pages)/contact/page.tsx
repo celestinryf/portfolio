@@ -1,6 +1,123 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
+
+// Magnetic Link Component - Same as TopNavigation
+interface MagneticLinkProps {
+  href: string;
+  children: React.ReactNode;
+  strength?: number;
+  className?: string;
+  isExternal?: boolean;
+}
+
+function MagneticLink({ 
+  href, 
+  children, 
+  strength = 0.3, 
+  className = "",
+  isExternal = false 
+}: MagneticLinkProps) {
+  const linkRef = useRef<HTMLAnchorElement>(null);
+  const textRef = useRef<HTMLSpanElement>(null);
+  const innerTextRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const link = linkRef.current;
+    const text = textRef.current;
+    const innerText = innerTextRef.current;
+    
+    if (!link || !text || !innerText) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = link.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      const deltaX = (e.clientX - centerX) * strength;
+      const deltaY = (e.clientY - centerY) * strength;
+      
+      // Move the link container with matrix3d for hardware acceleration
+      gsap.to(link, {
+        duration: 0.3,
+        x: deltaX,
+        y: deltaY,
+        rotationZ: 0.001,
+        ease: "power2.out",
+        force3D: true
+      });
+      
+      // Move the text with less intensity
+      gsap.to(text, {
+        duration: 0.3,
+        x: deltaX * 0.5,
+        y: deltaY * 0.5,
+        rotationZ: 0.001,
+        ease: "power2.out",
+        force3D: true
+      });
+    };
+
+    const handleMouseLeave = () => {
+      // Return to original position with elastic ease
+      gsap.to(link, {
+        duration: 0.5,
+        x: 0,
+        y: 0,
+        rotationZ: 0.001,
+        ease: "elastic.out(1, 0.3)",
+        force3D: true
+      });
+      
+      gsap.to(text, {
+        duration: 0.5,
+        x: 0,
+        y: 0,
+        rotationZ: 0.001,
+        ease: "elastic.out(1, 0.3)",
+        force3D: true
+      });
+    };
+
+    link.addEventListener('mousemove', handleMouseMove);
+    link.addEventListener('mouseleave', handleMouseLeave);
+
+    // Cleanup
+    return () => {
+      link.removeEventListener('mousemove', handleMouseMove);
+      link.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [strength]);
+
+  const externalProps = isExternal ? {
+    target: "_blank",
+    rel: "noopener noreferrer"
+  } : {};
+
+  return (
+    <a
+      ref={linkRef}
+      href={href}
+      className={`inline-block relative cursor-pointer ${className}`}
+      style={{ transform: 'rotate(0.001deg)' }}
+      {...externalProps}
+    >
+      <span 
+        ref={textRef}
+        className="magnetic-link-text inline-block transition-colors duration-200 relative"
+        style={{ transform: 'rotate(0.001deg)' }}
+      >
+        <span 
+          ref={innerTextRef}
+          className="inline-block"
+        >
+          {children}
+        </span>
+      </span>
+    </a>
+  );
+}
 
 interface FormData {
   name: string;
@@ -37,6 +154,10 @@ const ContactPage: React.FC = () => {
   const headerRef = useRef<HTMLElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
+  
+  // Magnetic button refs
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
+  const submitTextRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Intersection Observer for animations
@@ -80,6 +201,78 @@ const ContactPage: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
+  // Magnetic effect for submit button - exactly like footer's "Get in touch" button
+  useEffect(() => {
+    const button = submitButtonRef.current;
+    const text = submitTextRef.current;
+    
+    if (!button || !text) return;
+
+    const strength = 0.4; // Same strength as "Get in touch" button
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (button.disabled) return; // Don't apply magnetic effect when disabled
+      
+      const rect = button.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      const deltaX = (e.clientX - centerX) * strength;
+      const deltaY = (e.clientY - centerY) * strength;
+      
+      // Move the entire button container (the circle) - this is the main magnetic effect
+      gsap.to(button, {
+        duration: 0.3,
+        x: deltaX,
+        y: deltaY,
+        rotationZ: 0.001,
+        ease: "power2.out",
+        force3D: true
+      });
+      
+      // Move the text with half the intensity (just like MagneticLink does)
+      gsap.to(text, {
+        duration: 0.3,
+        x: deltaX * 0.5,
+        y: deltaY * 0.5,
+        rotationZ: 0.001,
+        ease: "power2.out",
+        force3D: true
+      });
+    };
+
+    const handleMouseLeave = () => {
+      // Return the entire button to original position with elastic ease
+      gsap.to(button, {
+        duration: 0.5,
+        x: 0,
+        y: 0,
+        rotationZ: 0.001,
+        ease: "elastic.out(1, 0.3)",
+        force3D: true
+      });
+      
+      // Return the text to original position
+      gsap.to(text, {
+        duration: 0.5,
+        x: 0,
+        y: 0,
+        rotationZ: 0.001,
+        ease: "elastic.out(1, 0.3)",
+        force3D: true
+      });
+    };
+
+    button.addEventListener('mousemove', handleMouseMove);
+    button.addEventListener('mouseleave', handleMouseLeave);
+
+    // Cleanup
+    return () => {
+      button.removeEventListener('mousemove', handleMouseMove);
+      button.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [submitStatus]); // Re-run when submitStatus changes
+
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
     
@@ -117,9 +310,7 @@ const ContactPage: React.FC = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
-    
+  const handleSubmit = async (): Promise<void> => {
     // Basic spam protection
     if (formData.honeypot) return;
     
@@ -130,13 +321,6 @@ const ContactPage: React.FC = () => {
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Here you would typically make an API call
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // });
       
       setSubmitStatus('success');
       setFormData({
@@ -167,9 +351,81 @@ const ContactPage: React.FC = () => {
   const isSubmitting = submitStatus === 'submitting';
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white dark:bg-black">
+      <style jsx global>{`
+        /* Magnetic link underline animation */
+        .magnetic-link-text::after {
+          content: '';
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          border-radius: 1px;
+          transform: scaleX(0);
+          transform-origin: right;
+          transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .magnetic-link:hover .magnetic-link-text::after {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
+
+        /* Submit button styles - matching footer's "Get in touch" button */
+        .submit-button {
+          overflow: hidden;
+          background-color: black !important;
+          transition: transform 0.2s ease;
+          cursor: pointer;
+        }
+
+        .dark .submit-button {
+          background-color: white !important;
+        }
+
+        .submit-button:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
+        .submit-button:disabled:hover {
+          transform: scale(1);
+        }
+
+        .submit-button-text {
+          position: relative;
+          z-index: 10;
+          color: white !important;
+        }
+
+        .dark .submit-button-text {
+          color: black !important;
+        }
+
+        /* Links stay the same color on hover */
+        .contact-link {
+          color: black;
+          transition: transform 0.3s ease;
+        }
+
+        .dark .contact-link {
+          color: white !important;
+        }
+
+        /* Animation utilities */
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        .animate-fade-in {
+          animation: fadeIn 0.5s ease-in-out;
+        }
+      `}</style>
+      
       {/* Main Content */}
-      <main className="py-16">
+      <main className="container mx-auto px-5 sm:px-6 pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-12 sm:pb-16 md:pb-24 relative">
         <div className="max-w-6xl mx-auto px-6">
           
           {/* Header */}
@@ -179,9 +435,9 @@ const ContactPage: React.FC = () => {
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h1 className="text-4xl lg:text-6xl font-light leading-tight mb-6">
+                <h1 className="text-6xl md:text-7xl font-normal leading-tight mb-6">
                   <div className="flex items-center mb-2">
-                    Let&apos;s start a
+                    Let's build a
                   </div>
                   <span className="block">project together</span>
                 </h1>
@@ -199,7 +455,7 @@ const ContactPage: React.FC = () => {
               ref={formRef}
               className="lg:col-span-2 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200"
             >
-              <form onSubmit={handleSubmit} className="space-y-16">
+              <div className="space-y-16">
                 {/* Honeypot field for spam protection */}
                 <input
                   type="text"
@@ -219,7 +475,7 @@ const ContactPage: React.FC = () => {
                     </div>
                     <div className="col-span-10">
                       <label htmlFor="name" className="block text-xl text-neutral-400 mb-4">
-                        What&apos;s your name?
+                        What's your name?
                       </label>
                       <input
                         type="text"
@@ -228,7 +484,7 @@ const ContactPage: React.FC = () => {
                         value={formData.name}
                         onChange={handleInputChange}
                         placeholder="John Doe *"
-                        className="w-full bg-transparent pb-4 text-xl text-white placeholder-neutral-600 focus:outline-none transition-colors duration-300"
+                        className="w-full bg-transparent pb-4 text-xl text-black dark:text-white placeholder-neutral-600 focus:outline-none transition-colors duration-300"
                       />
                       {errors.name && (
                         <p className="text-red-400 text-sm mt-2">{errors.name}</p>
@@ -245,7 +501,7 @@ const ContactPage: React.FC = () => {
                     </div>
                     <div className="col-span-10">
                       <label htmlFor="email" className="block text-xl text-neutral-400 mb-4">
-                        What&apos;s your email?
+                        What's your email?
                       </label>
                       <input
                         type="email"
@@ -254,7 +510,7 @@ const ContactPage: React.FC = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder="john@doe.com *"
-                        className="w-full bg-transparent pb-4 text-xl text-white placeholder-neutral-600 focus:outline-none transition-colors duration-300"
+                        className="w-full bg-transparent pb-4 text-xl text-black dark:text-white placeholder-neutral-600 focus:outline-none transition-colors duration-300"
                       />
                       {errors.email && (
                         <p className="text-red-400 text-sm mt-2">{errors.email}</p>
@@ -271,7 +527,7 @@ const ContactPage: React.FC = () => {
                     </div>
                     <div className="col-span-10">
                       <label htmlFor="company" className="block text-xl text-neutral-400 mb-4">
-                        What&apos;s the name of your organization?
+                        What's the name of your organization?
                       </label>
                       <input
                         type="text"
@@ -280,7 +536,7 @@ const ContactPage: React.FC = () => {
                         value={formData.company}
                         onChange={handleInputChange}
                         placeholder="Your Company Inc."
-                        className="w-full bg-transparent pb-4 text-xl text-white placeholder-neutral-600 focus:outline-none transition-colors duration-300"
+                        className="w-full bg-transparent pb-4 text-xl text-black dark:text-white placeholder-neutral-600 focus:outline-none transition-colors duration-300"
                       />
                     </div>
                   </div>
@@ -303,7 +559,7 @@ const ContactPage: React.FC = () => {
                         value={formData.service}
                         onChange={handleInputChange}
                         placeholder="Web Development, System Architecture, ML Engineering..."
-                        className="w-full bg-transparent pb-4 text-xl text-white placeholder-neutral-600 focus:outline-none transition-colors duration-300"
+                        className="w-full bg-transparent pb-4 text-xl text-black dark:text-white placeholder-neutral-600 focus:outline-none transition-colors duration-300"
                       />
                     </div>
                   </div>
@@ -326,7 +582,7 @@ const ContactPage: React.FC = () => {
                         onChange={handleInputChange}
                         rows={6}
                         placeholder="Hello Célestin, can you help me with... *"
-                        className="w-full bg-transparent pb-4 text-xl text-white placeholder-neutral-600 focus:outline-none transition-colors duration-300 resize-none"
+                        className="w-full bg-transparent pb-4 text-xl text-black dark:text-white placeholder-neutral-600 focus:outline-none duration-300 resize-none"
                       />
                       {errors.message && (
                         <p className="text-red-400 text-sm mt-2">{errors.message}</p>
@@ -338,25 +594,29 @@ const ContactPage: React.FC = () => {
                 {/* Submit Button */}
                 <div className="relative z-10 border-t border-neutral-700">
                   <button
-                    type="submit"
+                    ref={submitButtonRef}
+                    type="button"
                     disabled={isSubmitting}
-                    className="group relative w-32 h-32 rounded-full bg-white text-black font-medium text-lg overflow-hidden transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    onClick={handleSubmit}
+                    className="submit-button w-48 h-48 rounded-full !-translate-y-1/2 !translate-x-1/2 font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    style={{ transform: 'rotate(0.001deg)' }}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="relative z-10 flex items-center justify-center h-full group-hover:text-white transition-colors duration-300">
+                    <div 
+                      ref={submitTextRef}
+                      className="submit-button-text flex items-center justify-center h-full"
+                      style={{ transform: 'rotate(0.001deg)' }}
+                    >
                       {isSubmitting ? (
-                        <div className="animate-spin w-6 h-6 border-2 border-current border-t-transparent rounded-full" />
+                        <div className="animate-spin w-6 h-6 rounded-full" />
                       ) : (
-                        <>
-                          Send it!
-                        </>
+                        <>Send it!</>
                       )}
                     </div>
                   </button>
                   
                   {submitStatus === 'success' && (
                     <div className="mt-4 text-green-400 text-sm animate-fade-in">
-                      Message sent successfully! I&apos;ll get back to you soon.
+                      Message sent successfully! I'll get back to you soon.
                     </div>
                   )}
                   
@@ -366,7 +626,7 @@ const ContactPage: React.FC = () => {
                     </div>
                   )}
                 </div>
-              </form>
+              </div>
             </div>
 
             {/* Contact Details */}
@@ -380,30 +640,24 @@ const ContactPage: React.FC = () => {
                   Contact Details
                 </h3>
                 <div className="space-y-4">
-                  <a 
-                    href="mailto:celestin@example.com" 
-                    className="block text-lg text-white hover:text-blue-400 transition-all duration-300 hover:-translate-y-0.5"
-                  >
-                    celestin@example.com
-                  </a>
-                  <a 
-                    href="tel:+1234567890" 
-                    className="block text-lg text-white hover:text-blue-400 transition-all duration-300 hover:-translate-y-0.5"
-                  >
-                    +1 (234) 567-8900
-                  </a>
-                </div>
-              </div>
-
-              {/* Business Details */}
-              <div>
-                <h3 className="text-sm text-neutral-400 uppercase tracking-wider mb-6">
-                  Business Details
-                </h3>
-                <div className="space-y-2 text-neutral-300">
-                  <p>Célestin Tech Solutions</p>
-                  <p>Location: Auburn, Washington, US</p>
-                  <p>Available for remote & on-site work</p>
+                  <div>
+                    <MagneticLink 
+                      href="mailto:celestin@gmail.com" 
+                      strength={0.4}
+                      className="contact-link text-lg"
+                    >
+                      celestin@gmail.com
+                    </MagneticLink>
+                  </div>
+                  <div>
+                    <MagneticLink 
+                      href="tel:+12538819185" 
+                      strength={0.4}
+                      className="contact-link text-lg"
+                    >
+                      +1 (253) 881-9185
+                    </MagneticLink>
+                  </div>
                 </div>
               </div>
 
@@ -413,39 +667,35 @@ const ContactPage: React.FC = () => {
                   Socials
                 </h3>
                 <div className="space-y-4">
-                  <a 
-                    href="https://linkedin.com/in/celestin" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="block text-lg text-white hover:text-blue-400 transition-all duration-300 hover:-translate-y-0.5"
-                  >
-                    LinkedIn
-                  </a>
-                  <a 
-                    href="https://github.com/celestin" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="block text-lg text-white hover:text-blue-400 transition-all duration-300 hover:-translate-y-0.5"
-                  >
-                    GitHub
-                  </a>
-                  <a 
-                    href="https://twitter.com/celestin" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="block text-lg text-white hover:text-blue-400 transition-all duration-300 hover:-translate-y-0.5"
-                  >
-                    Twitter
-                  </a>
+                  <div>
+                    <MagneticLink 
+                      href="https://linkedin.com/in/celestinryf" 
+                      strength={0.4}
+                      isExternal={true}
+                      className="contact-link text-lg"
+                    >
+                      LinkedIn
+                    </MagneticLink>
+                  </div>
+                  <div>
+                    <MagneticLink 
+                      href="https://github.com/celestinryf" 
+                      strength={0.4}
+                      isExternal={true}
+                      className="contact-link text-lg"
+                    >
+                      GitHub
+                    </MagneticLink>
+                  </div>
                 </div>
               </div>
 
               {/* Local Time */}
               <div>
                 <h3 className="text-sm text-neutral-400 uppercase tracking-wider mb-2">
-                  Local Time
+                  Local Time (Seattle)
                 </h3>
-                <p className="text-neutral-300 transition-all duration-500">
+                <p className="text-black dark:text-white transition-all duration-500">
                   {currentTime || '--:-- -- ---'}
                 </p>
               </div>
