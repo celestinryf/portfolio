@@ -814,13 +814,13 @@ export default function Home() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                   <div className="w-full h-[600px] rounded-lg mb-8 overflow-hidden">                  
                   <img
-                    src="/assets/meeting4.jpg"
+                    src="/assets/meeting4.JPG"
                     alt="Description"
                     className="object-contain max-h-fill"
                   /></div>
                   <div className="w-full h-[600px] rounded-lg mb-8 overflow-hidden">                  
                     <img
-                      src="/assets/umarket (1).png"
+                      src="/assets/umarket1.png"
                       alt="Description"
                       className="w-full h-full object-cover"
                     />
