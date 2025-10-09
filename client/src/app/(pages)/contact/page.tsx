@@ -133,6 +133,8 @@ interface FormErrors {
 
 type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error';
 
+const GETFORM_ENDPOINT = 'https://getform.io/f/ayveojqb';
+
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -316,8 +318,25 @@ const ContactPage: React.FC = () => {
     setSubmitStatus('submitting');
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      const response = await fetch(GETFORM_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          service: formData.service,
+          message: formData.message,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Form submission failed');
+      }
       
       setSubmitStatus('success');
       setFormData({
