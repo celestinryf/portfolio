@@ -83,7 +83,7 @@ const projects: Project[] = [
     slug: "umarket",
   },
   {
-    id: "08",
+    id: "07",
     title: "SwiftHire",
     category: "2nd Place at Hackathon: AI HR Tool",
     description:
@@ -93,8 +93,8 @@ const projects: Project[] = [
     year: "2024",
     slug: "umarket",
   },
-    {
-    id: "07",
+  {
+    id: "08",
     title: "Market Watch",
     category: "Stock Tracking App",
     description:
