@@ -82,19 +82,19 @@ const projects: Project[] = [
     year: "2024",
     slug: "umarket",
   },
+  // {
+  //   id: "07",
+  //   title: "SwiftHire",
+  //   category: "2nd Place at Hackathon: AI HR Tool",
+  //   description:
+  //     "Developed a peer-to-peer marketplace platform for university students to buy, sell, and trade textbooks and supplies. Implemented secure payment processing and real-time chat functionality.",
+  //   image: "/assets/umarket1.png",
+  //   tags: ['Python', "Flask", 'React', 'JavaScript', 'PostgreSQL'],
+  //   year: "2024",
+  //   slug: "umarket",
+  // },
   {
     id: "07",
-    title: "SwiftHire",
-    category: "2nd Place at Hackathon: AI HR Tool",
-    description:
-      "Developed a peer-to-peer marketplace platform for university students to buy, sell, and trade textbooks and supplies. Implemented secure payment processing and real-time chat functionality.",
-    image: "/assets/umarket1.png",
-    tags: ['Python', "Flask", 'React', 'JavaScript', 'PostgreSQL'],
-    year: "2024",
-    slug: "umarket",
-  },
-  {
-    id: "08",
     title: "Market Watch",
     category: "Stock Tracking App",
     description:
