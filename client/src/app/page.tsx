@@ -678,7 +678,7 @@ export default function Home() {
                       <p className="text-black dark:text-gray-300">Developed a Document Search feature full-stack using Next.js, TypeScript, GraphQL, and REST APIs, enabling real-time data access for 500+ professors and automating reporting workflows across departments.</p>
                     </div>
                     <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
-                      <p className="text-black dark:text-gray-300">actual development experience, feature or architecture decision</p>
+                      <p className="text-black dark:text-gray-300">Engineered automation that cut manual processing time across business units, saving \$30K+/year in operational costs</p>
                     </div>
                   </div>
                 </div>
@@ -803,9 +803,6 @@ export default function Home() {
                     </div>
                     <div className="border-t border-gray-300 dark:border-gray-700 py-4">
                       <p className="text-black dark:text-gray-300">Lead organizer and Host of UHackathon, the largest ever hackathon south of Seattle. Secured $5,000 in sponsorship funding and oversaw all financial planning, budgeting, and expense tracking. Awarded $10,000 contract for 2 further years.</p>
-                    </div>
-                    <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
-                      <p className="text-black dark:text-gray-300">Implemented infrastructure as code using Terraform and Kubernetes, reducing deployment time by 80%.</p>
                     </div>
                   </div>
                 </div>
