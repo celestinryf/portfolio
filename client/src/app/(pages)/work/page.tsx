@@ -58,7 +58,7 @@ const projects: Project[] = [
     image: "/assets/mock1.png",
     tags: ["React", "Node.js", "Redux", "Microservices", "CI/CD"],
     year: "2025",
-    slug: "illuminance-esthetics",
+    slug: "aws-cost-optimization",
   },
     {
     id: "05",
@@ -69,18 +69,7 @@ const projects: Project[] = [
     image: "/assets/shell.png",
     tags: ["React", "Node.js", "Redux", "Microservices", "CI/CD"],
     year: "2025",
-    slug: "illuminance-esthetics",
-  },
-  {
-    id: "07",
-    title: "UMarket",
-    category: "Student Marketplace",
-    description:
-      "Developed a peer-to-peer marketplace platform for university students to buy, sell, and trade textbooks and supplies. Implemented secure payment processing and real-time chat functionality.",
-    image: "/assets/umarket1.png",
-    tags: ["TypeScript", "Next.js", "Go", "PostgreSQL", "AWS S3", "Postman", "Docker", "Kubernetes", "Redis"],
-    year: "2024",
-    slug: "umarket",
+    slug: "unix-shell",
   }
 ];
 
