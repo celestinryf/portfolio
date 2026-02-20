@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Your Portfolio",
-  description: "Project Manager & Software Engineer Portfolio",
+  title: "Celestin Ryf",
+  description: "Portfolio of Celestin Ryf, a software engineer specializing in full-stack development and systems design.",
 };
 
 export default function RootLayout({

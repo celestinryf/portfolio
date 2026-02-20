@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import MagneticLink from "@/app/components/shared/MagneticLink";
+import { ScrollIndicator, TechStackSection, CTASection, MetricsStrip, ArchitectureDiagram } from "@/app/components/shared/CaseStudySections";
 import ProjectNav from "@/app/components/shared/ProjectNav";
+import { useReveal, reveal } from "@/app/hooks/useReveal";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -44,44 +45,15 @@ const TECH = ["Python", "boto3", "AWS Lambda", "EventBridge", "Terraform", "SNS"
 
 const ARCH_FLOW = ["EventBridge", "Lambda Function", "S3 Scanner", "Risk Scorer", "Optimizer", "SNS / Slack"];
 
-// ─── Hooks ───────────────────────────────────────────────────────────────────
-
-function useReveal<T extends HTMLElement>(threshold = 0.15) {
-  const ref = useRef<T>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      { threshold, rootMargin: "0px 0px -50px 0px" }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [threshold]);
-  return { ref, visible };
-}
-
-const reveal = (visible: boolean, delay = 0) =>
-  `transition-all duration-700 ease-out ${visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}` +
-  (delay ? ` delay-[${delay}ms]` : "");
-
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function AWSCostOptimizationCaseStudy() {
   const headlineRef = useRef<HTMLHeadingElement>(null);
-  const metricRefs = useRef<(HTMLSpanElement | null)[]>([]);
-  const metricsSection = useRef<HTMLElement>(null);
-  const archRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const archSection = useRef<HTMLDivElement>(null);
-
   const hero = useReveal<HTMLElement>(0.1);
   const problem = useReveal<HTMLDivElement>();
   const solution = useReveal<HTMLDivElement>();
   const eng = useReveal<HTMLDivElement>();
-  const techStack = useReveal<HTMLDivElement>();
   const outcome = useReveal<HTMLDivElement>();
-  const cta = useReveal<HTMLDivElement>();
 
   // Hero headline word-stagger
   useEffect(() => {
@@ -91,55 +63,6 @@ export default function AWSCostOptimizationCaseStudy() {
       { y: 60, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.8, stagger: 0.06, ease: "power3.out", delay: 0.3 }
     );
-  }, []);
-
-  // Metric counter animation
-  useEffect(() => {
-    if (!metricsSection.current) return;
-    const triggers: ScrollTrigger[] = [];
-
-    metricRefs.current.forEach((el, i) => {
-      if (!el) return;
-      const m = METRICS[i];
-      const obj = { val: 0 };
-      const tween = gsap.to(obj, {
-        val: m.value,
-        duration: 1.8,
-        ease: "power2.out",
-        snap: { val: 1 },
-        onUpdate: () => {
-          if (m.suffix === "/mo") {
-            el.textContent = `$${obj.val}${m.suffix}`;
-          } else if (m.suffix === "%") {
-            el.textContent = `${obj.val}${m.suffix}`;
-          } else {
-            el.textContent = `${obj.val}`;
-          }
-        },
-        scrollTrigger: {
-          trigger: metricsSection.current,
-          start: "top 80%",
-          once: true,
-        },
-      });
-      if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
-    });
-
-    return () => triggers.forEach((t) => t.kill());
-  }, []);
-
-  // Architecture diagram sequential reveal
-  useEffect(() => {
-    if (!archSection.current) return;
-    const boxes = archRefs.current.filter(Boolean) as HTMLDivElement[];
-    gsap.fromTo(boxes,
-      { opacity: 0, x: -20 },
-      {
-        opacity: 1, x: 0, duration: 0.5, stagger: 0.12, ease: "power2.out",
-        scrollTrigger: { trigger: archSection.current, start: "top 75%", once: true },
-      }
-    );
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
   }, []);
 
   const headlineWords = "An automated S3 optimizer that scores risk before it touches your data.".split(" ");
@@ -208,30 +131,11 @@ export default function AWSCostOptimizationCaseStudy() {
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-neutral-400">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 5v14M5 12l7 7 7-7" /></svg>
-        </div>
+        <ScrollIndicator />
       </section>
 
       {/* ────────────────── 2. METRICS STRIP ────────────────── */}
-      <section ref={metricsSection} className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-black dark:bg-white py-16 md:py-24">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-16">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-            {METRICS.map((m, i) => (
-              <div key={m.label} className="text-center md:text-left">
-                <span
-                  ref={(el) => { metricRefs.current[i] = el; }}
-                  className="block text-5xl md:text-7xl font-bold text-emerald-400"
-                >
-                  {m.suffix === "/mo" ? "$0/mo" : `0${m.suffix}`}
-                </span>
-                <p className="text-sm md:text-base font-medium text-white/90 dark:text-black/90 mt-2">{m.label}</p>
-                <p className="text-xs text-white/50 dark:text-black/50 mt-1">{m.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <MetricsStrip metrics={METRICS} accentColor="emerald" formatValue={(val, suffix) => suffix === "/mo" ? `$${val}${suffix}` : suffix === "%" ? `${val}${suffix}` : `${val}`} />
 
       {/* ────────────────── 3. THE PROBLEM ────────────────── */}
       <section className="py-24 md:py-32">
@@ -308,31 +212,7 @@ export default function AWSCostOptimizationCaseStudy() {
           </p>
 
           {/* Architecture Diagram */}
-          <div ref={archSection} className="mb-16 overflow-x-auto">
-            <div className="flex items-center gap-0 min-w-[600px] md:min-w-0">
-              {ARCH_FLOW.map((label, i) => (
-                <div key={label} className="flex items-center">
-                  <div
-                    ref={(el) => { archRefs.current[i] = el; }}
-                    className="bg-white dark:bg-black rounded-lg px-5 py-3 border border-neutral-200 dark:border-neutral-700 text-sm font-mono text-black dark:text-white whitespace-nowrap opacity-0"
-                  >
-                    {label}
-                  </div>
-                  {i < ARCH_FLOW.length - 1 && (
-                    <div className="w-8 md:w-12 flex items-center justify-center text-neutral-400 shrink-0">
-                      <svg width="24" height="12" viewBox="0 0 24 12" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M0 6h22M18 1l4 5-4 5" /></svg>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <div className="flex items-center mt-3 ml-0 md:ml-[calc(33%)]">
-              <div className="w-px h-6 bg-neutral-300 dark:bg-neutral-600 ml-12" />
-              <div className="bg-emerald-400/20 text-emerald-700 dark:text-emerald-400 rounded-lg px-4 py-2 border border-emerald-300 dark:border-emerald-700 text-xs font-mono mt-2 ml-[-12px]">
-                Rollback Snapshots
-              </div>
-            </div>
-          </div>
+          <ArchitectureDiagram flow={ARCH_FLOW} accentLabel="Rollback Snapshots" accentColor="emerald" />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16">
             {ENGINEERING.map((e, i) => (

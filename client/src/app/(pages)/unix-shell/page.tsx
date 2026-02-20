@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import MagneticLink from "@/app/components/shared/MagneticLink";
+import { ScrollIndicator, TechStackSection, CTASection } from "@/app/components/shared/CaseStudySections";
 import ProjectNav from "@/app/components/shared/ProjectNav";
+import { useReveal, reveal } from "@/app/hooks/useReveal";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -41,28 +42,6 @@ const ENGINEERING = [
 
 const TECH = ["C", "Unix", "POSIX", "Makefile", "Valgrind", "GDB"];
 
-// ─── Hooks ───────────────────────────────────────────────────────────────────
-
-function useReveal<T extends HTMLElement>(threshold = 0.15) {
-  const ref = useRef<T>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      { threshold, rootMargin: "0px 0px -50px 0px" }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [threshold]);
-  return { ref, visible };
-}
-
-const reveal = (visible: boolean, delay = 0) =>
-  `transition-all duration-700 ease-out ${visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}` +
-  (delay ? ` delay-[${delay}ms]` : "");
-
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function UnixShellCaseStudy() {
@@ -72,9 +51,7 @@ export default function UnixShellCaseStudy() {
   const features = useReveal<HTMLDivElement>();
   const syscalls = useReveal<HTMLDivElement>();
   const eng = useReveal<HTMLDivElement>();
-  const techStack = useReveal<HTMLDivElement>();
   const outcome = useReveal<HTMLDivElement>();
-  const cta = useReveal<HTMLDivElement>();
 
   // Hero headline word-stagger
   useEffect(() => {
@@ -146,9 +123,7 @@ export default function UnixShellCaseStudy() {
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-neutral-400">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 5v14M5 12l7 7 7-7" /></svg>
-        </div>
+        <ScrollIndicator />
       </section>
 
       {/* ────────────────── 2. FEATURES ────────────────── */}
@@ -245,21 +220,7 @@ export default function UnixShellCaseStudy() {
       </section>
 
       {/* ────────────────── 5. TECH STACK ────────────────── */}
-      <section className="py-24 md:py-32">
-        <div ref={techStack.ref} className="max-w-[1400px] mx-auto px-6 md:px-16 text-center">
-          <p className={`text-xs uppercase tracking-[0.3em] text-neutral-500 dark:text-neutral-400 font-medium mb-10 ${reveal(techStack.visible)}`}>
-            Built With
-          </p>
-          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-            {TECH.map((t, i) => (
-              <span key={t}
-                className={`px-6 py-3 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 text-sm md:text-base font-medium border border-neutral-200 dark:border-neutral-700 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 cursor-default ${reveal(techStack.visible, 100 + i * 60)}`}>
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TechStackSection tech={TECH} />
 
       {/* ────────────────── 6. OUTCOME ────────────────── */}
       <section className="py-24 md:py-32">
@@ -308,29 +269,7 @@ export default function UnixShellCaseStudy() {
       </section>
 
       {/* ────────────────── 7. CTA ────────────────── */}
-      <section className="py-24 md:py-32 border-t border-neutral-200 dark:border-neutral-800">
-        <div ref={cta.ref} className="max-w-[1400px] mx-auto px-6 md:px-16 text-center">
-          <h2 className={`text-4xl md:text-6xl font-semibold text-black dark:text-white mb-10 ${reveal(cta.visible)}`}>
-            Want to see more?
-          </h2>
-          <div className={`flex flex-col sm:flex-row items-center justify-center gap-4 ${reveal(cta.visible, 200)}`}>
-            <MagneticLink
-              href="/work"
-              strength={0.4}
-              className="rounded-full border-2 border-black dark:border-white px-10 py-4 text-base font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all"
-            >
-              View all projects
-            </MagneticLink>
-            <MagneticLink
-              href="/contact"
-              strength={0.4}
-              className="rounded-full bg-black dark:bg-white text-white dark:text-black px-10 py-4 text-base font-medium hover:opacity-80 transition-all"
-            >
-              Get in touch
-            </MagneticLink>
-          </div>
-        </div>
-      </section>
+      <CTASection />
     </div>
   );
 }
