@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MagneticLink from "@/app/components/shared/MagneticLink";
@@ -14,36 +13,36 @@ if (typeof window !== "undefined") {
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const METRICS = [
-  { value: 10, suffix: "", label: "Features in 10 Weeks", desc: "Every deadline hit early across the full sprint cycle" },
-  { value: 7, suffix: "", label: "Person Engineering Team", desc: "1 PM, 1 senior engineer, 5 developers" },
-  { value: 2, suffix: "", label: "Roles at Once", desc: "Full-stack developer + technical PM simultaneously" },
-  { value: 100, suffix: "%", label: "On-Time Delivery", desc: "Ideation to full deployment with zero missed deadlines" },
+  { value: 50, suffix: "/mo", label: "Monthly Savings", desc: "Automated storage class transitions and lifecycle policies" },
+  { value: 100, suffix: "", label: "Risk Score Range", desc: "0–100 scoring based on reversibility, age, and data loss potential" },
+  { value: 0, suffix: "", label: "Unsafe Changes", desc: "Risk scoring prevents destructive operations from executing" },
+  { value: 100, suffix: "%", label: "Rollback Coverage", desc: "Pre-state snapshots enable full reversion of every optimization" },
 ];
 
 const PROBLEMS = [
-  { title: "No platform at all", body: "The beauty school had no digital system — students preparing for state esthetician exams had no structured way to access courses, track progress, or practice." },
-  { title: "Complex content types", body: "Courses needed to support videos, images, text, multiple choice questions, and long-form questions — all tracked per student for scoring and completion." },
-  { title: "Media storage at scale", body: "Handling rich media (video, images) for course content required a storage and delivery strategy that wouldn't tank performance or costs." },
-  { title: "Greenfield uncertainty", body: "Starting from zero meant every architecture decision mattered — tech stack, data modeling, hosting, and deployment all had to be figured out together." },
+  { title: "Unchecked S3 sprawl", body: "Buckets accumulate objects over time with no lifecycle policies — old data sits in expensive storage classes indefinitely." },
+  { title: "Manual cost reviews", body: "Engineers audit S3 costs by hand, scrolling through the console to spot waste — tedious and error-prone." },
+  { title: "Fear of data loss", body: "Teams avoid storage class changes because one wrong move could make critical data inaccessible or trigger unexpected costs." },
+  { title: "No guardrails", body: "Existing tools either optimize too aggressively (risking data) or too conservatively (saving nothing)." },
 ];
 
 const SOLUTIONS = [
-  { title: "Owned the Course Feature", body: "Took full ownership of the course system — the core of the LMS. Designed the data model for courses with mixed content types (video, images, text, quizzes) and built it end-to-end." },
-  { title: "S3 + PostgreSQL + Caching", body: "Architected media storage with AWS S3 for videos and images, PostgreSQL for structured course data and user progress, and caching layers for fast content delivery." },
-  { title: "Student Progress Tracking", body: "Built the system for tracking user scores, quiz completion, and course progress — so students and admins could see exactly where each learner stood." },
-  { title: "Technical PM Duties", body: "Led client presentations, managed roadmaps and sprint planning via Miro and Trello, ran team meetings, and established GitHub workflows alongside the PM." },
+  { title: "Automated Bucket Scanning", body: "Scans all S3 buckets, analyzes object age, access patterns, and storage class distribution to generate targeted recommendations." },
+  { title: "Risk Scoring Engine", body: "Every recommendation gets a 0–100 risk score based on reversibility, object age, and data loss potential — only safe changes execute." },
+  { title: "Rollback System", body: "Captures pre-state snapshots before every optimization, enabling one-click reversion of storage class and lifecycle policy changes." },
+  { title: "Smart Transitions", body: "Enforces optimal storage class migrations (Standard → IA → Glacier) based on access frequency and object lifecycle." },
 ];
 
 const ENGINEERING = [
-  { title: "Data Modeling for Mixed Content", body: "Designed PostgreSQL schemas to handle courses containing videos, images, text blocks, multiple choice questions, and long-form responses — all linked to per-user progress." },
-  { title: "Client Communication & Leadership", body: "Presented directly to the client weekly, ran roadmap sessions, and led team meetings. My PM manager recognized leadership qualities and actively mentored me into the role." },
-  { title: "Tech Stack Decisions", body: "Involved in choosing the stack for my features — S3 for media, PostgreSQL for relational data, Docker for containerization, Vercel + AWS for hosting." },
-  { title: "Ideation to Deployment", body: "Saw the project from first whiteboard session to production deployment. Contributed to architecture decisions, built features, and helped ship the final product." },
+  { title: "Serverless Architecture", body: "Deployed as a Lambda function triggered by EventBridge on a configurable schedule — zero infrastructure to manage." },
+  { title: "Infrastructure as Code", body: "Entire stack defined in Terraform: Lambda, IAM roles, EventBridge rules, SNS topics, and S3 permissions." },
+  { title: "Real-Time Notifications", body: "SNS + Slack integration delivers optimization reports and alerts so teams know exactly what changed and why." },
+  { title: "Safe Execution Engine", body: "Recommendations above the risk threshold are flagged for manual review — the system never makes a change it can't undo." },
 ];
 
-const TECH = ["Next.js", "TypeScript", "Go", "PostgreSQL", "AWS S3", "Docker", "Vercel", "REST API", "Trello", "Miro", "Git"];
+const TECH = ["Python", "boto3", "AWS Lambda", "EventBridge", "Terraform", "SNS", "S3", "IAM", "Slack API"];
 
-const ARCH_FLOW = ["Next.js Frontend", "Go API Server", "Route Handlers", "PostgreSQL", "AWS S3"];
+const ARCH_FLOW = ["EventBridge", "Lambda Function", "S3 Scanner", "Risk Scorer", "Optimizer", "SNS / Slack"];
 
 // ─── Hooks ───────────────────────────────────────────────────────────────────
 
@@ -69,7 +68,7 @@ const reveal = (visible: boolean, delay = 0) =>
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 
-export default function IlluminanceCaseStudy() {
+export default function AWSCostOptimizationCaseStudy() {
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const metricRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const metricsSection = useRef<HTMLElement>(null);
@@ -108,7 +107,15 @@ export default function IlluminanceCaseStudy() {
         duration: 1.8,
         ease: "power2.out",
         snap: { val: 1 },
-        onUpdate: () => { el.textContent = `${obj.val}${m.suffix}`; },
+        onUpdate: () => {
+          if (m.suffix === "/mo") {
+            el.textContent = `$${obj.val}${m.suffix}`;
+          } else if (m.suffix === "%") {
+            el.textContent = `${obj.val}${m.suffix}`;
+          } else {
+            el.textContent = `${obj.val}`;
+          }
+        },
         scrollTrigger: {
           trigger: metricsSection.current,
           start: "top 80%",
@@ -135,20 +142,20 @@ export default function IlluminanceCaseStudy() {
     return () => ScrollTrigger.getAll().forEach((t) => t.kill());
   }, []);
 
-  const headlineWords = "I owned the core feature, led client calls, and shipped 10 features in 10 weeks.".split(" ");
+  const headlineWords = "An automated S3 optimizer that scores risk before it touches your data.".split(" ");
 
   return (
     <div className="bg-white dark:bg-black">
-      <ProjectNav currentSlug="illuminance-esthetics" />
+      <ProjectNav currentSlug="aws-cost-optimization" />
 
       {/* ────────────────── 1. HERO ────────────────── */}
       <section ref={hero.ref} className="relative min-h-screen flex items-center">
         <div className="max-w-[1400px] mx-auto px-6 md:px-16 w-full py-32">
           <div className="grid grid-cols-12 gap-8 md:gap-16 items-center">
 
-            <div className="col-span-12 md:col-span-7 space-y-8">
+            <div className="col-span-12 md:col-span-8 space-y-8">
               <p className="text-xs tracking-[0.3em] uppercase text-neutral-500 dark:text-neutral-400">
-                Insights Emerge &nbsp;/&nbsp; April – June 2025
+                Personal Project &nbsp;/&nbsp; Sept – Dec 2025
               </p>
 
               <h1 ref={headlineRef} className="text-4xl sm:text-5xl md:text-7xl font-semibold leading-[1.08] tracking-tight text-black dark:text-white">
@@ -157,27 +164,45 @@ export default function IlluminanceCaseStudy() {
                 ))}
               </h1>
 
-              <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-[560px]">
-                A 7-person team at Insights Emerge built a learning management system for
-                Illuminance Esthetics — a beauty school helping students pass state
-                esthetician exams. I owned the course feature end-to-end while simultaneously
-                serving as a technical PM: leading client presentations, managing roadmaps,
-                and running team meetings. We took it from ideation to full deployment.
+              <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-[600px]">
+                S3 costs creep up silently. I built a Python tool that scans buckets,
+                scores every optimization by risk, and only executes changes it can fully
+                roll back — deployed serverless with Lambda, Terraform, and Slack alerts.
               </p>
 
-              <div className="flex flex-wrap gap-2">
-                <span className="inline-block bg-violet-400/20 text-violet-700 dark:text-violet-400 px-4 py-1.5 rounded-full text-sm font-medium">
-                  Full-Stack Developer
+              <div className="flex flex-wrap gap-3">
+                <span className="inline-block bg-emerald-400/20 text-emerald-700 dark:text-emerald-400 px-4 py-1.5 rounded-full text-sm font-medium">
+                  Cloud Engineering
                 </span>
-                <span className="inline-block bg-violet-400/20 text-violet-700 dark:text-violet-400 px-4 py-1.5 rounded-full text-sm font-medium">
-                  Technical PM
+                <span className="inline-block bg-emerald-400/20 text-emerald-700 dark:text-emerald-400 px-4 py-1.5 rounded-full text-sm font-medium">
+                  DevOps
                 </span>
               </div>
             </div>
 
-            <div className="col-span-12 md:col-span-5">
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl bg-neutral-200 dark:bg-neutral-800">
-                <Image src="/assets/lms.png" alt="Illuminance Esthetics LMS" fill className="object-cover" priority sizes="(min-width: 768px) 40vw, 90vw" />
+            <div className="col-span-12 md:col-span-4">
+              {/* Terminal-style hero visual */}
+              <div className="bg-neutral-950 dark:bg-neutral-900 rounded-2xl p-6 shadow-2xl border border-neutral-800 font-mono text-sm">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-3 h-3 rounded-full bg-red-500" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                  <div className="w-3 h-3 rounded-full bg-green-500" />
+                </div>
+                <div className="space-y-2 text-neutral-300">
+                  <p><span className="text-emerald-400">$</span> aws-optimizer scan</p>
+                  <p className="text-neutral-500">Scanning 12 buckets...</p>
+                  <p className="text-neutral-500">Generating recommendations...</p>
+                  <p>&nbsp;</p>
+                  <p className="text-emerald-400">3 optimizations found</p>
+                  <p className="text-neutral-400">├─ lifecycle-policy <span className="text-yellow-400">risk: 12</span></p>
+                  <p className="text-neutral-400">├─ storage-class    <span className="text-yellow-400">risk: 28</span></p>
+                  <p className="text-neutral-400">└─ archive-old      <span className="text-emerald-400">risk: 5</span></p>
+                  <p>&nbsp;</p>
+                  <p><span className="text-emerald-400">$</span> aws-optimizer execute --safe</p>
+                  <p className="text-emerald-400">✓ Snapshot saved</p>
+                  <p className="text-emerald-400">✓ 3/3 applied</p>
+                  <p className="text-emerald-400">✓ Slack notified</p>
+                </div>
               </div>
             </div>
           </div>
@@ -196,9 +221,9 @@ export default function IlluminanceCaseStudy() {
               <div key={m.label} className="text-center md:text-left">
                 <span
                   ref={(el) => { metricRefs.current[i] = el; }}
-                  className="block text-5xl md:text-7xl font-bold text-violet-400"
+                  className="block text-5xl md:text-7xl font-bold text-emerald-400"
                 >
-                  0{m.suffix}
+                  {m.suffix === "/mo" ? "$0/mo" : `0${m.suffix}`}
                 </span>
                 <p className="text-sm md:text-base font-medium text-white/90 dark:text-black/90 mt-2">{m.label}</p>
                 <p className="text-xs text-white/50 dark:text-black/50 mt-1">{m.desc}</p>
@@ -211,36 +236,31 @@ export default function IlluminanceCaseStudy() {
       {/* ────────────────── 3. THE PROBLEM ────────────────── */}
       <section className="py-24 md:py-32">
         <div ref={problem.ref} className="max-w-[1400px] mx-auto px-6 md:px-16">
-          <p className={`text-xs uppercase tracking-[0.25em] text-violet-600 dark:text-violet-400 font-medium mb-4 ${reveal(problem.visible)}`}>
+          <p className={`text-xs uppercase tracking-[0.25em] text-emerald-600 dark:text-emerald-400 font-medium mb-4 ${reveal(problem.visible)}`}>
             01 / The Problem
           </p>
           <h2 className={`text-3xl md:text-5xl font-semibold text-black dark:text-white leading-tight mb-12 max-w-3xl ${reveal(problem.visible, 100)}`}>
-            A beauty school with no digital platform and a state exam to prepare for
+            S3 costs grow silently — and nobody wants to touch what they don&apos;t understand
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
             <p className={`text-neutral-600 dark:text-neutral-400 leading-relaxed text-lg ${reveal(problem.visible, 200)}`}>
-              Illuminance Esthetics is a beauty school that prepares students to pass state
-              esthetician exams. They had no digital platform — no way to deliver courses,
-              track student progress, or manage instructor content at scale. The courses
-              themselves were complex: videos, images, text content, multiple choice questions,
-              long-form responses, all needing per-student scoring and completion tracking.
-              Starting from zero, every architecture decision mattered.
+              AWS S3 is deceptively simple — you upload objects and pay per GB. But over months
+              and years, buckets accumulate stale data in expensive storage classes. Teams know
+              they&apos;re overpaying but avoid making changes because a wrong storage class transition
+              can make data temporarily inaccessible, or a lifecycle policy can delete something
+              critical. The result: everyone leaves it alone, and costs keep climbing.
             </p>
 
             <div className="space-y-6">
               {PROBLEMS.map((p, i) => (
                 <div key={p.title}
-                  className={`border-l-2 border-violet-400 pl-6 ${reveal(problem.visible, 250 + i * 100)}`}>
+                  className={`border-l-2 border-emerald-400 pl-6 ${reveal(problem.visible, 250 + i * 100)}`}>
                   <h4 className="font-semibold text-black dark:text-white mb-1">{p.title}</h4>
                   <p className="text-neutral-600 dark:text-neutral-400 text-sm">{p.body}</p>
                 </div>
               ))}
             </div>
-          </div>
-
-          <div className={`relative w-full aspect-[16/9] rounded-2xl overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 ${reveal(problem.visible, 600)}`}>
-            <Image src="/assets/lms.png" alt="Illuminance Esthetics LMS" fill className="object-cover" sizes="(min-width: 768px) 80vw, 95vw" />
           </div>
         </div>
       </section>
@@ -248,46 +268,43 @@ export default function IlluminanceCaseStudy() {
       {/* ────────────────── 4. THE SOLUTION ────────────────── */}
       <section className="py-24 md:py-32">
         <div ref={solution.ref} className="max-w-[1400px] mx-auto px-6 md:px-16">
-          <p className={`text-xs uppercase tracking-[0.25em] text-violet-600 dark:text-violet-400 font-medium mb-4 ${reveal(solution.visible)}`}>
-            02 / What I Built
+          <p className={`text-xs uppercase tracking-[0.25em] text-emerald-600 dark:text-emerald-400 font-medium mb-4 ${reveal(solution.visible)}`}>
+            02 / The Solution
           </p>
           <h2 className={`text-3xl md:text-5xl font-semibold text-black dark:text-white leading-tight mb-12 max-w-3xl ${reveal(solution.visible, 100)}`}>
-            I owned the course system and led from both sides of the table
+            Score every change by risk. Snapshot before you touch anything. Roll back if needed.
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-            <div className={`relative aspect-[4/5] rounded-2xl overflow-hidden bg-neutral-200 dark:bg-neutral-800 ${reveal(solution.visible, 200)}`}>
-              <Image src="/assets/lms.png" alt="LMS features" fill className="object-cover" sizes="(min-width: 768px) 45vw, 90vw" />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {SOLUTIONS.map((s, i) => (
-                <div key={s.title}
-                  className={`bg-neutral-50 dark:bg-neutral-900 rounded-xl p-6 border border-neutral-100 dark:border-neutral-800 ${reveal(solution.visible, 300 + i * 100)}`}>
-                  <h4 className="font-semibold text-black dark:text-white mb-2 text-sm">{s.title}</h4>
-                  <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">{s.body}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {SOLUTIONS.map((s, i) => (
+              <div key={s.title}
+                className={`bg-neutral-50 dark:bg-neutral-900 rounded-xl p-6 border border-neutral-100 dark:border-neutral-800 ${reveal(solution.visible, 200 + i * 100)}`}>
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="w-8 h-8 rounded-full bg-emerald-400/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-sm font-bold">
+                    {i + 1}
+                  </span>
+                  <h4 className="font-semibold text-black dark:text-white text-sm">{s.title}</h4>
                 </div>
-              ))}
-            </div>
+                <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">{s.body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ────────────────── 5. HOW I WORKED ────────────────── */}
+      {/* ────────────────── 5. ENGINEERING ────────────────── */}
       <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-neutral-50 dark:bg-neutral-900 py-24 md:py-32">
         <div ref={eng.ref} className="max-w-[1400px] mx-auto px-6 md:px-16">
-          <p className={`text-xs uppercase tracking-[0.25em] text-violet-600 dark:text-violet-400 font-medium mb-4 ${reveal(eng.visible)}`}>
-            03 / How I Worked
+          <p className={`text-xs uppercase tracking-[0.25em] text-emerald-600 dark:text-emerald-400 font-medium mb-4 ${reveal(eng.visible)}`}>
+            03 / Engineering
           </p>
           <h2 className={`text-3xl md:text-5xl font-semibold text-black dark:text-white leading-tight mb-6 max-w-3xl ${reveal(eng.visible, 100)}`}>
-            Developer and PM at the same time — from first whiteboard to production
+            Serverless, automated, and fully reversible
           </h2>
           <p className={`text-neutral-600 dark:text-neutral-400 leading-relaxed text-lg max-w-2xl mb-16 ${reveal(eng.visible, 200)}`}>
-            My PM saw leadership qualities early and brought me into product management
-            alongside my engineering work. I ran client presentations, managed roadmaps
-            with Miro and Trello, established GitHub workflows, and led team meetings —
-            all while shipping my own features. We took the project from ideation to
-            full deployment on Vercel and AWS.
+            The optimizer runs as a scheduled Lambda function — no servers to manage.
+            Terraform defines the entire stack, EventBridge triggers scans on a cron schedule,
+            and SNS + Slack deliver reports so the team always knows what changed.
           </p>
 
           {/* Architecture Diagram */}
@@ -308,6 +325,12 @@ export default function IlluminanceCaseStudy() {
                   )}
                 </div>
               ))}
+            </div>
+            <div className="flex items-center mt-3 ml-0 md:ml-[calc(33%)]">
+              <div className="w-px h-6 bg-neutral-300 dark:bg-neutral-600 ml-12" />
+              <div className="bg-emerald-400/20 text-emerald-700 dark:text-emerald-400 rounded-lg px-4 py-2 border border-emerald-300 dark:border-emerald-700 text-xs font-mono mt-2 ml-[-12px]">
+                Rollback Snapshots
+              </div>
             </div>
           </div>
 
@@ -343,31 +366,45 @@ export default function IlluminanceCaseStudy() {
       {/* ────────────────── 7. OUTCOME ────────────────── */}
       <section className="py-24 md:py-32">
         <div ref={outcome.ref} className="max-w-[1400px] mx-auto px-6 md:px-16">
-          <p className={`text-xs uppercase tracking-[0.25em] text-violet-600 dark:text-violet-400 font-medium mb-4 ${reveal(outcome.visible)}`}>
+          <p className={`text-xs uppercase tracking-[0.25em] text-emerald-600 dark:text-emerald-400 font-medium mb-4 ${reveal(outcome.visible)}`}>
             04 / Outcome
           </p>
           <h2 className={`text-3xl md:text-5xl font-semibold text-black dark:text-white leading-tight mb-6 max-w-3xl ${reveal(outcome.visible, 100)}`}>
-            10 features. 10 weeks. Every deadline hit early.
+            $50/month saved — with zero unsafe changes
           </h2>
           <p className={`text-neutral-600 dark:text-neutral-400 leading-relaxed text-lg max-w-2xl mb-16 ${reveal(outcome.visible, 200)}`}>
-            The team shipped 10 features in 10 weeks, hitting every deadline ahead of schedule.
-            The platform went from a whiteboard idea to a fully deployed LMS on Vercel and AWS,
-            with Docker containerization and a production-ready course system that handles
-            rich media, student progress tracking, and quiz scoring. Both the PM and the client
-            gave strong endorsements of my work.
+            The optimizer runs on a schedule, scans buckets, scores every recommendation,
+            and only executes changes below the risk threshold. Storage class transitions
+            and lifecycle policy enforcement happen automatically — and every change can be
+            rolled back with a single command.
           </p>
 
-          <div className={`relative w-full aspect-[16/9] rounded-2xl overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 mb-16 ${reveal(outcome.visible, 300)}`}>
-            <Image src="/assets/lms.png" alt="Final LMS platform" fill className="object-cover" sizes="90vw" />
+          {/* Outcome breakdown */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
+            {[
+              { title: "Scan", items: ["Bucket enumeration", "Object age analysis", "Access pattern detection", "Storage class audit"] },
+              { title: "Score", items: ["Reversibility weight", "Object age factor", "Data loss potential", "Risk threshold gate"] },
+              { title: "Execute", items: ["Pre-state snapshot", "Storage class transition", "Lifecycle policy enforcement", "Slack notification"] },
+            ].map((col, i) => (
+              <div key={col.title}
+                className={`bg-neutral-50 dark:bg-neutral-900 rounded-xl p-6 border border-neutral-100 dark:border-neutral-800 ${reveal(outcome.visible, 300 + i * 150)}`}>
+                <h4 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-4">{col.title}</h4>
+                <ul className="space-y-2">
+                  {col.items.map((item) => (
+                    <li key={item} className="text-neutral-600 dark:text-neutral-400 text-sm flex items-start gap-2">
+                      <span className="text-emerald-400 mt-0.5">&#8226;</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
 
-          <blockquote className={`text-center max-w-3xl mx-auto ${reveal(outcome.visible, 500)}`}>
-            <span className="text-6xl text-violet-400 leading-none block mb-2">&ldquo;</span>
+          <blockquote className={`text-center max-w-3xl mx-auto ${reveal(outcome.visible, 600)}`}>
+            <span className="text-6xl text-emerald-400 leading-none block mb-2">&ldquo;</span>
             <p className="text-2xl md:text-3xl font-medium text-black dark:text-white leading-snug">
-              I wore two hats — building the core course system as an engineer while
-              leading client calls and sprint planning as a PM. We shipped a full product
-              from zero to deployment, and I earned strong endorsements from both
-              my manager and the client.
+              The best optimization is the one you don&apos;t have to think about — it runs, it&apos;s safe, and it pays for itself.
             </p>
           </blockquote>
         </div>

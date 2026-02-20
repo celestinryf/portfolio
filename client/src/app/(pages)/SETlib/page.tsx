@@ -5,6 +5,7 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MagneticLink from "@/app/components/shared/MagneticLink";
+import ProjectNav from "@/app/components/shared/ProjectNav";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -138,6 +139,7 @@ export default function SETlibCaseStudy() {
 
   return (
     <div className="bg-white dark:bg-black">
+      <ProjectNav currentSlug="SETlib" />
 
       {/* ────────────────── 1. HERO ────────────────── */}
       <section ref={hero.ref} className="relative min-h-screen flex items-center">

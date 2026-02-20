@@ -54,9 +54,9 @@ const projects: Project[] = [
     title: "AWS Cost Optimization",
     category: "Cloud Infrastructure",
     description:
-      "Designed and implemented cost optimization strategies for AWS infrastructure, analyzing resource utilization and right-sizing instances to reduce cloud spend while maintaining performance and reliability.",
+      "Built an automated S3 cost optimizer with risk scoring, rollback snapshots, and safe storage class transitions. Deployed serverless with Lambda, EventBridge, and Terraform IaC — saving $50/month in cloud costs.",
     image: "/assets/mock1.png",
-    tags: ["AWS", "EC2", "S3", "CloudWatch", "Lambda", "Terraform"],
+    tags: ["Python", "boto3", "AWS Lambda", "Terraform", "EventBridge", "SNS", "S3"],
     year: "2025",
     slug: "aws-cost-optimization",
   },
