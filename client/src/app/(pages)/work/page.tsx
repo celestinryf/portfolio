@@ -21,9 +21,9 @@ const projects: Project[] = [
     title: "SETlib",
     category: "Document Management System",
     description:
-      "Built an ML-powered document ingestion pipeline for the University of Washington CS department, migrating over 50,000 legacy files and reducing manual data entry by 90%. Developed full-stack features using Next.js, TypeScript, and GraphQL.",
+      "Built a full-stack document management system for UW Tacoma, enabling worksheet and problem lookup, creation, and generation. Reduced facilitator workflows from 20 minutes to 2 minutes per problem and weekly prep from 6 hours to 1 hour.",
     image: "/assets/mock.png",
-    tags: ["Go", "Python", "TypeScript", "PostgreSQL", "GraphQL"],
+    tags: ["Next.js", "TypeScript", "Java", "Spring Boot", "PostgreSQL", "AWS RDS", "AWS Cognito", "JWT", "JUnit", "REST API"],
     year: "2025",
     slug: "SETlib",
   },
@@ -32,9 +32,9 @@ const projects: Project[] = [
     title: "Illuminance Esthetics",
     category: "Beauty School LMS",
     description:
-      "Engineered a monolithic Node.js backend into microservices architecture, improving API response latency by 38%. Built interactive prototypes with React and Redux, reducing page load times by 40% for production deployment.",
+      "Led development of a beauty school LMS as both full-stack developer and technical PM. Owned the course feature end-to-end — rich media storage, progress tracking, and scoring. Shipped 10 features in 10 weeks, hitting every deadline early.",
     image: "/assets/lms.png",
-    tags: ["React", "Node.js", "Redux", "Microservices", "CI/CD"],
+    tags: ["Next.js", "TypeScript", "Go", "PostgreSQL", "AWS S3", "Docker", "Vercel", "REST API"],
     year: "2025",
     slug: "illuminance-esthetics",
   },
@@ -45,29 +45,29 @@ const projects: Project[] = [
     description:
       "Designing a scalable, multi-stage home recommendation system leveraging TTE+ANN for candidate generation, GBDT for ranking, and LTR for fine-ranking on Zillow's 31M-row ZTRAX dataset. Automated MLOps pipelines with Airflow reduce deployment time by 75%, while Redis caching improves response time by 50%.",
     image: "/assets/mock1.png",
-    tags: ["TensorFlow", "Docker", "Kubernetes", "Airflow", "Spark", "AWS", "Redis", "PySpark"],
+    tags: ["TensorFlow", "Python", "FastAPI", "Spring Boot", "React", "PostgreSQL", "Kafka", "Docker", "Kubernetes", "Airflow", "Apache Spark"],
     year: "2025",
     slug: "home-recommendation",
   },
   {
     id: "04",
     title: "AWS Cost Optimization",
-    category: "Beauty School LMS",
+    category: "Cloud Infrastructure",
     description:
-      "Engineered a monolithic Node.js backend into microservices architecture, improving API response latency by 38%. Built interactive prototypes with React and Redux, reducing page load times by 40% for production deployment.",
+      "Designed and implemented cost optimization strategies for AWS infrastructure, analyzing resource utilization and right-sizing instances to reduce cloud spend while maintaining performance and reliability.",
     image: "/assets/mock1.png",
-    tags: ["React", "Node.js", "Redux", "Microservices", "CI/CD"],
+    tags: ["AWS", "EC2", "S3", "CloudWatch", "Lambda", "Terraform"],
     year: "2025",
     slug: "aws-cost-optimization",
   },
-    {
+  {
     id: "05",
-    title: "Unix Sheel in C",
-    category: "Beauty School LMS",
+    title: "Unix Shell in C",
+    category: "Systems Programming",
     description:
-      "Engineered a monolithic Node.js backend into microservices architecture, improving API response latency by 38%. Built interactive prototypes with React and Redux, reducing page load times by 40% for production deployment.",
+      "Built a fully functional Unix shell from scratch in C, implementing process management, I/O redirection, piping, signal handling, and built-in commands with robust memory management.",
     image: "/assets/shell.png",
-    tags: ["React", "Node.js", "Redux", "Microservices", "CI/CD"],
+    tags: ["C", "Unix", "POSIX", "Systems Programming"],
     year: "2025",
     slug: "unix-shell",
   }
