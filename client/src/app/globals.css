@@ -164,3 +164,47 @@ main {
 .animate-dropdown-in {
   animation: dropdownSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* ── Footer ───────────────────────────────────────────────────────────────── */
+:root {
+  --section-padding: clamp(5em, 21vh, 12em);
+  --container-padding: clamp(2.5em, 8vw, 8em);
+  --gap-padding: clamp(1.5em, 4vw, 2.5em);
+}
+
+.footer-text {
+  font-family: 'Dennis Sans', sans-serif;
+  line-height: 1.6;
+  font-weight: 450;
+  font-style: normal;
+  font-size: clamp(16px, 1.2vw, 19px);
+}
+
+.footer-heading {
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 1;
+}
+
+.footer-time {
+  font-size: clamp(14px, 1.1vw, 18px);
+}
+
+.footer-label {
+  font-size: clamp(12px, 0.9vw, 14px);
+}
+
+.footer-button {
+  font-size: clamp(16px, 1.1vw, 18px);
+  padding: clamp(0.75em, 1.5vw, 1.5em) clamp(1.5em, 3vw, 3em);
+}
+
+.footer-circle-button {
+  width: clamp(120px, 12vw, 200px);
+  height: clamp(120px, 12vw, 200px);
+  font-size: clamp(14px, 1.1vw, 16px);
+}
+
+.footer-profile {
+  width: clamp(60px, 8vw, 120px);
+  height: clamp(60px, 8vw, 120px);
+}

@@ -1,28 +1,23 @@
 {
-  "name": "my-portfolio",
+  "name": "celestin-portfolio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint",
-    "tailwind:init": "tailwindcss init"
+    "lint": "eslint"
   },
   "dependencies": {
-    "@studio-freight/lenis": "^1.0.42",
     "framer-motion": "^12.23.21",
     "gsap": "^3.14.2",
-    "locomotive-scroll": "^4.1.4",
     "lucide-react": "^0.544.0",
     "next": "^15.5.2",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "styled-jsx": "^5.1.7"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^0.1.0",
-    "@types/locomotive-scroll": "^4.1.4",
     "@types/node": "^20.19.33",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",

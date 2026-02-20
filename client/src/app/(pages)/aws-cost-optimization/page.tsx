@@ -227,21 +227,7 @@ export default function AWSCostOptimizationCaseStudy() {
       </section>
 
       {/* ────────────────── 6. TECH STACK ────────────────── */}
-      <section className="py-24 md:py-32">
-        <div ref={techStack.ref} className="max-w-[1400px] mx-auto px-6 md:px-16 text-center">
-          <p className={`text-xs uppercase tracking-[0.3em] text-neutral-500 dark:text-neutral-400 font-medium mb-10 ${reveal(techStack.visible)}`}>
-            Built With
-          </p>
-          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-            {TECH.map((t, i) => (
-              <span key={t}
-                className={`px-6 py-3 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 text-sm md:text-base font-medium border border-neutral-200 dark:border-neutral-700 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 cursor-default ${reveal(techStack.visible, 100 + i * 60)}`}>
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TechStackSection tech={TECH} />
 
       {/* ────────────────── 7. OUTCOME ────────────────── */}
       <section className="py-24 md:py-32">
@@ -291,29 +277,7 @@ export default function AWSCostOptimizationCaseStudy() {
       </section>
 
       {/* ────────────────── 8. CTA ────────────────── */}
-      <section className="py-24 md:py-32 border-t border-neutral-200 dark:border-neutral-800">
-        <div ref={cta.ref} className="max-w-[1400px] mx-auto px-6 md:px-16 text-center">
-          <h2 className={`text-4xl md:text-6xl font-semibold text-black dark:text-white mb-10 ${reveal(cta.visible)}`}>
-            Want to see more?
-          </h2>
-          <div className={`flex flex-col sm:flex-row items-center justify-center gap-4 ${reveal(cta.visible, 200)}`}>
-            <MagneticLink
-              href="/work"
-              strength={0.4}
-              className="rounded-full border-2 border-black dark:border-white px-10 py-4 text-base font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all"
-            >
-              View all projects
-            </MagneticLink>
-            <MagneticLink
-              href="/contact"
-              strength={0.4}
-              className="rounded-full bg-black dark:bg-white text-white dark:text-black px-10 py-4 text-base font-medium hover:opacity-80 transition-all"
-            >
-              Get in touch
-            </MagneticLink>
-          </div>
-        </div>
-      </section>
+      <CTASection />
     </div>
   );
 }

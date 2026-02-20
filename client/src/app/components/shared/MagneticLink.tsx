@@ -56,6 +56,8 @@ export default function MagneticLink({
       onClick={onClick}
       className={`inline-block relative cursor-pointer ${className}`}
       style={{ transform: "rotate(0.001deg)" }}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
     >
       <span
         ref={textRef}

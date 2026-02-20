@@ -2,14 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
-const PROJECTS = [
-  { slug: "SETlib", title: "SETlib" },
-  { slug: "illuminance-esthetics", title: "Illuminance Esthetics" },
-  { slug: "home-recommendation", title: "Home Recommendation System" },
-  { slug: "aws-cost-optimization", title: "AWS Cost Optimization" },
-  { slug: "unix-shell", title: "Unix Shell in C" },
-];
+import { PROJECTS } from "@/app/data/projects";
 
 interface ProjectNavProps {
   currentSlug: string;
