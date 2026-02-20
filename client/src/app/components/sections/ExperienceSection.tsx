@@ -133,7 +133,7 @@ function ProjectTechStartupClub() {
         <div className="text-left">
           <div className="mb-8">
             <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">
-              Leadership Role 04
+              Leadership Role
             </p>
             <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
               Tech Startup Club
@@ -232,7 +232,7 @@ function ProjectSETlib() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">
-              Professional Project 02
+              Professional Project 01
             </p>
             <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
               SETlib
@@ -287,7 +287,7 @@ function ProjectIlluminance() {
         <div className="text-left">
           <div className="mb-8">
             <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">
-              Professional Project 03
+              Professional Project 02
             </p>
             <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
               Illuminance Esthetics
