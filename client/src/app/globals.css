@@ -68,3 +68,99 @@ main {
 .scroll-indicator.show {
   opacity: 1;
 }
+
+/* ── Landing page entrance animations ─────────────────────────────────────── */
+@keyframes slideInFromBottom {
+  from { transform: translateY(100px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+@keyframes fadeInScale {
+  from { transform: scale(0.8); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+@keyframes slideInFromLeft {
+  from { transform: translateX(-100px); opacity: 0; }
+  to   { transform: translateX(0);      opacity: 1; }
+}
+
+.animate-slide-in-1 {
+  opacity: 0;
+  animation: slideInFromBottom 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.2s;
+}
+
+.animate-fade-in-scale {
+  opacity: 0;
+  animation: fadeInScale 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.6s;
+}
+
+.animate-slide-from-left {
+  opacity: 0;
+  animation: slideInFromLeft 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.8s;
+}
+
+/* Scroll-snap helpers used by the landing page */
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* ── Topbar entrance animations ────────────────────────────────────────────── */
+@keyframes navFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes navItemSlideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes dropdownSlideIn {
+  from { opacity: 0; transform: translateY(-10px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0)      scale(1);   }
+}
+
+.nav-fade-in {
+  opacity: 0;
+  animation: navFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.1s;
+}
+
+.nav-slide-up-logo {
+  opacity: 0;
+  animation: navItemSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.3s;
+}
+
+.nav-slide-up-1 {
+  opacity: 0;
+  animation: navItemSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.4s;
+}
+
+.nav-slide-up-2 {
+  opacity: 0;
+  animation: navItemSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.5s;
+}
+
+.nav-slide-up-3 {
+  opacity: 0;
+  animation: navItemSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.6s;
+}
+
+.nav-slide-up-menu {
+  opacity: 0;
+  animation: navItemSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.5s;
+}
+
+.animate-dropdown-in {
+  animation: dropdownSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

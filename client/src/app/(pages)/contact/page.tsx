@@ -1,723 +1,217 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
+import React, { useState, useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import MagneticLink from "@/app/components/shared/MagneticLink";
 
-// Magnetic Link Component - Same as TopNavigation
-interface MagneticLinkProps {
-  href: string;
-  children: React.ReactNode;
-  strength?: number;
-  className?: string;
-  isExternal?: boolean;
-}
+const GETFORM_ENDPOINT = "https://getform.io/f/ayveojqb";
 
-function MagneticLink({ 
-  href, 
-  children, 
-  strength = 0.3, 
-  className = "",
-  isExternal = false 
-}: MagneticLinkProps) {
-  const linkRef = useRef<HTMLAnchorElement>(null);
-  const textRef = useRef<HTMLSpanElement>(null);
-  const innerTextRef = useRef<HTMLSpanElement>(null);
+type FieldId = "name" | "email" | "company" | "service" | "message";
+type FormData = Record<FieldId | "honeypot", string>;
 
-  useEffect(() => {
-    const link = linkRef.current;
-    const text = textRef.current;
-    const innerText = innerTextRef.current;
-    
-    if (!link || !text || !innerText) return;
+const FIELDS: { id: FieldId; label: string; placeholder: string; required?: boolean; type?: string; multiline?: boolean }[] = [
+  { id: "name", label: "What's your name?", placeholder: "John Doe *", required: true },
+  { id: "email", label: "What's your email?", placeholder: "john@doe.com *", required: true, type: "email" },
+  { id: "company", label: "What's the name of your organization?", placeholder: "Your Company Inc." },
+  { id: "service", label: "What services are you looking for?", placeholder: "Web Development, System Architecture, ML Engineering..." },
+  { id: "message", label: "Your message", placeholder: "Hello Célestin, can you help me with... *", required: true, multiline: true },
+];
+type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = link.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      
-      const deltaX = (e.clientX - centerX) * strength;
-      const deltaY = (e.clientY - centerY) * strength;
-      
-      // Move the link container with matrix3d for hardware acceleration
-      gsap.to(link, {
-        duration: 0.3,
-        x: deltaX,
-        y: deltaY,
-        rotationZ: 0.001,
-        ease: "power2.out",
-        force3D: true
-      });
-      
-      // Move the text with less intensity
-      gsap.to(text, {
-        duration: 0.3,
-        x: deltaX * 0.5,
-        y: deltaY * 0.5,
-        rotationZ: 0.001,
-        ease: "power2.out",
-        force3D: true
-      });
-    };
+const CONTACTS = [
+  { href: "mailto:celestin@gmail.com", label: "celestin@gmail.com" },
+  { href: "tel:+12538819185", label: "+1 (253) 881-9185" },
+];
+const SOCIALS = [
+  { href: "https://linkedin.com/in/celestinryf", label: "LinkedIn" },
+  { href: "https://github.com/celestinryf", label: "GitHub" },
+];
 
-    const handleMouseLeave = () => {
-      // Return to original position with elastic ease
-      gsap.to(link, {
-        duration: 0.5,
-        x: 0,
-        y: 0,
-        rotationZ: 0.001,
-        ease: "elastic.out(1, 0.3)",
-        force3D: true
-      });
-      
-      gsap.to(text, {
-        duration: 0.5,
-        x: 0,
-        y: 0,
-        rotationZ: 0.001,
-        ease: "elastic.out(1, 0.3)",
-        force3D: true
-      });
-    };
+export default function ContactPage() {
+  const [formData, setFormData] = useState<FormData>({ name: "", email: "", company: "", service: "", message: "", honeypot: "" });
+  const [errors, setErrors] = useState<Partial<Record<FieldId, string>>>({});
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
+  const [currentTime, setCurrentTime] = useState("");
 
-    link.addEventListener('mousemove', handleMouseMove);
-    link.addEventListener('mouseleave', handleMouseLeave);
-
-    // Cleanup
-    return () => {
-      link.removeEventListener('mousemove', handleMouseMove);
-      link.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, [strength]);
-
-  const externalProps = isExternal ? {
-    target: "_blank",
-    rel: "noopener noreferrer"
-  } : {};
-
-  return (
-    <a
-      ref={linkRef}
-      href={href}
-      className={`magnetic-link inline-block relative cursor-pointer ${className}`}
-      style={{ transform: 'rotate(0.001deg)' }}
-      {...externalProps}
-    >
-      <span 
-        ref={textRef}
-        className="magnetic-link-text inline-block transition-colors duration-200 relative"
-        style={{ transform: 'rotate(0.001deg)' }}
-      >
-        <span ref={innerTextRef} className="inline-block">
-          {children}
-        </span>
-      </span>
-    </a>
-  );
-}
-
-interface FormData {
-  name: string;
-  email: string;
-  company: string;
-  service: string;
-  message: string;
-  honeypot: string;
-}
-
-interface FormErrors {
-  name?: string;
-  email?: string;
-  message?: string;
-}
-
-type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error';
-
-const GETFORM_ENDPOINT = 'https://getform.io/f/ayveojqb';
-
-const ContactPage: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    company: '',
-    service: '',
-    message: '',
-    honeypot: ''
-  });
-  
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('idle');
-  const [currentTime, setCurrentTime] = useState<string>('');
-  
-  // Animation refs
   const headerRef = useRef<HTMLElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
-  
-  // Magnetic button refs
-  const submitButtonRef = useRef<HTMLButtonElement>(null);
+  const submitBtnRef = useRef<HTMLButtonElement>(null);
   const submitTextRef = useRef<HTMLDivElement>(null);
 
+  // Intersection observer for fade-in animations
   useEffect(() => {
-    // Intersection Observer for animations
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.target instanceof HTMLElement) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-          }
-        });
-      },
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting && e.target instanceof HTMLElement) {
+          e.target.style.opacity = "1";
+          e.target.style.transform = "translateY(0)";
+        }
+      }),
       { threshold: 0.1 }
     );
-
-    const refs = [headerRef, formRef, contactRef];
-    refs.forEach((ref) => {
-      if (ref.current) {
-        observer.observe(ref.current);
-      }
-    });
-
+    [headerRef, formRef, contactRef].forEach((r) => r.current && observer.observe(r.current));
     return () => observer.disconnect();
   }, []);
 
+  // Clock
   useEffect(() => {
-    const updateTime = (): void => {
-      const now = new Date();
-      const timeString = now.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        timeZone: 'America/Los_Angeles',
-        timeZoneName: 'short'
-      });
-      setCurrentTime(timeString);
-    };
-
-    updateTime();
-    const timer = setInterval(updateTime, 1000);
-    
-    return () => clearInterval(timer);
+    const update = () =>
+      setCurrentTime(new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", timeZone: "America/Los_Angeles", timeZoneName: "short" }));
+    update();
+    const id = setInterval(update, 1000);
+    return () => clearInterval(id);
   }, []);
 
-  // Magnetic effect for submit button - exactly like footer's "Get in touch" button
+  // Magnetic effect on submit button
   useEffect(() => {
-    const button = submitButtonRef.current;
-    const text = submitTextRef.current;
-    
-    if (!button || !text) return;
+    const btn = submitBtnRef.current;
+    const txt = submitTextRef.current;
+    if (!btn || !txt) return;
+    const strength = 0.4;
 
-    const strength = 0.4; // Same strength as "Get in touch" button
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (button.disabled) return; // Don't apply magnetic effect when disabled
-      
-      const rect = button.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      
-      const deltaX = (e.clientX - centerX) * strength;
-      const deltaY = (e.clientY - centerY) * strength;
-      
-      // Move the entire button container (the circle) - this is the main magnetic effect
-      gsap.to(button, {
-        duration: 0.3,
-        x: deltaX,
-        y: deltaY,
-        rotationZ: 0.001,
-        ease: "power2.out",
-        force3D: true
-      });
-      
-      // Move the text with half the intensity (just like MagneticLink does)
-      gsap.to(text, {
-        duration: 0.3,
-        x: deltaX * 0.5,
-        y: deltaY * 0.5,
-        rotationZ: 0.001,
-        ease: "power2.out",
-        force3D: true
-      });
+    const onMove = (e: MouseEvent) => {
+      if (btn.disabled) return;
+      const r = btn.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width / 2)) * strength;
+      const dy = (e.clientY - (r.top + r.height / 2)) * strength;
+      gsap.to(btn, { duration: 0.3, x: dx, y: dy, rotationZ: 0.001, ease: "power2.out", force3D: true });
+      gsap.to(txt, { duration: 0.3, x: dx * 0.5, y: dy * 0.5, rotationZ: 0.001, ease: "power2.out", force3D: true });
+    };
+    const onLeave = () => {
+      gsap.to(btn, { duration: 0.5, x: 0, y: 0, rotationZ: 0.001, ease: "elastic.out(1, 0.3)", force3D: true });
+      gsap.to(txt, { duration: 0.5, x: 0, y: 0, rotationZ: 0.001, ease: "elastic.out(1, 0.3)", force3D: true });
     };
 
-    const handleMouseLeave = () => {
-      // Return the entire button to original position with elastic ease
-      gsap.to(button, {
-        duration: 0.5,
-        x: 0,
-        y: 0,
-        rotationZ: 0.001,
-        ease: "elastic.out(1, 0.3)",
-        force3D: true
-      });
-      
-      // Return the text to original position
-      gsap.to(text, {
-        duration: 0.5,
-        x: 0,
-        y: 0,
-        rotationZ: 0.001,
-        ease: "elastic.out(1, 0.3)",
-        force3D: true
-      });
-    };
+    btn.addEventListener("mousemove", onMove);
+    btn.addEventListener("mouseleave", onLeave);
+    return () => { btn.removeEventListener("mousemove", onMove); btn.removeEventListener("mouseleave", onLeave); };
+  }, [submitStatus]);
 
-    button.addEventListener('mousemove', handleMouseMove);
-    button.addEventListener('mouseleave', handleMouseLeave);
-
-    // Cleanup
-    return () => {
-      button.removeEventListener('mousemove', handleMouseMove);
-      button.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, [submitStatus]); // Re-run when submitStatus changes
-
-  const validateForm = (): boolean => {
-    const newErrors: FormErrors = {};
-    
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-    
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
-    }
-    
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    }
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    
-    // Clear error when user starts typing
-    if (errors[name as keyof FormErrors]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: undefined
-      }));
-    }
+    setFormData((p) => ({ ...p, [name]: value }));
+    if (errors[name as FieldId]) setErrors((p) => ({ ...p, [name]: undefined }));
   };
 
-  const handleSubmit = async (): Promise<void> => {
-    // Basic spam protection
+  const handleSubmit = async () => {
     if (formData.honeypot) return;
-    
-    if (!validateForm()) return;
-    
-    setSubmitStatus('submitting');
-    
+
+    const newErrors: Partial<Record<FieldId, string>> = {};
+    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Email is invalid";
+    if (!formData.message.trim()) newErrors.message = "Message is required";
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length) return;
+
+    setSubmitStatus("submitting");
     try {
-
-      const response = await fetch(GETFORM_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          company: formData.company,
-          service: formData.service,
-          message: formData.message,
-        }),
+      const res = await fetch(GETFORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ name: formData.name, email: formData.email, company: formData.company, service: formData.service, message: formData.message }),
       });
-
-      if (!response.ok) {
-        throw new Error('Form submission failed');
-      }
-      
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        service: '',
-        message: '',
-        honeypot: ''
-      });
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setSubmitStatus('idle');
-      }, 5000);
-      
-    } catch (error) {
-      console.error('Form submission error:', error);
-      setSubmitStatus('error');
-      
-      // Reset error status after 3 seconds
-      setTimeout(() => {
-        setSubmitStatus('idle');
-      }, 3000);
+      if (!res.ok) throw new Error("Form submission failed");
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", company: "", service: "", message: "", honeypot: "" });
+      setTimeout(() => setSubmitStatus("idle"), 5000);
+    } catch {
+      setSubmitStatus("error");
+      setTimeout(() => setSubmitStatus("idle"), 3000);
     }
   };
 
-  const isSubmitting = submitStatus === 'submitting';
+  const isSubmitting = submitStatus === "submitting";
 
   return (
     <div className="min-h-screen bg-white dark:bg-black">
-      <style jsx global>{`
-        /* MagneticLink underline animation — same as nav-link */
-        .magnetic-link-text::after {
-          content: '';
-          position: absolute;
-          bottom: -4px; /* or adjust to -16px to match navbar */
-          left: 50%;
-          width: 100%;
-          height: 2px;
-          background-color: black;
-          border-radius: 1.5px;
-          transform: translateX(-50%) scaleX(0);
-          transform-origin: center;
-          transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .dark .magnetic-link-text::after {
-          background-color: white;
-        }
-
-        .magnetic-link:hover .magnetic-link-text::after {
-          transform: translateX(-50%) scaleX(1);
-        }
-
-        /* Submit button styles - matching footer's "Get in touch" button */
-        .submit-button {
-          overflow: hidden;
-          background-color: black !important;
-          transition: transform 0.2s ease;
-          cursor: pointer;
-        }
-
-        .dark .submit-button {
-          background-color: white !important;
-        }
-
-        .submit-button:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
-        }
-
-        .submit-button:disabled:hover {
-          transform: scale(1);
-        }
-
-        .submit-button-text {
-          position: relative;
-          z-index: 10;
-          color: white !important;
-        }
-
-        .dark .submit-button-text {
-          color: black !important;
-        }
-
-        /* Links stay the same color on hover */
-        .contact-link {
-          color: black;
-          transition: transform 0.3s ease;
-        }
-
-        .dark .contact-link {
-          color: white !important;
-        }
-
-        /* Animation utilities */
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-
-        .animate-fade-in {
-          animation: fadeIn 0.5s ease-in-out;
-        }
-      `}</style>
-      
-      {/* Main Content */}
       <main className="container mx-auto px-5 sm:px-6 pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-12 sm:pb-16 md:pb-24 relative">
         <div className="max-w-6xl mx-auto px-6">
-          
+
           {/* Header */}
-          <section 
-            ref={headerRef}
-            className="mb-20 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out"
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h1 className="text-6xl md:text-7xl font-normal leading-tight mb-6">
-                  <div className="flex items-center mb-2">
-                    Let&apos;s build a
-                  </div>
-                  <span className="block">project together</span>
-                </h1>
-              </div>
-              <div className="flex justify-end">
-              </div>
-            </div>
+          <section ref={headerRef} className="mb-20 opacity-0 translate-y-8 transition-all duration-1000 ease-out">
+            <h1 className="text-6xl md:text-7xl font-normal leading-tight mb-6">
+              <span className="block mb-2">Let&apos;s build a</span>
+              <span className="block">project together</span>
+            </h1>
           </section>
 
-          {/* Form and Contact Details */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            
-            {/* Contact Form */}
-            <div 
-              ref={formRef}
-              className="lg:col-span-2 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200"
-            >
+            {/* Form */}
+            <div ref={formRef} className="lg:col-span-2 opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-200">
               <div className="space-y-16">
-                {/* Honeypot field for spam protection */}
-                <input
-                  type="text"
-                  name="honeypot"
-                  value={formData.honeypot}
-                  onChange={handleInputChange}
-                  className="absolute -left-9999px opacity-0"
-                  tabIndex={-1}
-                  autoComplete="off"
-                />
-                
-                {/* Name Field */}
-                <div className="group border-t border-neutral-700 py-8">
-                  <div className="grid grid-cols-12 gap-8">
-                    <div className="col-span-2">
-                      <span className="text-lg font-light text-neutral-500">01</span>
-                    </div>
-                    <div className="col-span-10">
-                      <label htmlFor="name" className="block text-xl text-neutral-400 mb-4">
-                        What&apos;s your name?
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        placeholder="John Doe *"
-                        className="w-full bg-transparent pb-4 text-xl text-black dark:text-white placeholder-neutral-600 focus:outline-none transition-colors duration-300"
-                      />
-                      {errors.name && (
-                        <p className="text-red-400 text-sm mt-2">{errors.name}</p>
-                      )}
-                    </div>
-                  </div>
-                </div>
+                <input type="text" name="honeypot" value={formData.honeypot} onChange={handleChange}
+                  className="absolute -left-9999px opacity-0" tabIndex={-1} autoComplete="off" />
 
-                {/* Email Field */}
-                <div className="group border-t border-neutral-700 py-8">
-                  <div className="grid grid-cols-12 gap-8">
-                    <div className="col-span-2">
-                      <span className="text-lg font-light text-neutral-500">02</span>
-                    </div>
-                    <div className="col-span-10">
-                      <label htmlFor="email" className="block text-xl text-neutral-400 mb-4">
-                        What&apos;s your email?
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        placeholder="john@doe.com *"
-                        className="w-full bg-transparent pb-4 text-xl text-black dark:text-white placeholder-neutral-600 focus:outline-none transition-colors duration-300"
-                      />
-                      {errors.email && (
-                        <p className="text-red-400 text-sm mt-2">{errors.email}</p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Company Field */}
-                <div className="group border-t border-neutral-700 py-8">
-                  <div className="grid grid-cols-12 gap-8">
-                    <div className="col-span-2">
-                      <span className="text-lg font-light text-neutral-500">03</span>
-                    </div>
-                    <div className="col-span-10">
-                      <label htmlFor="company" className="block text-xl text-neutral-400 mb-4">
-                        What&apos;s the name of your organization?
-                      </label>
-                      <input
-                        type="text"
-                        id="company"
-                        name="company"
-                        value={formData.company}
-                        onChange={handleInputChange}
-                        placeholder="Your Company Inc."
-                        className="w-full bg-transparent pb-4 text-xl text-black dark:text-white placeholder-neutral-600 focus:outline-none transition-colors duration-300"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Services Field */}
-                <div className="group border-t border-neutral-700 py-8">
-                  <div className="grid grid-cols-12 gap-8">
-                    <div className="col-span-2">
-                      <span className="text-lg font-light text-neutral-500">04</span>
-                    </div>
-                    <div className="col-span-10">
-                      <label htmlFor="service" className="block text-xl text-neutral-400 mb-4">
-                        What services are you looking for?
-                      </label>
-                      <input
-                        type="text"
-                        id="service"
-                        name="service"
-                        value={formData.service}
-                        onChange={handleInputChange}
-                        placeholder="Web Development, System Architecture, ML Engineering..."
-                        className="w-full bg-transparent pb-4 text-xl text-black dark:text-white placeholder-neutral-600 focus:outline-none transition-colors duration-300"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Message Field */}
-                <div className="group border-t border-neutral-700 py-8">
-                  <div className="grid grid-cols-12 gap-8">
-                    <div className="col-span-2">
-                      <span className="text-lg font-light text-neutral-500">05</span>
-                    </div>
-                    <div className="col-span-10">
-                      <label htmlFor="message" className="block text-xl text-neutral-400 mb-4">
-                        Your message
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        rows={6}
-                        placeholder="Hello Célestin, can you help me with... *"
-                        className="w-full bg-transparent pb-4 text-xl text-black dark:text-white placeholder-neutral-600 focus:outline-none duration-300 resize-none"
-                      />
-                      {errors.message && (
-                        <p className="text-red-400 text-sm mt-2">{errors.message}</p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Submit Button */}
-                <div className="relative z-10 border-t border-neutral-700">
-                    <button
-                      ref={submitButtonRef}
-                      type="button"
-                      disabled={isSubmitting}
-                      onClick={handleSubmit}
-                      className="submit-button w-48 h-48 rounded-full font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                      style={{ transform: 'translate(50%, -50%) rotate(0.001deg)' }}
-                    >
-                      <div
-                        ref={submitTextRef}
-                        className="submit-button-text flex items-center justify-center h-full"
-                        style={{ transform: 'rotate(0.001deg)' }}
-                      >
-                        {isSubmitting ? (
-                          <div className="animate-spin w-6 h-6 rounded-full" />
-                        ) : (
-                          <>Send it!</>
-                        )}
+                {FIELDS.map((f, i) => (
+                  <div key={f.id} className="group border-t border-neutral-700 py-8">
+                    <div className="grid grid-cols-12 gap-8">
+                      <div className="col-span-2">
+                        <span className="text-lg font-light text-neutral-500">{String(i + 1).padStart(2, "0")}</span>
                       </div>
-                    </button>
-                  
-                  {submitStatus === 'success' && (
-                    <div className="mt-4 text-green-400 text-sm animate-fade-in">
-                      Message sent successfully! I&apos;ll get back to you soon.
+                      <div className="col-span-10">
+                        <label htmlFor={f.id} className="block text-xl text-neutral-400 mb-4">{f.label}</label>
+                        {f.multiline ? (
+                          <textarea id={f.id} name={f.id} value={formData[f.id]} onChange={handleChange} rows={6}
+                            placeholder={f.placeholder}
+                            className="w-full bg-transparent pb-4 text-xl text-black dark:text-white placeholder-neutral-600 focus:outline-none resize-none" />
+                        ) : (
+                          <input type={f.type ?? "text"} id={f.id} name={f.id} value={formData[f.id]} onChange={handleChange}
+                            placeholder={f.placeholder}
+                            className="w-full bg-transparent pb-4 text-xl text-black dark:text-white placeholder-neutral-600 focus:outline-none transition-colors duration-300" />
+                        )}
+                        {errors[f.id] && <p className="text-red-400 text-sm mt-2">{errors[f.id]}</p>}
+                      </div>
                     </div>
+                  </div>
+                ))}
+
+                {/* Submit */}
+                <div className="relative z-10 border-t border-neutral-700">
+                  <button ref={submitBtnRef} type="button" disabled={isSubmitting} onClick={handleSubmit}
+                    className="w-48 h-48 rounded-full font-medium text-lg !bg-black dark:!bg-white disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                    style={{ transform: "translate(50%, -50%) rotate(0.001deg)" }}>
+                    <div ref={submitTextRef} className="flex items-center justify-center h-full !text-white dark:!text-black"
+                      style={{ transform: "rotate(0.001deg)" }}>
+                      {isSubmitting ? <div className="animate-spin w-6 h-6 rounded-full" /> : "Send it!"}
+                    </div>
+                  </button>
+                  {submitStatus === "success" && (
+                    <p className="mt-4 text-green-400 text-sm animate-fade-in">Message sent successfully! I&apos;ll get back to you soon.</p>
                   )}
-                  
-                  {submitStatus === 'error' && (
-                    <div className="mt-4 text-red-400 text-sm animate-fade-in">
-                      Something went wrong. Please try again.
-                    </div>
+                  {submitStatus === "error" && (
+                    <p className="mt-4 text-red-400 text-sm animate-fade-in">Something went wrong. Please try again.</p>
                   )}
                 </div>
               </div>
             </div>
 
-            {/* Contact Details */}
-            <div 
-              ref={contactRef}
-              className="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400 space-y-12"
-            >
-              {/* Contact Information */}
+            {/* Sidebar */}
+            <div ref={contactRef} className="opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-400 space-y-12">
               <div>
-                <h3 className="text-sm text-neutral-400 uppercase tracking-wider mb-6">
-                  Contact Details
-                </h3>
+                <h3 className="text-sm text-neutral-400 uppercase tracking-wider mb-6">Contact Details</h3>
                 <div className="space-y-4">
-                  <div>
-                    <MagneticLink 
-                      href="mailto:celestin@gmail.com" 
-                      strength={0.4}
-                      className="contact-link text-lg"
-                    >
-                      celestin@gmail.com
-                    </MagneticLink>
-                  </div>
-                  <div>
-                    <MagneticLink 
-                      href="tel:+12538819185" 
-                      strength={0.4}
-                      className="contact-link text-lg"
-                    >
-                      +1 (253) 881-9185
-                    </MagneticLink>
-                  </div>
+                  {CONTACTS.map((c) => (
+                    <div key={c.href}><MagneticLink href={c.href} strength={0.4} className="text-lg">{c.label}</MagneticLink></div>
+                  ))}
                 </div>
               </div>
-
-              {/* Social Links */}
               <div>
-                <h3 className="text-sm text-neutral-400 uppercase tracking-wider mb-6">
-                  Socials
-                </h3>
+                <h3 className="text-sm text-neutral-400 uppercase tracking-wider mb-6">Socials</h3>
                 <div className="space-y-4">
-                  <div>
-                    <MagneticLink 
-                      href="https://linkedin.com/in/celestinryf" 
-                      strength={0.4}
-                      isExternal={true}
-                      className="contact-link text-lg"
-                    >
-                      LinkedIn
-                    </MagneticLink>
-                  </div>
-                  <div>
-                    <MagneticLink 
-                      href="https://github.com/celestinryf" 
-                      strength={0.4}
-                      isExternal={true}
-                      className="contact-link text-lg"
-                    >
-                      GitHub
-                    </MagneticLink>
-                  </div>
+                  {SOCIALS.map((s) => (
+                    <div key={s.href}>
+                      <a href={s.href} target="_blank" rel="noopener noreferrer" className="text-lg text-black dark:text-white hover:opacity-70 transition-opacity">
+                        {s.label}
+                      </a>
+                    </div>
+                  ))}
                 </div>
               </div>
-
-              {/* Local Time */}
               <div>
-                <h3 className="text-sm text-neutral-400 uppercase tracking-wider mb-2">
-                  Local Time (Seattle)
-                </h3>
-                <p className="text-black dark:text-white transition-all duration-500">
-                  {currentTime || '--:-- -- ---'}
-                </p>
+                <h3 className="text-sm text-neutral-400 uppercase tracking-wider mb-2">Local Time (Seattle)</h3>
+                <p className="text-black dark:text-white">{currentTime || "--:-- -- ---"}</p>
               </div>
             </div>
           </div>
@@ -725,6 +219,4 @@ const ContactPage: React.FC = () => {
       </main>
     </div>
   );
-};
-
-export default ContactPage;
+}

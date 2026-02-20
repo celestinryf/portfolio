@@ -40,6 +40,17 @@ const projects: Project[] = [
   },
     {
     id: "03",
+    title: "Home Recommendation System",
+    category: "MLOps & Recommendation Engine",
+    description:
+      "Designing a scalable, multi-stage home recommendation system leveraging TTE+ANN for candidate generation, GBDT for ranking, and LTR for fine-ranking on Zillow's 31M-row ZTRAX dataset. Automated MLOps pipelines with Airflow reduce deployment time by 75%, while Redis caching improves response time by 50%.",
+    image: "/assets/mock1.png",
+    tags: ["TensorFlow", "Docker", "Kubernetes", "Airflow", "Spark", "AWS", "Redis", "PySpark"],
+    year: "2025",
+    slug: "home-recommendation",
+  },
+  {
+    id: "04",
     title: "AWS Cost Optimization",
     category: "Beauty School LMS",
     description:
@@ -50,7 +61,7 @@ const projects: Project[] = [
     slug: "illuminance-esthetics",
   },
     {
-    id: "04",
+    id: "05",
     title: "Unix Sheel in C",
     category: "Beauty School LMS",
     description:
@@ -61,18 +72,7 @@ const projects: Project[] = [
     slug: "illuminance-esthetics",
   },
   {
-    id: "05",
-    title: "UHackathon",
-    category: "Largest Ever South of Seattle",
-    description:
-      "Founded and led the largest hackathon south of Seattle, securing $5,000 in sponsorships and managing end-to-end software development for the event platform. Awarded $10,000 contract for continued development.",
-    image: "/assets/HACK.png",
-    tags: ["Leadership", "Project Management"],
-    year: "2025",
-    slug: "uhackathon",
-  },
-  {
-    id: "06",
+    id: "07",
     title: "UMarket",
     category: "Student Marketplace",
     description:
@@ -81,100 +81,8 @@ const projects: Project[] = [
     tags: ["TypeScript", "Next.js", "Go", "PostgreSQL", "AWS S3", "Postman", "Docker", "Kubernetes", "Redis"],
     year: "2024",
     slug: "umarket",
-  },
-  // {
-  //   id: "07",
-  //   title: "SwiftHire",
-  //   category: "2nd Place at Hackathon: AI HR Tool",
-  //   description:
-  //     "Developed a peer-to-peer marketplace platform for university students to buy, sell, and trade textbooks and supplies. Implemented secure payment processing and real-time chat functionality.",
-  //   image: "/assets/umarket1.png",
-  //   tags: ['Python', "Flask", 'React', 'JavaScript', 'PostgreSQL'],
-  //   year: "2024",
-  //   slug: "umarket",
-  // },
-  {
-    id: "07",
-    title: "Market Watch",
-    category: "Stock Tracking App",
-    description:
-      "Developed a peer-to-peer marketplace platform for university students to buy, sell, and trade textbooks and supplies. Implemented secure payment processing and real-time chat functionality.",
-    image: "/assets/stock1.png",
-    tags: ["React", "JavaScript", "Node.js", "Express", "PostgreSQL", "REST APIs"],
-    year: "2023",
-    slug: "umarket",
-  },
+  }
 ];
-
-// Magnetic cursor image component
-interface MagneticImageProps {
-  src: string | null;
-  isActive: boolean;
-}
-
-function MagneticImage({ src, isActive }: MagneticImageProps) {
-  const imageRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
-    };
-
-    if (isActive) {
-      window.addEventListener("mousemove", handleMouseMove);
-    }
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, [isActive]);
-
-  useEffect(() => {
-    if (!imageRef.current) return;
-
-    if (isActive) {
-      gsap.fromTo(
-        imageRef.current,
-        { scale: 0, opacity: 0, rotation: -5 },
-        { scale: 1, opacity: 1, rotation: 0, duration: 0.3, ease: "back.out(1.7)" }
-      );
-    } else {
-      gsap.to(imageRef.current, {
-        scale: 0,
-        opacity: 0,
-        rotation: 5,
-        duration: 0.2,
-        ease: "power2.in",
-      });
-    }
-  }, [isActive]);
-
-  if (!src || !isActive) return null;
-
-  return (
-    <div
-      ref={imageRef}
-      className="fixed pointer-events-none z-50"
-      style={{
-        left: `${position.x}px`,
-        top: `${position.y}px`,
-        width: "400px",
-        height: "300px",
-        transform: "translate(-50%, -50%)",
-      }}
-    >
-      <div className="relative w-full h-full rounded-lg overflow-hidden shadow-2xl">
-        <img
-          src={src}
-          alt="Project preview"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-      </div>
-    </div>
-  );
-}
 
 interface ProjectItemProps {
   project: Project;
@@ -304,7 +212,6 @@ function ProjectItem({
 
 export default function Projects() {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
-  const [hoveredProjectImage, setHoveredProjectImage] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -398,7 +305,6 @@ export default function Projects() {
                 index={index}
                 onHover={(isHovering) => {
                   setHoveredProject(isHovering ? project.id : null);
-                  setHoveredProjectImage(isHovering ? project.image : null);
                 }}
                 isHovered={hoveredProject === project.id}
               />
@@ -407,11 +313,6 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* Magnetic Image Follower */}
-      <MagneticImage
-        src={hoveredProjectImage}
-        isActive={hoveredProject !== null}
-      />
     </div>
   );
 }
