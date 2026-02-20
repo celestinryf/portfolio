@@ -96,7 +96,7 @@ function ProjectUHackathon() {
             {/* CTA */}
             <div>
               <MagneticLink
-                href="/work"
+                href="/uhackathon"
                 strength={0.4}
                 className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
               >

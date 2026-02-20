@@ -65,4 +65,15 @@ export const PROJECTS: Project[] = [
     year: "2025",
     slug: "unix-shell",
   },
+  {
+    id: "06",
+    title: "UHackathon",
+    category: "Event Leadership",
+    description:
+      "Founded and organized UHackathon — a 100+ competitor event that became the largest hackathon south of Seattle, on just $3,500 in funding. United seven student clubs, secured sponsors and judges, and set it up to run annually.",
+    image: "/assets/hackflyer.png",
+    tags: ["Event Planning", "Leadership", "Community Building", "Hackathon"],
+    year: "2025",
+    slug: "uhackathon",
+  },
 ];
