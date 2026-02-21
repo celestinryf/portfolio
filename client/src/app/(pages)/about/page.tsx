@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 const ROTATE_MS = 5000;
@@ -90,28 +89,17 @@ export default function AboutPage() {
     const id = setInterval(() => {
       setDayIdx((i) => (i + 1) % Math.max(DAY_ROLES.length, DAY_MEDIA.length));
       setNightIdx((i) => (i + 1) % Math.max(NIGHT_ROLES.length, NIGHT_MEDIA.length));
+      setAboutIdx((i) => (i + 1) % ABOUT_SLIDES.length);
     }, ROTATE_MS);
     return () => clearInterval(id);
   }, []);
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") setAboutIdx((i) => (i + 1) % ABOUT_SLIDES.length);
-      if (e.key === "ArrowLeft") setAboutIdx((i) => (i - 1 + ABOUT_SLIDES.length) % ABOUT_SLIDES.length);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
-
-  const nextAbout = () => setAboutIdx((i) => (i + 1) % ABOUT_SLIDES.length);
-  const prevAbout = () => setAboutIdx((i) => (i - 1 + ABOUT_SLIDES.length) % ABOUT_SLIDES.length);
-
   return (
     <div>
       {/* ── Intro ── */}
-      <main className="container mx-auto px-5 sm:px-6 pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-12 sm:pb-16 md:pb-24">
-        <section className="grid grid-cols-12 gap-8 sm:gap-12 lg:gap-32 items-center">
-          <div className="col-span-12 md:col-span-7 space-y-4 sm:space-y-6">
+      <main className="container mx-auto px-5 sm:px-6 pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-12 sm:pb-16 md:pb-24 overflow-hidden">
+        <section className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
+          <div className="md:col-span-7 space-y-4 sm:space-y-6">
             <h1 className="text-3xl md:text-4xl font-semibold">I&apos;m Celestin</h1>
             <p className="text-neutral-700 dark:text-neutral-400">
               Software engineer and CS student at the University of Washington with
@@ -129,8 +117,8 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="col-span-12 md:col-span-4">
-            <div className="relative w-full aspect-[4/5] sm:aspect-square max-w-[22rem] sm:max-w-none mx-auto md:mx-0 rounded-xl overflow-hidden bg-neutral-200">
+          <div className="md:col-span-5">
+            <div className="relative w-full aspect-square max-w-[280px] sm:max-w-[22rem] md:max-w-none mx-auto md:mx-0 rounded-xl overflow-hidden bg-neutral-200">
               <AnimatePresence mode="wait">
                 <motion.div key={ABOUT_SLIDES[aboutIdx].src} className="absolute inset-0"
                   initial={{ opacity: 0.8, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }}
@@ -140,20 +128,6 @@ export default function AboutPage() {
                 </motion.div>
               </AnimatePresence>
 
-              <div className="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between p-2 sm:p-3">
-                <button type="button" aria-label="Previous photo" onClick={prevAbout}
-                  className="pointer-events-auto inline-flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-white/85 backdrop-blur shadow hover:bg-white transition">
-                  <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5 text-neutral-800" />
-                </button>
-                <button type="button" aria-label="Next photo" onClick={nextAbout}
-                  className="pointer-events-auto inline-flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-white/85 backdrop-blur shadow hover:bg-white transition">
-                  <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 text-neutral-800" />
-                </button>
-              </div>
-
-              <div className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 rounded-full bg-black/60 text-white text-[10px] sm:text-xs px-2 py-0.5 sm:py-1">
-                {aboutIdx + 1} / {ABOUT_SLIDES.length}
-              </div>
             </div>
           </div>
         </section>

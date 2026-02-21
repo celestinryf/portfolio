@@ -65,14 +65,14 @@ export function CTASection() {
           <MagneticLink
             href="/work"
             strength={0.4}
-            className="rounded-full border-2 border-black dark:border-white px-10 py-4 text-base font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all"
+            className="rounded-full border-2 border-black dark:border-white px-6 sm:px-10 py-4 text-base font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all"
           >
             View all projects
           </MagneticLink>
           <MagneticLink
             href="/contact"
             strength={0.4}
-            className="rounded-full bg-black dark:bg-white text-white dark:text-black px-10 py-4 text-base font-medium hover:opacity-80 transition-all"
+            className="rounded-full bg-black dark:bg-white text-white dark:text-black px-6 sm:px-10 py-4 text-base font-medium hover:opacity-80 transition-all"
           >
             Get in touch
           </MagneticLink>
@@ -139,7 +139,7 @@ export function MetricsStrip({ metrics, accentColor, formatValue }: MetricsStrip
             <div key={m.label} className="text-center md:text-left">
               <span
                 ref={(el) => { metricRefs.current[i] = el; }}
-                className={`block text-5xl md:text-7xl font-bold text-${accentColor}-400`}
+                className={`block text-3xl sm:text-5xl md:text-7xl font-bold text-${accentColor}-400`}
               >
                 0{m.suffix}
               </span>
@@ -180,7 +180,7 @@ export function ArchitectureDiagram({ flow, accentLabel, accentColor }: Architec
 
   return (
     <div ref={archSection} className="mb-16 overflow-x-auto">
-      <div className="flex items-center gap-0 min-w-[600px] md:min-w-0">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-0 min-w-0">
         {flow.map((label, i) => (
           <div key={label} className="flex items-center">
             <div
@@ -190,7 +190,7 @@ export function ArchitectureDiagram({ flow, accentLabel, accentColor }: Architec
               {label}
             </div>
             {i < flow.length - 1 && (
-              <div className="w-8 md:w-12 flex items-center justify-center text-neutral-400 shrink-0">
+              <div className="w-6 sm:w-8 md:w-12 flex items-center justify-center text-neutral-400 shrink-0 rotate-90 sm:rotate-0">
                 <svg width="24" height="12" viewBox="0 0 24 12" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M0 6h22M18 1l4 5-4 5" /></svg>
               </div>
             )}

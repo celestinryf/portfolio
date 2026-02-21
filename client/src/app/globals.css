@@ -109,6 +109,12 @@ main {
   scroll-snap-stop: always;
 }
 
+@media (max-width: 768px) {
+  .snap-section {
+    scroll-snap-stop: normal;
+  }
+}
+
 /* ── Topbar entrance animations ────────────────────────────────────────────── */
 @keyframes navFadeIn {
   from { opacity: 0; }

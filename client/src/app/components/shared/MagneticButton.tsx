@@ -30,6 +30,9 @@ export default function MagneticButton({
     const innerText = innerTextRef.current;
     if (!button || !text || !innerText) return;
 
+    // Skip magnetic effect on touch devices
+    if (window.matchMedia("(hover: none)").matches) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       const rect = button.getBoundingClientRect();
       const deltaX = (e.clientX - (rect.left + rect.width / 2)) * strength;

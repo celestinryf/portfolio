@@ -46,7 +46,7 @@ export default function DarkModeToggle() {
   // Prevent hydration mismatch
   if (!mounted) {
     return (
-      <div className="fixed top-6 right-12 z-50 opacity-50">
+      <div className="fixed top-6 right-12 z-50 opacity-50 hidden md:block">
         <div className="w-12 h-6 bg-gray-300 rounded-full"></div>
       </div>
     )
@@ -55,7 +55,7 @@ export default function DarkModeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className={`fixed bottom-6 right-12 z-50 w-12 h-6 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+      className={`fixed bottom-6 right-12 z-50 w-12 h-6 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 hidden md:block ${
         isDark 
           ? 'bg-gray-700 focus:ring-gray-600' 
           : 'bg-gray-300 focus:ring-gray-400'

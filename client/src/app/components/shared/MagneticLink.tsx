@@ -27,6 +27,9 @@ export default function MagneticLink({
     const text = textRef.current;
     if (!link || !text) return;
 
+    // Skip magnetic effect on touch devices
+    if (window.matchMedia("(hover: none)").matches) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       const rect = link.getBoundingClientRect();
       const deltaX = (e.clientX - (rect.left + rect.width / 2)) * strength;

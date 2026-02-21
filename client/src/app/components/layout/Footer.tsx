@@ -85,7 +85,7 @@ export default function Footer() {
       }}>
         <div className="w-full max-w-[80em] mx-auto">
           {/* Main header section */}
-          <div style={{ marginBottom: 'var(--gap-padding)' }}>
+          <div style={{ marginBottom: '0' }}>
             <div className="flex flex-col md:flex-row items-start md:items-center" style={{ gap: 'clamp(1.5em, 3vw, 2em)' }}>
               {/* Profile picture */}
               <div className="footer-profile translate-y-1/10 rounded-full flex-shrink-0 overflow-hidden">
@@ -109,15 +109,26 @@ export default function Footer() {
             </h1>
           </div>
 
-          {/* Center line with button */}
-          <div className="relative" style={{ marginBottom: 'clamp(8em, 15vh, 12em)', marginTop: 'calc(clamp(3em, 8vh, 12em) + 2em)' }}>
-            <div className="border-t border-white/40 dark:border-black/40"></div>
-
-            {/* Get in touch circular button */}
+          {/* Center line with button — on mobile, stack vertically in normal flow */}
+          <div className="flex flex-col items-center gap-6 my-8 md:hidden">
+            <div className="w-full border-t border-white/40 dark:border-black/40"></div>
             <MagneticLink
               href="/contact"
               strength={0.4}
-              className="absolute left-1/2 md:left-3/4 -translate-x-1/2 md:-translate-x-0 -translate-y-1/2 footer-circle-button rounded-full bg-white dark:bg-black text-black dark:text-white flex items-center justify-center hover:scale-105 transition-transform cursor-pointer z-10"
+              className="footer-circle-button rounded-full bg-white dark:bg-black text-black dark:text-white flex items-center justify-center hover:scale-105 transition-transform cursor-pointer"
+            >
+              <span className="footer-text font-medium">Get in touch</span>
+            </MagneticLink>
+          </div>
+
+          {/* Center line with button — desktop only, absolute positioning */}
+          <div className="relative items-center hidden md:flex" style={{ marginBottom: 'clamp(4em, 15vh, 12em)', marginTop: '0', height: 'clamp(10em, 15vw, 14em)' }}>
+            <div className="absolute inset-x-0 top-[60%] -translate-y-1/2 border-t border-white/40 dark:border-black/40"></div>
+
+            <MagneticLink
+              href="/contact"
+              strength={0.4}
+              className="absolute left-3/4 -translate-y-1/2 top-[60%] footer-circle-button rounded-full bg-white dark:bg-black text-black dark:text-white flex items-center justify-center hover:scale-105 transition-transform cursor-pointer z-10"
             >
               <span className="footer-text font-medium">Get in touch</span>
             </MagneticLink>
@@ -125,8 +136,7 @@ export default function Footer() {
 
           {/* Email and Phone buttons */}
           <div className="flex flex-col md:flex-row" style={{
-            gap: 'clamp(1em, 2vw, 1.5em)',
-            marginTop: 'clamp(-14em, -10vh, -16em)'
+            gap: 'clamp(1em, 2vw, 1.5em)'
           }}>
             <MagneticLink
               href="mailto:celestinryf@gmail.com"
@@ -148,7 +158,7 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div
-        className="absolute max-w-[110em] mx-auto bottom-0 left-0 right-0 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-0"
+        className="relative md:absolute max-w-[110em] mx-auto md:bottom-0 left-0 right-0 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-0 mt-12 md:mt-0"
         style={{ padding: 'var(--gap-padding)' }}
       >
         {/* Local Time */}

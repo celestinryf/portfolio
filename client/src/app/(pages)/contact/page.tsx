@@ -68,6 +68,10 @@ export default function ContactPage() {
     const btn = submitBtnRef.current;
     const txt = submitTextRef.current;
     if (!btn || !txt) return;
+
+    // Skip magnetic effect on touch devices
+    if (window.matchMedia("(hover: none)").matches) return;
+
     const strength = 0.4;
 
     const onMove = (e: MouseEvent) => {
@@ -126,12 +130,11 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-black">
-      <main className="container mx-auto px-5 sm:px-6 pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-12 sm:pb-16 md:pb-24 relative">
-        <div className="max-w-6xl mx-auto px-6">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-12 sm:pb-16 md:pb-24 relative">
 
           {/* Header */}
           <section ref={headerRef} className="mb-20 opacity-0 translate-y-8 transition-all duration-1000 ease-out">
-            <h1 className="text-6xl md:text-7xl font-normal leading-tight mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-normal leading-tight mb-6">
               <span className="block mb-2">Let&apos;s build a</span>
               <span className="block">project together</span>
             </h1>
@@ -146,11 +149,11 @@ export default function ContactPage() {
 
                 {FIELDS.map((f, i) => (
                   <div key={f.id} className="group border-t border-neutral-700 py-8">
-                    <div className="grid grid-cols-12 gap-8">
-                      <div className="col-span-2">
+                    <div className="flex gap-4 sm:gap-8">
+                      <div className="shrink-0">
                         <span className="text-lg font-light text-neutral-500">{String(i + 1).padStart(2, "0")}</span>
                       </div>
-                      <div className="col-span-10">
+                      <div className="flex-1 min-w-0">
                         <label htmlFor={f.id} className="block text-xl text-neutral-400 mb-4">{f.label}</label>
                         {f.multiline ? (
                           <textarea id={f.id} name={f.id} value={formData[f.id]} onChange={handleChange} rows={6}
@@ -168,10 +171,10 @@ export default function ContactPage() {
                 ))}
 
                 {/* Submit */}
-                <div className="relative z-10 border-t border-neutral-700">
+                <div className="relative z-10 border-t border-neutral-700 pt-8 sm:pt-0">
                   <button ref={submitBtnRef} type="button" disabled={isSubmitting} onClick={handleSubmit}
-                    className="w-48 h-48 rounded-full font-medium text-lg !bg-black dark:!bg-white disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-                    style={{ transform: "translate(50%, -50%) rotate(0.001deg)" }}>
+                    className="w-full sm:w-48 h-14 sm:h-48 rounded-full font-medium text-lg !bg-black dark:!bg-white disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer sm:translate-x-1/2 sm:-translate-y-1/2"
+                    style={{ transform: "rotate(0.001deg)" }}>
                     <div ref={submitTextRef} className="flex items-center justify-center h-full !text-white dark:!text-black"
                       style={{ transform: "rotate(0.001deg)" }}>
                       {isSubmitting ? <div className="animate-spin w-6 h-6 rounded-full" /> : "Send it!"}
@@ -215,7 +218,6 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
-        </div>
       </main>
     </div>
   );

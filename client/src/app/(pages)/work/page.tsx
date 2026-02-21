@@ -26,6 +26,9 @@ function ProjectItem({
   useEffect(() => {
     if (!itemRef.current) return;
 
+    // Skip hover animations on touch devices
+    if (window.matchMedia("(hover: none)").matches) return;
+
     const handleMouseEnter = () => {
       onHover(true);
 
@@ -88,7 +91,7 @@ function ProjectItem({
         isHovered ? "bg-gray-50 dark:bg-gray-900/50" : ""
       }`}
     >
-      <div className="grid grid-cols-12 gap-8 py-12 px-8 md:px-16">
+      <div className="grid grid-cols-12 gap-4 sm:gap-8 py-8 sm:py-12 px-4 sm:px-8 md:px-16">
         <div className="col-span-12 md:col-span-5 flex items-start gap-6">
           <span
             ref={numberRef}
@@ -177,10 +180,10 @@ export default function Projects() {
       `}</style>
 
       {/* Header */}
-      <div className="pt-32 pb-20 px-8 md:px-16">
+      <div className="pt-32 pb-20 px-4 sm:px-8 md:px-16">
         <div className="max-w-7xl mx-auto">
           <h1
-            className={`text-6xl md:text-9xl font-normal mt-16 text-black dark:text-white tracking-tight mb-6 ${
+            className={`text-4xl sm:text-6xl md:text-9xl font-normal mt-16 text-black dark:text-white tracking-tight mb-6 ${
               isLoaded ? "animate-fade-in-up" : "opacity-0"
             }`}
           >
@@ -194,7 +197,7 @@ export default function Projects() {
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Table Headers */}
         <div className="border-b border-gray-200 dark:border-gray-800">
-          <div className="grid grid-cols-12 gap-8 py-6 px-8 mb-4 md:px-16">
+          <div className="grid grid-cols-12 gap-4 sm:gap-8 py-6 px-4 sm:px-8 mb-4 md:px-16">
             <div className="col-span-12 md:col-span-5 flex items-center gap-6">
               <span className="text-sm font-medium text-gray-500 dark:text-gray-400" style={{ minWidth: "30px" }}>
                 #
@@ -203,7 +206,7 @@ export default function Projects() {
                 Project
               </h2>
             </div>
-            <div className="col-span-12 md:col-span-7 pl-0 md:pl-12">
+            <div className="hidden md:block col-span-7 pl-12">
               <h2 className="text-sm font-medium !text-gray-500 dark:text-gray-100 uppercase tracking-wider">
                 Description & Tech Stack
               </h2>

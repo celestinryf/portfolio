@@ -41,7 +41,7 @@ export default function ProjectNav({ currentSlug }: ProjectNavProps) {
         <button
           onClick={() => router.push(`/${prev.slug}`)}
           aria-label={`Previous project: ${prev.title}`}
-          className={`fixed left-4 md:left-8 top-1/2 -translate-y-1/2 z-50 group transition-all duration-500 ${
+          className={`fixed left-4 md:left-8 top-1/2 -translate-y-1/2 z-50 group transition-all duration-500 p-3 ${
             visible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4 pointer-events-none"
           }`}
         >
@@ -61,7 +61,7 @@ export default function ProjectNav({ currentSlug }: ProjectNavProps) {
         <button
           onClick={() => router.push(`/${next.slug}`)}
           aria-label={`Next project: ${next.title}`}
-          className={`fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 group transition-all duration-500 ${
+          className={`fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 group transition-all duration-500 p-3 ${
             visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4 pointer-events-none"
           }`}
         >

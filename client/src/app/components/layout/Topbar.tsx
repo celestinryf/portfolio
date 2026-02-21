@@ -109,7 +109,7 @@ export default function TopNavigation() {
   return (
     <>
       {/* ── Main nav bar ───────────────────────────────────────────────────── */}
-      <nav className={`fixed top-0 left-0 right-0 z-20 py-6 px-12 text-black dark:text-white ${isLoaded ? "nav-fade-in" : "opacity-0"}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-20 py-6 px-4 sm:px-8 md:px-12 text-black dark:text-white ${isLoaded ? "nav-fade-in" : "opacity-0"}`}>
         <div className="flex items-center justify-between max-w-[1880px] mx-auto">
 
           {/* Logo */}
@@ -160,12 +160,12 @@ export default function TopNavigation() {
 
       {/* ── Scroll burger — desktop only, appears after scrolling ──────────── */}
       {showScrollBurger && (
-        <div ref={scrollBurgerRef} className="fixed top-6 right-12 z-30 hidden md:block">
+        <div ref={scrollBurgerRef} className="fixed top-6 right-4 sm:right-8 md:right-12 z-30 hidden md:block">
           <MagneticButton
             onClick={toggleMenu}
             strength={0.3}
             isIcon
-            className="rounded-full flex items-center justify-center !bg-black dark:!bg-white backdrop-blur-md"
+            className="rounded-full flex items-center justify-center !bg-black dark:!bg-white"
             style={{ width: "clamp(60px, 6vw, 90px)", height: "clamp(60px, 6vw, 90px)" }}
           >
             <AlignJustify size={24} className="text-white dark:text-black" />

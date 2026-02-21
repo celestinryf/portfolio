@@ -1,7 +1,6 @@
 "use client";
 
 import MagneticLink from "@/app/components/shared/MagneticLink";
-import { useParallaxScroll } from "@/app/utils/parallaxController";
 
 function SkillTag({ label }: { label: string }) {
   return (
@@ -17,10 +16,8 @@ function Divider() {
 
 // ─── #01: UHackathon — editorial feature panel ────────────────────────────────
 function ProjectUHackathon() {
-  const ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2 });
-
   return (
-    <div ref={ref} className="mb-24">
+    <div className="mb-24">
       {/* Break out of the parent's horizontal padding to run edge-to-edge */}
       <div className="-mx-[5vw] px-[5vw] pt-16 pb-12">
 
@@ -37,7 +34,7 @@ function ProjectUHackathon() {
         {/* ── Display title ── */}
         <h3
           className="font-light leading-none tracking-tight text-black dark:text-white my-8 overflow-hidden"
-          style={{ fontSize: "clamp(5rem, 14vw, 15rem)" }}
+          style={{ fontSize: "clamp(2.5rem, 10vw, 15rem)" }}
         >
           UHackathon
         </h3>
@@ -113,10 +110,9 @@ function ProjectUHackathon() {
 
 // ─── #02: Tech Startup Club ───────────────────────────────────────────────────
 function ProjectTechStartupClub() {
-  const ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2 });
 
   return (
-    <div ref={ref} className="mb-16" style={{ marginBottom: "calc(10rem - 70vh)" }}>
+    <div>
       <Divider />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="text-left">
@@ -125,7 +121,7 @@ function ProjectTechStartupClub() {
           </h4>
           <p className="text-black dark:text-gray-300 mb-1">Tech Startup Club</p>
           <p className="text-sm text-gray-400 mb-8">Sept. 2024 – Present</p>
-          <div className="w-full h-[600px] rounded-lg mb-8 overflow-hidden">
+          <div className="w-full h-[300px] sm:h-[400px] md:h-[600px] rounded-lg mb-8 overflow-hidden">
             <img src="/assets/umarket1.png" alt="Tech Startup Club" className="w-full h-full object-cover" />
           </div>
         </div>
@@ -185,10 +181,8 @@ function ProjectTechStartupClub() {
 
 // ─── #03: UW Tacoma SET ───────────────────────────────────────────────────────
 function ProjectSETlib() {
-  const ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2 });
-
   return (
-    <div ref={ref} className="mb-16">
+    <div className="mb-16">
       <Divider />
       <div className="mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -267,10 +261,8 @@ function ProjectSETlib() {
 
 // ─── #04: Insights Emerge ─────────────────────────────────────────────────────
 function ProjectIlluminance() {
-  const ref = useParallaxScroll<HTMLDivElement>({ speed: 0.2 });
-
   return (
-    <div ref={ref} className="mb-16">
+    <div className="mb-16">
       <Divider />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="text-left">
@@ -279,7 +271,7 @@ function ProjectIlluminance() {
           </h4>
           <p className="text-black dark:text-gray-300 mb-1">Insights Emerge</p>
           <p className="text-sm text-gray-400 mb-8">April 2025 – June 2025</p>
-          <div className="w-full h-[600px] rounded-lg mb-8 overflow-hidden">
+          <div className="w-full h-[300px] sm:h-[400px] md:h-[600px] rounded-lg mb-8 overflow-hidden">
             <img src="/assets/lms.png" alt="Illuminance Esthetics LMS" className="object-contain max-h-fill" />
           </div>
         </div>
@@ -346,11 +338,9 @@ function ProjectIlluminance() {
 
 // ─── Experience Section ────────────────────────────────────────────────────────
 export default function ExperienceSection() {
-  const headerRef = useParallaxScroll<HTMLDivElement>({ speed: 0.2 });
-
   return (
     <>
-      <div ref={headerRef} className="mb-20">
+      <div className="mb-20">
         <h2 className="text-5xl md:text-7xl font-light text-black dark:text-white tracking-tight">
           My experience
         </h2>
