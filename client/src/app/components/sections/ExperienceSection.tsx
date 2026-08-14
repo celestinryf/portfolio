@@ -27,20 +27,28 @@ function ProjectUiPath() {
           <p className="text-black dark:text-gray-300 mb-1">UiPath</p>
           <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Summer 2026</p>
 
-          {/* Terminal panel: real commands from the project, not a mockup */}
+          {/* Terminal panel: an agent driving the CLI over MCP, real commands */}
           <div className="w-full rounded-lg mb-8 overflow-hidden bg-neutral-900 dark:bg-black border border-black/10 dark:border-white/10">
             <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10">
               <span className="w-3 h-3 rounded-full bg-red-400/80" />
               <span className="w-3 h-3 rounded-full bg-yellow-400/80" />
               <span className="w-3 h-3 rounded-full bg-green-400/80" />
-              <span className="ml-3 text-xs text-neutral-400 font-mono">uip — insights</span>
+              <span className="ml-3 text-xs text-neutral-400 font-mono">agent — uipath-insights via MCP</span>
             </div>
             <pre className="p-5 text-sm leading-7 font-mono text-neutral-200 overflow-x-auto">
-              <code>{`$ uip insights filter-folders list --limit 10
-$ uip insights alerts list --agentic
-$ uip insights users get <user-id>
-
-# one typed contract → validation, SDK, MCP, skill`}</code>
+              <code>
+                <span className="text-neutral-200">❯ alert me when payroll jobs start faulting</span>
+                {"\n\n"}
+                <span className="text-neutral-500"># agent picks its own commands:</span>
+                {"\n"}
+                <span className="text-sky-300">⏺ uip insights alerts get-schema</span>
+                {"\n"}
+                <span className="text-sky-300">⏺ uip insights filter-folders list --limit 10</span>
+                {"\n"}
+                <span className="text-sky-300">⏺ uip insights alerts create …</span>
+                {"\n\n"}
+                <span className="text-emerald-300">✓ watching Payroll for faulted jobs</span>
+              </code>
             </pre>
           </div>
         </div>
