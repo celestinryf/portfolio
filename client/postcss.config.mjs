@@ -1,7 +1,9 @@
 // postcss.config.js (ESM version)
-export default {
+const config = {
   plugins: {
     tailwindcss: {},
     autoprefixer: {},
   },
 };
+
+export default config;
