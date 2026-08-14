@@ -22,7 +22,7 @@ export default function HeroSection() {
       <div className="absolute bottom-0 left-0 right-0 px-[5vw] pb-[10vh]">
         <h1
           className="text-white font-light tracking-tight leading-tight"
-          style={{ fontSize: "clamp(1.5rem, 4vw, 3rem)" }}
+          style={{ fontSize: "clamp(0.5rem, 1vw, 1rem)" }}
         >
           Software engineer · CS student at the University of Washington
         </h1>
