@@ -39,7 +39,7 @@ function ProjectUiPath() {
               <code>
                 <span className="text-neutral-200">❯ alert me when payroll jobs start faulting</span>
                 {"\n\n"}
-                <span className="text-neutral-500"># agent picks its own commands:</span>
+                <span className="text-neutral-400"># agent picks its own commands:</span>
                 {"\n"}
                 <span className="text-sky-300">⏺ uip insights alerts get-schema</span>
                 {"\n"}
@@ -104,6 +104,13 @@ function ProjectUiPath() {
               operable by coding agents: one typed contract feeding validation,
               the SDK, MCP, and the agent skill.
             </p>
+            <MagneticLink
+              href="/uipath-insights"
+              strength={0.4}
+              className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors mt-4"
+            >
+              View Case Study
+            </MagneticLink>
           </div>
         </div>
       </div>

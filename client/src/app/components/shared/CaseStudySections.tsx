@@ -144,7 +144,7 @@ export function MetricsStrip({ metrics, accentColor, formatValue }: MetricsStrip
                 0{m.suffix}
               </span>
               <p className="text-sm md:text-base font-medium text-white/90 dark:text-black/90 mt-2">{m.label}</p>
-              <p className="text-xs text-white/50 dark:text-black/50 mt-1">{m.desc}</p>
+              <p className="text-xs text-white/70 dark:text-black/70 mt-1">{m.desc}</p>
             </div>
           ))}
         </div>
