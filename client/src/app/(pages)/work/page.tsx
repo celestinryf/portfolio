@@ -7,14 +7,12 @@ import { PROJECTS, type Project } from "@/app/data/projects";
 
 interface ProjectItemProps {
   project: Project;
-  index: number;
   onHover: (isHovering: boolean) => void;
   isHovered: boolean;
 }
 
 function ProjectItem({
   project,
-  index,
   onHover,
   isHovered,
 }: ProjectItemProps) {
@@ -95,7 +93,7 @@ function ProjectItem({
         <div className="col-span-12 md:col-span-5 flex items-start gap-6">
           <span
             ref={numberRef}
-            className="text-sm text-gray-400 dark:text-gray-500 font-light mt-2"
+            className="text-sm text-gray-600 dark:text-gray-400 font-light mt-2"
             style={{ minWidth: "30px" }}
           >
             {project.id}
@@ -199,15 +197,15 @@ export default function Projects() {
         <div className="border-b border-gray-200 dark:border-gray-800">
           <div className="grid grid-cols-12 gap-4 sm:gap-8 py-6 px-4 sm:px-8 mb-4 md:px-16">
             <div className="col-span-12 md:col-span-5 flex items-center gap-6">
-              <span className="text-sm font-medium text-gray-500 dark:text-gray-400" style={{ minWidth: "30px" }}>
+              <span className="text-sm font-medium text-gray-600 dark:text-gray-400" style={{ minWidth: "30px" }}>
                 #
               </span>
-              <h2 className="text-sm font-medium !text-gray-500 dark:text-gray-100 uppercase tracking-wider">
+              <h2 className="text-sm font-medium text-gray-600 dark:text-gray-100 uppercase tracking-wider">
                 Project
               </h2>
             </div>
             <div className="hidden md:block col-span-7 pl-12">
-              <h2 className="text-sm font-medium !text-gray-500 dark:text-gray-100 uppercase tracking-wider">
+              <h2 className="text-sm font-medium text-gray-600 dark:text-gray-100 uppercase tracking-wider">
                 Description & Tech Stack
               </h2>
             </div>
@@ -226,7 +224,6 @@ export default function Projects() {
             >
               <ProjectItem
                 project={project}
-                index={index}
                 onHover={(isHovering) => {
                   setHoveredProject(isHovering ? project.id : null);
                 }}

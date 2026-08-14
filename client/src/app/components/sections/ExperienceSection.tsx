@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import MagneticLink from "@/app/components/shared/MagneticLink";
 
 function SkillTag({ label }: { label: string }) {
@@ -20,9 +21,9 @@ function ProjectUiPath() {
     <div className="mb-16">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="text-left">
-          <h4 className="text-4xl text-black dark:text-white font-normal">
+          <h3 className="text-4xl text-black dark:text-white font-normal">
             Software Engineer Intern
-          </h4>
+          </h3>
           <p className="text-black dark:text-gray-300 mb-1">UiPath</p>
           <p className="text-sm text-gray-400 mb-8">Summer 2026</p>
 
@@ -49,9 +50,9 @@ $ uip insights users get <user-id>
             <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">
               Current Role
             </p>
-            <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
+            <h4 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
               UiPath Insights
-            </h5>
+            </h4>
             <p className="text-black dark:text-gray-300 text-sm mb-4">
               CLI &amp; Agent Skill for an Analytics Product
             </p>
@@ -131,11 +132,13 @@ function ProjectUHackathon() {
         <div className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-6 mb-0">
 
           {/* Left — primary image, tall */}
-          <div className="h-[55vh] md:h-[70vh] overflow-hidden">
-            <img
+          <div className="relative h-[55vh] md:h-[70vh] overflow-hidden">
+            <Image
               src="/assets/room.png"
               alt="UHackathon venue"
-              className="w-full h-full object-cover"
+              fill
+              sizes="(min-width: 768px) 60vw, 90vw"
+              className="object-cover"
             />
           </div>
 
@@ -204,13 +207,13 @@ function ProjectTechStartupClub() {
       <Divider />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="text-left">
-          <h4 className="text-4xl text-black dark:text-white font-normal">
+          <h3 className="text-4xl text-black dark:text-white font-normal">
             President &amp; Founder
-          </h4>
+          </h3>
           <p className="text-black dark:text-gray-300 mb-1">Tech Startup Club</p>
           <p className="text-sm text-gray-400 mb-8">Sept. 2024 – Present</p>
-          <div className="w-full h-[300px] sm:h-[400px] md:h-[600px] rounded-lg mb-8 overflow-hidden">
-            <img src="/assets/umarket1.png" alt="Tech Startup Club" className="w-full h-full object-cover" />
+          <div className="relative w-full h-[300px] sm:h-[400px] md:h-[600px] rounded-lg mb-8 overflow-hidden">
+            <Image src="/assets/umarket1.png" alt="Tech Startup Club" fill sizes="(min-width: 768px) 50vw, 90vw" className="object-cover" />
           </div>
         </div>
 
@@ -219,9 +222,9 @@ function ProjectTechStartupClub() {
             <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">
               Leadership Role
             </p>
-            <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
+            <h4 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
               Tech Startup Club
-            </h5>
+            </h4>
             <p className="text-black dark:text-gray-300 text-sm mb-4">
               Student Software Consultancy
             </p>
@@ -275,9 +278,9 @@ function ProjectSETlib() {
       <div className="mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <div className="text-left">
-            <h4 className="text-4xl text-black dark:text-white font-normal">
+            <h3 className="text-4xl text-black dark:text-white font-normal">
               Software Engineer Intern
-            </h4>
+            </h3>
             <p className="text-black dark:text-gray-300 mb-1">
               University of Washington Tacoma
             </p>
@@ -307,8 +310,8 @@ function ProjectSETlib() {
           </div>
         </div>
 
-        <div className="w-full h-[500px] flex items-center justify-center rounded-lg mb-8 overflow-hidden">
-          <img src="/assets/SETlib.png" alt="SETlib" className="object-contain max-h-fill" />
+        <div className="relative w-full h-[500px] rounded-lg mb-8 overflow-hidden">
+          <Image src="/assets/SETlib.png" alt="SETlib worksheet management platform" fill sizes="90vw" className="object-contain" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -316,9 +319,9 @@ function ProjectSETlib() {
             <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">
               Professional Project 01
             </p>
-            <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
+            <h4 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
               SETlib
-            </h5>
+            </h4>
             <p className="text-black dark:text-gray-300 text-sm mb-4">
               Worksheet Management Platform
             </p>
@@ -354,13 +357,13 @@ function ProjectIlluminance() {
       <Divider />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="text-left">
-          <h4 className="text-4xl text-black dark:text-white font-normal">
+          <h3 className="text-4xl text-black dark:text-white font-normal">
             Software Engineer Intern
-          </h4>
+          </h3>
           <p className="text-black dark:text-gray-300 mb-1">Insights Emerge</p>
           <p className="text-sm text-gray-400 mb-8">April 2025 – June 2025</p>
-          <div className="w-full h-[300px] sm:h-[400px] md:h-[600px] rounded-lg mb-8 overflow-hidden">
-            <img src="/assets/lms.png" alt="Illuminance Esthetics LMS" className="object-contain max-h-fill" />
+          <div className="relative w-full h-[300px] sm:h-[400px] md:h-[600px] rounded-lg mb-8 overflow-hidden">
+            <Image src="/assets/lms.png" alt="Illuminance Esthetics LMS" fill sizes="(min-width: 768px) 50vw, 90vw" className="object-contain" />
           </div>
         </div>
 
@@ -369,9 +372,9 @@ function ProjectIlluminance() {
             <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">
               Professional Project 02
             </p>
-            <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
+            <h4 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
               Illuminance Esthetics
-            </h5>
+            </h4>
             <p className="text-black dark:text-gray-300 text-sm mb-4">
               Beauty School LMS
             </p>

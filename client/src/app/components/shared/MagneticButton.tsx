@@ -10,6 +10,7 @@ export interface MagneticButtonProps {
   onClick?: () => void;
   isIcon?: boolean;
   style?: React.CSSProperties;
+  ariaLabel?: string;
 }
 
 export default function MagneticButton({
@@ -19,6 +20,7 @@ export default function MagneticButton({
   onClick,
   isIcon = false,
   style,
+  ariaLabel,
 }: MagneticButtonProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
@@ -59,6 +61,7 @@ export default function MagneticButton({
     <button
       ref={buttonRef}
       onClick={onClick}
+      aria-label={ariaLabel}
       className={`block relative cursor-pointer bg-transparent border-none ${className}`}
       style={{ transform: "rotate(0.001deg)", ...style }}
     >
