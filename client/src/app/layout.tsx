@@ -16,8 +16,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Celestin Ryf",
+  metadataBase: new URL("https://portfolio-gules-zeta-88.vercel.app"),
+  title: {
+    default: "Celestin Ryf",
+    template: "%s — Celestin Ryf",
+  },
   description: "Portfolio of Celestin Ryf, a software engineer specializing in full-stack development and systems design.",
+  openGraph: {
+    title: "Celestin Ryf",
+    description: "Software engineer and CS student at the University of Washington. Work history, project case studies, and contact.",
+    url: "/",
+    siteName: "Celestin Ryf",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Celestin Ryf",
+    description: "Software engineer and CS student at the University of Washington.",
+  },
 };
 
 export default function RootLayout({

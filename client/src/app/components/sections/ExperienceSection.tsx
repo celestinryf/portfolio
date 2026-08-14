@@ -429,7 +429,7 @@ function ProjectIlluminance() {
               management system, working directly with the client from spec through deployment.
             </p>
             <MagneticLink
-              href="/work"
+              href="/illuminance-esthetics"
               strength={0.4}
               className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors mt-4"
             >

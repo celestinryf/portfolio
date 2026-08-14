@@ -214,3 +214,15 @@ main {
   width: clamp(60px, 8vw, 120px);
   height: clamp(60px, 8vw, 120px);
 }
+/* Respect reduced-motion: collapse CSS animations and transitions to instant.
+   (GSAP effects are brief and settle to their end state regardless.) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
