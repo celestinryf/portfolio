@@ -110,8 +110,8 @@ export default function AboutPage() {
             <p className="text-neutral-700 dark:text-neutral-400">
               My love for programming started with Hour of Code in elementary school
               and was cemented by a robotics class my freshman year of high school.
-              Since then I&apos;ve interned at a startup and at UW, founded the 2nd
-              largest CS club at UWT, and organized the largest hackathon south of
+              Since then I&apos;ve interned at UiPath, at a startup, and at UW,
+              founded the 2nd largest CS club at UWT, and organized the largest hackathon south of
               Seattle. When I&apos;m not coding you&apos;ll find me watching Manchester
               United or raving.
             </p>

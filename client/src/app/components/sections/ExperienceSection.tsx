@@ -14,6 +14,94 @@ function Divider() {
   return <div className="border-t border-gray-300 dark:border-gray-700 py-8" />;
 }
 
+// ─── #00: UiPath — current internship ─────────────────────────────────────────
+function ProjectUiPath() {
+  return (
+    <div className="mb-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="text-left">
+          <h4 className="text-4xl text-black dark:text-white font-normal">
+            Software Engineer Intern
+          </h4>
+          <p className="text-black dark:text-gray-300 mb-1">UiPath</p>
+          <p className="text-sm text-gray-400 mb-8">Summer 2026</p>
+
+          {/* Terminal panel: real commands from the project, not a mockup */}
+          <div className="w-full rounded-lg mb-8 overflow-hidden bg-neutral-900 dark:bg-black border border-black/10 dark:border-white/10">
+            <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10">
+              <span className="w-3 h-3 rounded-full bg-red-400/80" />
+              <span className="w-3 h-3 rounded-full bg-yellow-400/80" />
+              <span className="w-3 h-3 rounded-full bg-green-400/80" />
+              <span className="ml-3 text-xs text-neutral-400 font-mono">uip — insights</span>
+            </div>
+            <pre className="p-5 text-sm leading-7 font-mono text-neutral-200 overflow-x-auto">
+              <code>{`$ uip insights filter-folders list --limit 10
+$ uip insights alerts list --agentic
+$ uip insights users get <user-id>
+
+# one typed contract → validation, SDK, MCP, skill`}</code>
+            </pre>
+          </div>
+        </div>
+
+        <div className="text-left">
+          <div className="mb-8">
+            <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">
+              Current Role
+            </p>
+            <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
+              UiPath Insights
+            </h5>
+            <p className="text-black dark:text-gray-300 text-sm mb-4">
+              CLI &amp; Agent Skill for an Analytics Product
+            </p>
+          </div>
+
+          <div className="mb-8">
+            <div className="border-t border-gray-300 dark:border-gray-700 py-4">
+              <p className="text-black dark:text-gray-300">
+                Building the Insights surface of UiPath&apos;s open-source CLI in
+                TypeScript: shipped the typed SDK transport layer to main, with
+                filter discovery commands in review backed by 240 unit tests and
+                a live end-to-end suite.
+              </p>
+            </div>
+            <div className="border-t border-gray-300 dark:border-gray-700 py-4">
+              <p className="text-black dark:text-gray-300">
+                Own the uipath-insights agent skill that teaches AI coding agents
+                to run Insights tasks through the CLI and MCP. Shipped merged
+                fixes to UiPath&apos;s public skills repo, each verified against
+                an agent eval harness before review.
+              </p>
+            </div>
+            <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
+              <p className="text-black dark:text-gray-300">
+                Designed and won team sign-off on a 23-command surface for
+                alerts, filters, and RBAC reads: fail-closed input validation,
+                safe output projections, and access bounded by what the calling
+                user can already see and do.
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div className="flex flex-wrap gap-3">
+              {["TypeScript", "Bun", "Vitest", "CLI Tooling", "MCP", "AI Agents", "REST API", "API Design"].map(
+                (skill) => <SkillTag key={skill} label={skill} />
+              )}
+            </div>
+            <p className="text-black dark:text-gray-300 leading-relaxed">
+              Insights is UiPath&apos;s analytics product. My project makes it
+              operable by coding agents: one typed contract feeding validation,
+              the SDK, MCP, and the agent skill.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── #01: UHackathon — editorial feature panel ────────────────────────────────
 function ProjectUHackathon() {
   return (
@@ -346,6 +434,7 @@ export default function ExperienceSection() {
         </h2>
       </div>
 
+      <ProjectUiPath />
       <ProjectSETlib />
       <ProjectIlluminance />
       <ProjectUHackathon />
