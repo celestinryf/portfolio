@@ -25,7 +25,7 @@ function ProjectUiPath() {
             Software Engineer Intern
           </h3>
           <p className="text-black dark:text-gray-300 mb-1">UiPath</p>
-          <p className="text-sm text-gray-400 mb-8">Summer 2026</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Summer 2026</p>
 
           {/* Terminal panel: real commands from the project, not a mockup */}
           <div className="w-full rounded-lg mb-8 overflow-hidden bg-neutral-900 dark:bg-black border border-black/10 dark:border-white/10">
@@ -47,7 +47,7 @@ $ uip insights users get <user-id>
 
         <div className="text-left">
           <div className="mb-8">
-            <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">
+            <p className="text-xs text-gray-500 dark:text-gray-400 font-light mb-2 tracking-widest">
               Current Role
             </p>
             <h4 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
@@ -211,7 +211,7 @@ function ProjectTechStartupClub() {
             President &amp; Founder
           </h3>
           <p className="text-black dark:text-gray-300 mb-1">Tech Startup Club</p>
-          <p className="text-sm text-gray-400 mb-8">Sept. 2024 – Present</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Sept. 2024 – Present</p>
           <div className="relative w-full h-[300px] sm:h-[400px] md:h-[600px] rounded-lg mb-8 overflow-hidden">
             <Image src="/assets/umarket1.png" alt="Tech Startup Club" fill sizes="(min-width: 768px) 50vw, 90vw" className="object-cover" />
           </div>
@@ -219,7 +219,7 @@ function ProjectTechStartupClub() {
 
         <div className="text-left">
           <div className="mb-8">
-            <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">
+            <p className="text-xs text-gray-500 dark:text-gray-400 font-light mb-2 tracking-widest">
               Leadership Role
             </p>
             <h4 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
@@ -284,7 +284,7 @@ function ProjectSETlib() {
             <p className="text-black dark:text-gray-300 mb-1">
               University of Washington Tacoma
             </p>
-            <p className="text-sm text-gray-400 mb-8">June 2025 – Sept. 2025</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">June 2025 – Sept. 2025</p>
           </div>
           <div>
             <div className="border-t border-gray-300 dark:border-gray-700 py-4">
@@ -316,7 +316,7 @@ function ProjectSETlib() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
-            <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">
+            <p className="text-xs text-gray-500 dark:text-gray-400 font-light mb-2 tracking-widest">
               Professional Project 01
             </p>
             <h4 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
@@ -361,7 +361,7 @@ function ProjectIlluminance() {
             Software Engineer Intern
           </h3>
           <p className="text-black dark:text-gray-300 mb-1">Insights Emerge</p>
-          <p className="text-sm text-gray-400 mb-8">April 2025 – June 2025</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">April 2025 – June 2025</p>
           <div className="relative w-full h-[300px] sm:h-[400px] md:h-[600px] rounded-lg mb-8 overflow-hidden">
             <Image src="/assets/lms.png" alt="Illuminance Esthetics LMS" fill sizes="(min-width: 768px) 50vw, 90vw" className="object-contain" />
           </div>
@@ -369,7 +369,7 @@ function ProjectIlluminance() {
 
         <div className="text-left">
           <div className="mb-8">
-            <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">
+            <p className="text-xs text-gray-500 dark:text-gray-400 font-light mb-2 tracking-widest">
               Professional Project 02
             </p>
             <h4 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
