@@ -15,6 +15,19 @@ export default function HeroSection() {
       />
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/25" />
+      {/* Name over the hero: the page's h1 and its stable LCP text candidate
+          (a bare full-viewport image is excluded from LCP by Chrome) */}
+      <div className="absolute bottom-0 left-0 right-0 px-[5vw] pb-[10vh]">
+        <h1
+          className="text-white font-light tracking-tight leading-none"
+          style={{ fontSize: "clamp(2.5rem, 8vw, 7rem)" }}
+        >
+          Célestin Ryf
+        </h1>
+        <p className="text-white/90 text-lg md:text-2xl mt-4 font-light">
+          Software engineer · CS student at the University of Washington
+        </p>
+      </div>
     </div>
   );
 }
