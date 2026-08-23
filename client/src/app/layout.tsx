@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://portfolio-gules-zeta-88.vercel.app"),
+  metadataBase: new URL("https://www.celestinryf.com"),
   title: {
     default: "Celestin Ryf",
     template: "%s — Celestin Ryf",

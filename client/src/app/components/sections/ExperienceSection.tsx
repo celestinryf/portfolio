@@ -25,7 +25,7 @@ function ProjectUiPath() {
             Software Engineer Intern
           </h3>
           <p className="text-black dark:text-gray-300 mb-1">UiPath</p>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Summer 2026</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">July - September 2026</p>
 
           {/* Terminal panel: an agent driving the CLI over MCP, real commands */}
           <div className="w-full rounded-lg mb-8 overflow-hidden bg-neutral-900 dark:bg-black border border-black/10 dark:border-white/10">

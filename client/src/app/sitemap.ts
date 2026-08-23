@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { PROJECTS } from "@/app/data/projects";
 
-const BASE = "https://portfolio-gules-zeta-88.vercel.app";
+const BASE = "https://www.celestinryf.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = ["", "/work", "/about", "/contact"];

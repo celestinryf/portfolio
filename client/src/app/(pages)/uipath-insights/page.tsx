@@ -144,7 +144,7 @@ export default function UiPathInsightsCaseStudy() {
 
             <div className="col-span-12 md:col-span-7 space-y-8">
               <p className="text-xs tracking-[0.3em] uppercase text-neutral-500 dark:text-neutral-400">
-                UiPath &nbsp;/&nbsp; Summer 2026
+                UiPath &nbsp;/&nbsp; July - September 2026
               </p>
 
               <h1 ref={headlineRef} className="text-4xl sm:text-5xl md:text-7xl font-semibold leading-[1.08] tracking-tight text-black dark:text-white">
