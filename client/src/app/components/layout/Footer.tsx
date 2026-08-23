@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MagneticLink from "@/app/components/shared/MagneticLink";
@@ -10,12 +11,15 @@ if (typeof window !== "undefined") {
 }
 
 export default function Footer() {
-  const [currentTime, setCurrentTime] = useState(new Date());
+  // Start as null so the server and first client render match; the real time
+  // only appears after mount (avoids a hydration mismatch on every page).
+  const [currentTime, setCurrentTime] = useState<Date | null>(null);
   const [imageError, setImageError] = useState(false);
   const footerRef = useRef<HTMLElement>(null);
   const blackBoxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    setCurrentTime(new Date());
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
@@ -88,12 +92,14 @@ export default function Footer() {
           <div style={{ marginBottom: '0' }}>
             <div className="flex flex-col md:flex-row items-start md:items-center" style={{ gap: 'clamp(1.5em, 3vw, 2em)' }}>
               {/* Profile picture */}
-              <div className="footer-profile translate-y-1/10 rounded-full flex-shrink-0 overflow-hidden">
+              <div className="footer-profile relative translate-y-1/10 rounded-full flex-shrink-0 overflow-hidden">
                 {!imageError ? (
-                  <img
+                  <Image
                     src="/assets/pfp.jpg"
-                    alt="Profile"
-                    className="w-full h-full rounded-full object-cover"
+                    alt="Celestin Ryf"
+                    fill
+                    sizes="120px"
+                    className="rounded-full object-cover"
                     onError={() => setImageError(true)}
                   />
                 ) : (
@@ -168,7 +174,7 @@ export default function Footer() {
           </p>
           <div className="flex items-center space-x-2">
             <span className="footer-time footer-text text-white dark:text-black font-mono">
-              {formatTime(currentTime)}
+              {currentTime ? formatTime(currentTime) : "--:--:--"}
             </span>
             <span className="footer-label footer-text text-white/60 dark:text-black/60">
               PST

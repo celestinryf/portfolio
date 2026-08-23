@@ -25,8 +25,8 @@ export default function AboutSection() {
           >
             My love for programming started with Hour of Code in elementary school
             and was cemented by a robotics class my freshman year of high school.
-            Since then I&apos;ve interned at a startup and at UW building internal
-            tools, founded the 2nd largest CS club at UWT, and organized the
+            Since then I&apos;ve interned at UiPath, at a startup, and at UW
+            building internal tools, founded the 2nd largest CS club at UWT, and organized the
             largest hackathon south of Seattle. My priorities are shipping fast, delivering for my clients,
             and creating opportunities for others to grow.
           </p>

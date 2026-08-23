@@ -12,6 +12,17 @@ export interface Project {
 export const PROJECTS: Project[] = [
   {
     id: "01",
+    title: "UiPath Insights CLI",
+    category: "AI Agents & Developer Tooling",
+    description:
+      "Building the agent-facing surface of UiPath's analytics product: typed uip insights CLI commands, an SDK transport layer, and the uipath-insights agent skill so AI agents can run Insights tasks over MCP. ~2,100 lines merged to the public cli repo; the next slice is in review with 240 tests.",
+    image: "/assets/mock1.png",
+    tags: ["TypeScript", "Bun", "Vitest", "MCP", "AI Agents", "CLI Tooling", "REST API"],
+    year: "2026",
+    slug: "uipath-insights",
+  },
+  {
+    id: "02",
     title: "SETlib",
     category: "Document Management System",
     description:
@@ -22,7 +33,7 @@ export const PROJECTS: Project[] = [
     slug: "SETlib",
   },
   {
-    id: "02",
+    id: "03",
     title: "Illuminance Esthetics",
     category: "Beauty School LMS",
     description:
@@ -33,7 +44,7 @@ export const PROJECTS: Project[] = [
     slug: "illuminance-esthetics",
   },
   {
-    id: "03",
+    id: "04",
     title: "Home Recommendation System",
     category: "MLOps & Recommendation Engine",
     description:
@@ -44,7 +55,7 @@ export const PROJECTS: Project[] = [
     slug: "home-recommendation",
   },
   {
-    id: "04",
+    id: "05",
     title: "AWS Cost Optimization",
     category: "Cloud Infrastructure",
     description:
@@ -55,7 +66,7 @@ export const PROJECTS: Project[] = [
     slug: "aws-cost-optimization",
   },
   {
-    id: "05",
+    id: "06",
     title: "Unix Shell in C",
     category: "Systems Programming",
     description:
@@ -66,7 +77,7 @@ export const PROJECTS: Project[] = [
     slug: "unix-shell",
   },
   {
-    id: "06",
+    id: "07",
     title: "UHackathon",
     category: "Event Leadership",
     description:

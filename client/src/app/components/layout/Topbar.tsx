@@ -147,6 +147,7 @@ export default function TopNavigation() {
               onClick={toggleMenu}
               strength={0.3}
               isIcon
+              ariaLabel={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               className="rounded-full flex items-center justify-center !bg-black dark:!bg-white"
               style={{ width: "clamp(50px, 10vw, 60px)", height: "clamp(50px, 10vw, 60px)" }}
             >
@@ -165,6 +166,7 @@ export default function TopNavigation() {
             onClick={toggleMenu}
             strength={0.3}
             isIcon
+            ariaLabel={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             className="rounded-full flex items-center justify-center !bg-black dark:!bg-white"
             style={{ width: "clamp(60px, 6vw, 90px)", height: "clamp(60px, 6vw, 90px)" }}
           >

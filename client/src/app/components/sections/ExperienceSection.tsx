@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import MagneticLink from "@/app/components/shared/MagneticLink";
 
 function SkillTag({ label }: { label: string }) {
@@ -12,6 +13,109 @@ function SkillTag({ label }: { label: string }) {
 
 function Divider() {
   return <div className="border-t border-gray-300 dark:border-gray-700 py-8" />;
+}
+
+// ─── #00: UiPath — current internship ─────────────────────────────────────────
+function ProjectUiPath() {
+  return (
+    <div className="mb-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="text-left">
+          <h3 className="text-4xl text-black dark:text-white font-normal">
+            Software Engineer Intern
+          </h3>
+          <p className="text-black dark:text-gray-300 mb-1">UiPath</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Summer 2026</p>
+
+          {/* Terminal panel: an agent driving the CLI over MCP, real commands */}
+          <div className="w-full rounded-lg mb-8 overflow-hidden bg-neutral-900 dark:bg-black border border-black/10 dark:border-white/10">
+            <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10">
+              <span className="w-3 h-3 rounded-full bg-red-400/80" />
+              <span className="w-3 h-3 rounded-full bg-yellow-400/80" />
+              <span className="w-3 h-3 rounded-full bg-green-400/80" />
+              <span className="ml-3 text-xs text-neutral-400 font-mono">agent — uipath-insights via MCP</span>
+            </div>
+            <pre className="p-5 text-sm leading-7 font-mono text-neutral-200 overflow-x-auto">
+              <code>
+                <span className="text-neutral-200">❯ alert me when payroll jobs start faulting</span>
+                {"\n\n"}
+                <span className="text-neutral-400"># agent picks its own commands:</span>
+                {"\n"}
+                <span className="text-sky-300">⏺ uip insights alerts get-schema</span>
+                {"\n"}
+                <span className="text-sky-300">⏺ uip insights filter-folders list --limit 10</span>
+                {"\n"}
+                <span className="text-sky-300">⏺ uip insights alerts create …</span>
+                {"\n\n"}
+                <span className="text-emerald-300">✓ watching Payroll for faulted jobs</span>
+              </code>
+            </pre>
+          </div>
+        </div>
+
+        <div className="text-left">
+          <div className="mb-8">
+            <p className="text-xs text-gray-500 dark:text-gray-400 font-light mb-2 tracking-widest">
+              Current Role
+            </p>
+            <h4 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
+              UiPath Insights
+            </h4>
+            <p className="text-black dark:text-gray-300 text-sm mb-4">
+              CLI &amp; Agent Skill for an Analytics Product
+            </p>
+          </div>
+
+          <div className="mb-8">
+            <div className="border-t border-gray-300 dark:border-gray-700 py-4">
+              <p className="text-black dark:text-gray-300">
+                Building the Insights surface of UiPath&apos;s open-source CLI in
+                TypeScript: shipped the typed SDK transport layer to main, with
+                filter discovery commands in review backed by 240 unit tests and
+                a live end-to-end suite.
+              </p>
+            </div>
+            <div className="border-t border-gray-300 dark:border-gray-700 py-4">
+              <p className="text-black dark:text-gray-300">
+                Own the uipath-insights agent skill that teaches AI coding agents
+                to run Insights tasks through the CLI and MCP. Shipped merged
+                fixes to UiPath&apos;s public skills repo, each verified against
+                an agent eval harness before review.
+              </p>
+            </div>
+            <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
+              <p className="text-black dark:text-gray-300">
+                Designed and won team sign-off on a 23-command surface for
+                alerts, filters, and RBAC reads: fail-closed input validation,
+                safe output projections, and access bounded by what the calling
+                user can already see and do.
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div className="flex flex-wrap gap-3">
+              {["TypeScript", "Bun", "Vitest", "CLI Tooling", "MCP", "AI Agents", "REST API", "API Design"].map(
+                (skill) => <SkillTag key={skill} label={skill} />
+              )}
+            </div>
+            <p className="text-black dark:text-gray-300 leading-relaxed">
+              Insights is UiPath&apos;s analytics product. My project makes it
+              operable by coding agents: one typed contract feeding validation,
+              the SDK, MCP, and the agent skill.
+            </p>
+            <MagneticLink
+              href="/uipath-insights"
+              strength={0.4}
+              className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors mt-4"
+            >
+              View Case Study
+            </MagneticLink>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 // ─── #01: UHackathon — editorial feature panel ────────────────────────────────
@@ -43,11 +147,13 @@ function ProjectUHackathon() {
         <div className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-6 mb-0">
 
           {/* Left — primary image, tall */}
-          <div className="h-[55vh] md:h-[70vh] overflow-hidden">
-            <img
+          <div className="relative h-[55vh] md:h-[70vh] overflow-hidden">
+            <Image
               src="/assets/room.png"
               alt="UHackathon venue"
-              className="w-full h-full object-cover"
+              fill
+              sizes="(min-width: 768px) 60vw, 90vw"
+              className="object-cover"
             />
           </div>
 
@@ -116,24 +222,24 @@ function ProjectTechStartupClub() {
       <Divider />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="text-left">
-          <h4 className="text-4xl text-black dark:text-white font-normal">
+          <h3 className="text-4xl text-black dark:text-white font-normal">
             President &amp; Founder
-          </h4>
+          </h3>
           <p className="text-black dark:text-gray-300 mb-1">Tech Startup Club</p>
-          <p className="text-sm text-gray-400 mb-8">Sept. 2024 – Present</p>
-          <div className="w-full h-[300px] sm:h-[400px] md:h-[600px] rounded-lg mb-8 overflow-hidden">
-            <img src="/assets/umarket1.png" alt="Tech Startup Club" className="w-full h-full object-cover" />
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Sept. 2024 – Present</p>
+          <div className="relative w-full h-[300px] sm:h-[400px] md:h-[600px] rounded-lg mb-8 overflow-hidden">
+            <Image src="/assets/umarket1.png" alt="Tech Startup Club" fill sizes="(min-width: 768px) 50vw, 90vw" className="object-cover" />
           </div>
         </div>
 
         <div className="text-left">
           <div className="mb-8">
-            <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">
+            <p className="text-xs text-gray-500 dark:text-gray-400 font-light mb-2 tracking-widest">
               Leadership Role
             </p>
-            <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
+            <h4 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
               Tech Startup Club
-            </h5>
+            </h4>
             <p className="text-black dark:text-gray-300 text-sm mb-4">
               Student Software Consultancy
             </p>
@@ -187,13 +293,13 @@ function ProjectSETlib() {
       <div className="mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <div className="text-left">
-            <h4 className="text-4xl text-black dark:text-white font-normal">
+            <h3 className="text-4xl text-black dark:text-white font-normal">
               Software Engineer Intern
-            </h4>
+            </h3>
             <p className="text-black dark:text-gray-300 mb-1">
               University of Washington Tacoma
             </p>
-            <p className="text-sm text-gray-400 mb-8">June 2025 – Sept. 2025</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">June 2025 – Sept. 2025</p>
           </div>
           <div>
             <div className="border-t border-gray-300 dark:border-gray-700 py-4">
@@ -219,18 +325,18 @@ function ProjectSETlib() {
           </div>
         </div>
 
-        <div className="w-full h-[500px] flex items-center justify-center rounded-lg mb-8 overflow-hidden">
-          <img src="/assets/SETlib.png" alt="SETlib" className="object-contain max-h-fill" />
+        <div className="relative w-full h-[500px] rounded-lg mb-8 overflow-hidden">
+          <Image src="/assets/SETlib.png" alt="SETlib worksheet management platform" fill sizes="90vw" className="object-contain" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
-            <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">
+            <p className="text-xs text-gray-500 dark:text-gray-400 font-light mb-2 tracking-widest">
               Professional Project 01
             </p>
-            <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
+            <h4 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
               SETlib
-            </h5>
+            </h4>
             <p className="text-black dark:text-gray-300 text-sm mb-4">
               Worksheet Management Platform
             </p>
@@ -266,24 +372,24 @@ function ProjectIlluminance() {
       <Divider />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="text-left">
-          <h4 className="text-4xl text-black dark:text-white font-normal">
+          <h3 className="text-4xl text-black dark:text-white font-normal">
             Software Engineer Intern
-          </h4>
+          </h3>
           <p className="text-black dark:text-gray-300 mb-1">Insights Emerge</p>
-          <p className="text-sm text-gray-400 mb-8">April 2025 – June 2025</p>
-          <div className="w-full h-[300px] sm:h-[400px] md:h-[600px] rounded-lg mb-8 overflow-hidden">
-            <img src="/assets/lms.png" alt="Illuminance Esthetics LMS" className="object-contain max-h-fill" />
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">April 2025 – June 2025</p>
+          <div className="relative w-full h-[300px] sm:h-[400px] md:h-[600px] rounded-lg mb-8 overflow-hidden">
+            <Image src="/assets/lms.png" alt="Illuminance Esthetics LMS" fill sizes="(min-width: 768px) 50vw, 90vw" className="object-contain" />
           </div>
         </div>
 
         <div className="text-left">
           <div className="mb-8">
-            <p className="text-xs text-gray-400 font-light mb-2 tracking-widest">
+            <p className="text-xs text-gray-500 dark:text-gray-400 font-light mb-2 tracking-widest">
               Professional Project 02
             </p>
-            <h5 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
+            <h4 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
               Illuminance Esthetics
-            </h5>
+            </h4>
             <p className="text-black dark:text-gray-300 text-sm mb-4">
               Beauty School LMS
             </p>
@@ -323,7 +429,7 @@ function ProjectIlluminance() {
               management system, working directly with the client from spec through deployment.
             </p>
             <MagneticLink
-              href="/work"
+              href="/illuminance-esthetics"
               strength={0.4}
               className="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors mt-4"
             >
@@ -346,6 +452,7 @@ export default function ExperienceSection() {
         </h2>
       </div>
 
+      <ProjectUiPath />
       <ProjectSETlib />
       <ProjectIlluminance />
       <ProjectUHackathon />

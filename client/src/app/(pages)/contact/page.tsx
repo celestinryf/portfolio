@@ -19,7 +19,7 @@ const FIELDS: { id: FieldId; label: string; placeholder: string; required?: bool
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
 const CONTACTS = [
-  { href: "mailto:celestin@gmail.com", label: "celestin@gmail.com" },
+  { href: "mailto:celestinryf@gmail.com", label: "celestinryf@gmail.com" },
   { href: "tel:+12538819185", label: "+1 (253) 881-9185" },
 ];
 const SOCIALS = [

@@ -58,8 +58,8 @@ function RotatingImage({ media, idx }: { media: { src: string; alt: string }[]; 
 }
 
 // ─── Rotating Title ──────────────────────────────────────────────────────────
-function RotatingTitle({ roles, idx, suffix, className }: {
-  roles: string[]; idx: number; suffix: string; className?: string;
+function RotatingTitle({ roles, idx, suffix, className, suffixClassName }: {
+  roles: string[]; idx: number; suffix: string; className?: string; suffixClassName?: string;
 }) {
   return (
     <div className="flex items-baseline gap-2 sm:gap-3 flex-wrap">
@@ -74,7 +74,7 @@ function RotatingTitle({ roles, idx, suffix, className }: {
         </AnimatePresence>
         <span aria-hidden className="invisible">{longest(roles)}</span>
       </h2>
-      <span className="text-neutral-500">{suffix}</span>
+      <span className={suffixClassName ?? "text-neutral-600"}>{suffix}</span>
     </div>
   );
 }
@@ -110,8 +110,8 @@ export default function AboutPage() {
             <p className="text-neutral-700 dark:text-neutral-400">
               My love for programming started with Hour of Code in elementary school
               and was cemented by a robotics class my freshman year of high school.
-              Since then I&apos;ve interned at a startup and at UW, founded the 2nd
-              largest CS club at UWT, and organized the largest hackathon south of
+              Since then I&apos;ve interned at UiPath, at a startup, and at UW,
+              founded the 2nd largest CS club at UWT, and organized the largest hackathon south of
               Seattle. When I&apos;m not coding you&apos;ll find me watching Manchester
               United or raving.
             </p>
@@ -163,7 +163,7 @@ export default function AboutPage() {
           <div className="container mx-auto px-5 sm:px-6">
             <div className="grid grid-cols-12 gap-6 sm:gap-8 items-start">
               <div className="col-span-12 md:col-span-7 space-y-3 sm:space-y-4">
-                <RotatingTitle roles={NIGHT_ROLES} idx={nightIdx} suffix="by night" />
+                <RotatingTitle roles={NIGHT_ROLES} idx={nightIdx} suffix="by night" suffixClassName="text-neutral-400" />
                 <p className="text-neutral-200 max-w-prose">
                   I founded a 25-member software consultancy, organized the largest
                   hackathon south of Seattle, and built a mentorship program that&apos;s
