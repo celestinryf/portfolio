@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# Portfolio, Celestin Ryf
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Personal portfolio site. Work history, project case studies, and contact.
 
-## Available Scripts
+Live: https://portfolio-gules-zeta-88.vercel.app
 
-In the project directory, you can run:
+## Stack
 
-### `npm start`
+- [Next.js 15](https://nextjs.org) (App Router) with Turbopack
+- React 19 and TypeScript
+- Tailwind CSS 3
+- Framer Motion and GSAP for animation
+- lucide-react for icons
+- Deployed on Vercel
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Needs Node 18.18 or newer. The app lives in `client/`, not the repo root.
 
-### `npm test`
+```bash
+cd client
+npm install
+npm run dev
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Open http://localhost:3000.
 
-### `npm run build`
+## Scripts
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Run these from `client/`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Script | What it does |
+| --- | --- |
+| `npm run dev` | Dev server with Turbopack and hot reload |
+| `npm run build` | Production build |
+| `npm start` | Serve the production build (run `build` first) |
+| `npm run lint` | ESLint |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+There is no test suite yet.
 
-### `npm run eject`
+## Layout
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+client/src/app/
+  layout.tsx              Root layout: topbar, dark mode toggle, footer
+  page.tsx                Landing page
+  globals.css             Tailwind entry and global styles
+  (pages)/                Routes: about, contact, work, and one folder per case study
+  components/
+    layout/               Topbar, Footer, Layout
+    sections/             Hero, About, Experience
+    shared/               Reusable pieces (BigName, MagneticButton, ProjectNav, ...)
+    LightDark.tsx         Dark mode toggle
+  data/projects.ts        Every project, in one place
+  hooks/useReveal.ts      Scroll reveal hook
+  utils/                  Helpers
+client/public/assets/     Images
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Adding a project
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Project content is centralized, so a new project is two steps:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Add an entry to the `PROJECTS` array in `client/src/app/data/projects.ts`. It must match the `Project` interface at the top of that file: `id`, `title`, `category`, `description`, `image`, `tags`, `year`, `slug`.
+2. Create a matching route folder at `client/src/app/(pages)/<slug>/` for the case study page. The folder name must equal the `slug`.
 
-## Learn More
+Drop images in `client/public/assets/` and reference them from `image` with a leading slash, for example `/assets/mock.png`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Deployment
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Hosted on Vercel. The Vercel project's root directory is `client/`, since that is where `package.json` lives.
 
-### Code Splitting
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MIT. See [LICENSE](LICENSE).
