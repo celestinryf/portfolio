@@ -290,18 +290,34 @@ function ProjectSETlib() {
   return (
     <div className="mb-16">
       <Divider />
-      <div className="mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-          <div className="text-left">
-            <h3 className="text-4xl text-black dark:text-white font-normal">
-              Software Engineer Intern
-            </h3>
-            <p className="text-black dark:text-gray-300 mb-1">
-              University of Washington Tacoma
-            </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">June 2025 – Sept. 2025</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="text-left">
+          <h3 className="text-4xl text-black dark:text-white font-normal">
+            Software Engineer Intern
+          </h3>
+          <p className="text-black dark:text-gray-300 mb-1">
+            University of Washington Tacoma
+          </p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">June 2025 – Sept. 2025</p>
+          <div className="relative w-full h-[300px] sm:h-[400px] md:h-[600px] rounded-lg mb-8 overflow-hidden">
+            <Image src="/assets/SETlib.png" alt="SETlib worksheet management platform" fill sizes="(min-width: 768px) 50vw, 90vw" className="object-cover" />
           </div>
-          <div>
+        </div>
+
+        <div className="text-left">
+          <div className="mb-8">
+            <p className="text-xs text-gray-500 dark:text-gray-400 font-light mb-2 tracking-widest">
+              Professional Project 01
+            </p>
+            <h4 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
+              SETlib
+            </h4>
+            <p className="text-black dark:text-gray-300 text-sm mb-4">
+              Worksheet Management Platform
+            </p>
+          </div>
+
+          <div className="mb-8">
             <div className="border-t border-gray-300 dark:border-gray-700 py-4">
               <p className="text-black dark:text-gray-300">
                 Developed a Spring Boot worksheet management platform for UW faculty,
@@ -323,24 +339,7 @@ function ProjectSETlib() {
               </p>
             </div>
           </div>
-        </div>
 
-        <div className="relative w-full h-[500px] rounded-lg mb-8 overflow-hidden">
-          <Image src="/assets/SETlib.png" alt="SETlib worksheet management platform" fill sizes="90vw" className="object-contain" />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 font-light mb-2 tracking-widest">
-              Professional Project 01
-            </p>
-            <h4 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
-              SETlib
-            </h4>
-            <p className="text-black dark:text-gray-300 text-sm mb-4">
-              Worksheet Management Platform
-            </p>
-          </div>
           <div className="space-y-4">
             <div className="flex flex-wrap gap-3">
               {["Java", "Spring Boot", "AWS RDS", "AWS Cognito", "JWT", "JUnit", "REST API", "IAM", "PostgreSQL"].map(

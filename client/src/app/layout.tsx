@@ -18,21 +18,21 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.celestinryf.com"),
   title: {
-    default: "Celestin Ryf",
-    template: "%s — Celestin Ryf",
+    default: "Célestin Ryf",
+    template: "%s — Célestin Ryf",
   },
-  description: "Portfolio of Celestin Ryf, a software engineer specializing in full-stack development and systems design.",
+  description: "Portfolio of Célestin Ryf, a software engineer specializing in full-stack development and systems design.",
   openGraph: {
-    title: "Celestin Ryf",
+    title: "Célestin Ryf",
     description: "Software engineer and CS student at the University of Washington. Work history, project case studies, and contact.",
     url: "/",
-    siteName: "Celestin Ryf",
+    siteName: "Célestin Ryf",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Celestin Ryf",
+    title: "Célestin Ryf",
     description: "Software engineer and CS student at the University of Washington.",
   },
 };

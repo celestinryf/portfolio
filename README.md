@@ -19,8 +19,8 @@ Needs Node 18.18 or newer. The app lives in `client/`, not the repo root.
 
 ```bash
 cd client
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 Open http://localhost:3000.
@@ -31,10 +31,10 @@ Run these from `client/`.
 
 | Script | What it does |
 | --- | --- |
-| `npm run dev` | Dev server with Turbopack and hot reload |
-| `npm run build` | Production build |
-| `npm start` | Serve the production build (run `build` first) |
-| `npm run lint` | ESLint |
+| `pnpm dev` | Dev server with Turbopack and hot reload |
+| `pnpm build` | Production build |
+| `pnpm start` | Serve the production build (run `build` first) |
+| `pnpm lint` | ESLint |
 
 There is no test suite yet.
 
