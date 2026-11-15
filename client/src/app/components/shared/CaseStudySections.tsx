@@ -168,14 +168,17 @@ export function ArchitectureDiagram({ flow, accentLabel, accentColor }: Architec
   useEffect(() => {
     if (!archSection.current) return;
     const boxes = archRefs.current.filter(Boolean) as HTMLDivElement[];
-    gsap.fromTo(boxes,
+    const tween = gsap.fromTo(boxes,
       { opacity: 0, x: -20 },
       {
         opacity: 1, x: 0, duration: 0.5, stagger: 0.12, ease: "power2.out",
         scrollTrigger: { trigger: archSection.current, start: "top 75%", once: true },
       }
     );
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    };
   }, []);
 
   return (

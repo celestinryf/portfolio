@@ -7,7 +7,7 @@ export default function HeroSection() {
     <div className="relative z-10 min-h-screen bg-stone-300 snap-section">
       <Image
         src="/assets/auraFarmingCelestin.jpg"
-        alt="Celestin Ryf"
+        alt="Célestin Ryf"
         fill
         priority
         sizes="100vw"
@@ -24,7 +24,7 @@ export default function HeroSection() {
           className="text-white font-light tracking-tight leading-tight"
           style={{ fontSize: "clamp(1rem, 2vw, 1.5rem)" }}
         >
-          Software engineer · CS student at the University of Washington
+          Software Engineer · CS student at the University of Washington
         </h1>
       </div>
     </div>

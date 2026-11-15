@@ -22,10 +22,10 @@ const NIGHT_MEDIA = [
 ];
 
 const ABOUT_SLIDES = [
-  { src: "/assets/aura farm.png", alt: "Celestin - Professional" },
-  { src: "/assets/room.png", alt: "Celestin at UHackathon" },
-  { src: "/assets/Meeting.png", alt: "Celestin leading a meeting" },
-  { src: "/assets/DSC_0214.png", alt: "Celestin with team" },
+  { src: "/assets/aura farm.png", alt: "Célestin - Professional" },
+  { src: "/assets/room.png", alt: "Célestin at UHackathon" },
+  { src: "/assets/Meeting.png", alt: "Célestin leading a meeting" },
+  { src: "/assets/DSC_0214.png", alt: "Célestin with team" },
 ];
 
 const textVariants = {
@@ -100,7 +100,7 @@ export default function AboutPage() {
       <main className="container mx-auto px-5 sm:px-6 pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-12 sm:pb-16 md:pb-24 overflow-hidden">
         <section className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
           <div className="md:col-span-7 space-y-4 sm:space-y-6">
-            <h1 className="text-3xl md:text-4xl font-semibold">I&apos;m Celestin</h1>
+            <h1 className="text-3xl md:text-4xl font-semibold">I&apos;m Célestin</h1>
             <p className="text-neutral-700 dark:text-neutral-400">
               Software engineer and CS student at the University of Washington with
               deep interests in backend architecture, cloud infrastructure, machine

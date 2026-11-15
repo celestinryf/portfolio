@@ -39,7 +39,7 @@ export default function Footer() {
       yPercent: 0
     });
 
-    gsap.to(blackBox, {
+    const tween = gsap.to(blackBox, {
       yPercent: -100,
       ease: "none",
       scrollTrigger: {
@@ -51,7 +51,8 @@ export default function Footer() {
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      tween.scrollTrigger?.kill();
+      tween.kill();
     };
   }, []);
 
@@ -96,7 +97,7 @@ export default function Footer() {
                 {!imageError ? (
                   <Image
                     src="/assets/pfp.jpg"
-                    alt="Celestin Ryf"
+                    alt="Célestin Ryf"
                     fill
                     sizes="120px"
                     className="rounded-full object-cover"
