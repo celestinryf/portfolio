@@ -15,7 +15,7 @@ export const PROJECTS: Project[] = [
     title: "UiPath Insights CLI",
     category: "AI Agents & Developer Tooling",
     description:
-      "Building the agent-facing surface of UiPath's analytics product: typed uip insights CLI commands, an SDK transport layer, and the uipath-insights agent skill so AI agents can run Insights tasks over MCP. ~2,100 lines merged to the public cli repo; the next slice is in review with 240 tests.",
+      "Owned the CLI and MCP server for the Insights team from R&D through release: 41 typed commands shipped across queues, machines, dashboards, alerts, and RBAC, with 23 merged PRs to UiPath's open-source skills repo, task routing that cut agent costs by 74%, and a nightly eval harness.",
     image: "/assets/mock1.png",
     tags: ["TypeScript", "Bun", "Vitest", "MCP", "AI Agents", "CLI Tooling", "REST API"],
     year: "2026",

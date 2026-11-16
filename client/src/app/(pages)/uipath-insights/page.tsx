@@ -14,10 +14,10 @@ if (typeof window !== "undefined") {
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const METRICS = [
-  { value: 240, suffix: "", label: "Unit Tests", desc: "On the filter-commands slice alone, plus a live end-to-end suite" },
-  { value: 23, suffix: "", label: "Commands Designed", desc: "Alerts, filters, and RBAC reads — the signed-off MVP surface" },
-  { value: 94, suffix: "", label: "API Capabilities Mapped", desc: "Full enumeration of the Insights backend to measure agent coverage" },
-  { value: 4, suffix: "", label: "Public PRs", desc: "Merged or in review across UiPath's open-source cli and skills repos" },
+  { value: 41, suffix: "", label: "Commands Shipped", desc: "Across queues, machines, dashboards, alerts, and access control" },
+  { value: 23, suffix: "", label: "Merged Public PRs", desc: "Across UiPath's open-source skills repository" },
+  { value: 74, suffix: "%", label: "Agent Cost Cut", desc: "Average token cost reduced (up to 92%) via task routing" },
+  { value: 240, suffix: "+", label: "Tests & Evals", desc: "Unit, live e2e, and golden eval tasks graded against a live tenant" },
 ];
 
 const PROBLEMS = [
@@ -36,36 +36,36 @@ const DESIGN = [
 
 const PRS = [
   {
-    repo: "UiPath/cli",
-    id: "#3392",
+    repo: "UiPath/skills",
+    id: "#3550",
     status: "Merged",
-    title: "Insights SDK transport + typed wrappers",
-    body: "A closed route registry, typed error classes, and read wrappers for alerts, filters, and RBAC. 19 files, ~2,100 added lines, 100/100 package tests.",
-    href: "https://github.com/UiPath/cli/pull/3392",
-  },
-  {
-    repo: "UiPath/cli",
-    id: "#3449",
-    status: "In review",
-    title: "Filter discovery commands",
-    body: "Four command groups for folder, process, queue, and machine discovery — 240 unit tests, scenario docs, and an e2e suite run against a live tenant.",
-    href: "https://github.com/UiPath/cli/pull/3449",
+    title: "Looker dashboards read commands",
+    body: "Taught agents to discover, inspect, and extract metrics from Looker dashboards with full schema grounding and safe projection.",
+    href: "https://github.com/UiPath/skills/pull/3550",
   },
   {
     repo: "UiPath/skills",
-    id: "#2396",
+    id: "#3358",
     status: "Merged",
-    title: "Agent skill: time-range fix",
-    body: "Corrected absolute time-range handling and gating flags in the uipath-insights skill after reproducing the exact agent failure locally.",
-    href: "https://github.com/UiPath/skills/pull/2396",
+    title: "Dashboard update, delete & copy lifecycle",
+    body: "Shipped safe dashboard mutation workflows with confirmation guards, preventing agents from corrupting shared analytics.",
+    href: "https://github.com/UiPath/skills/pull/3358",
   },
   {
     repo: "UiPath/skills",
-    id: "#2430",
+    id: "#2854",
     status: "Merged",
-    title: "Agent skill: loop fix",
-    body: "Fixed loop and shell-variable bugs that made agents mis-run multi-command tasks, verified against an eval harness before review.",
-    href: "https://github.com/UiPath/skills/pull/2430",
+    title: "Queue & machine diagnosis",
+    body: "Added multi-step queue and machine failure diagnosis, giving agents direct inspection into runner bottlenecks.",
+    href: "https://github.com/UiPath/skills/pull/2854",
+  },
+  {
+    repo: "UiPath/skills",
+    id: "#2609",
+    status: "Merged",
+    title: "RBAC reads & smoke eval harness",
+    body: "Role-based access control reads bounded by caller permissions, plus automated eval tasks graded against a live tenant.",
+    href: "https://github.com/UiPath/skills/pull/2609",
   },
 ];
 
@@ -156,9 +156,9 @@ export default function UiPathInsightsCaseStudy() {
               <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-[560px]">
                 Insights is UiPath&apos;s analytics product — dashboards, alerts, and usage data
                 for enterprise automations. Coding agents couldn&apos;t operate it: only 7 of its
-                94 API capabilities were reachable through the CLI. My internship is closing that
-                gap with typed <span className="font-mono text-base">uip insights</span> commands
-                and the agent skill that teaches agents to use them safely over MCP.
+                94 API capabilities were reachable through the CLI. I owned the CLI and MCP server
+                for the Insights team from R&amp;D through release, shipping 41 typed commands and
+                the open-source agent skill that teaches agents to use them safely.
               </p>
 
               <span className="inline-block bg-orange-400/20 text-orange-700 dark:text-orange-400 px-4 py-1.5 rounded-full text-sm font-medium">
@@ -251,9 +251,9 @@ export default function UiPathInsightsCaseStudy() {
             Real PRs, public repos, production review bar
           </h2>
           <p className={`text-neutral-600 dark:text-neutral-400 leading-relaxed text-lg max-w-2xl mb-12 ${reveal(shipping.visible, 200)}`}>
-            UiPath&apos;s CLI and skills are open source, so the work is reviewable like any other
-            engineer&apos;s: squash-merged branches, repo conventions, and reviewer feedback
-            addressed in public.
+            UiPath&apos;s agent skills are open source, reviewable by any engineer with 23 merged PRs
+            to the public repository. Commands, eval tasks, and schema fixes are verified in public with production
+            review bars.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -278,6 +278,17 @@ export default function UiPathInsightsCaseStudy() {
                 <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm">{pr.body}</p>
               </a>
             ))}
+          </div>
+
+          <div className="mt-8 text-center">
+            <a
+              href="https://github.com/UiPath/skills/pulls?q=is%3Apr+author%3Acelestinryf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
+            >
+              <span>View all 23 merged PRs on GitHub &rarr;</span>
+            </a>
           </div>
         </div>
       </section>
@@ -309,25 +320,49 @@ export default function UiPathInsightsCaseStudy() {
         </div>
       </section>
 
-      {/* ────────────────── 7. WHERE IT STANDS ────────────────── */}
+      {/* ────────────────── 7. SHIPPED & PRODUCTION IMPACT ────────────────── */}
       <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-black dark:bg-white py-24 md:py-32">
         <div ref={outcome.ref} className="max-w-[1400px] mx-auto px-6 md:px-16">
           <p className={`text-xs uppercase tracking-[0.25em] text-orange-400 dark:text-orange-600 font-medium mb-4 ${reveal(outcome.visible)}`}>
-            05 / Where It Stands
+            05 / Shipped &amp; Production Impact
           </p>
           <h2 className={`text-3xl md:text-5xl font-semibold text-white dark:text-black leading-tight mb-6 max-w-3xl ${reveal(outcome.visible, 100)}`}>
-            In flight, and landing piece by piece
+            From R&amp;D through release
           </h2>
           <p className={`text-white/70 dark:text-black/70 leading-relaxed text-lg max-w-2xl mb-16 ${reveal(outcome.visible, 200)}`}>
-            The internship is ongoing. The foundation is merged, the first command slice is in
-            review, and each next slice builds on a contract the team has already signed off.
+            The project moved from an uncataloged API surface to a fully shipped CLI and MCP toolchain,
+            tested by nightly eval harnesses and cutting agent token costs across the board.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
             {[
-              { title: "On Main Today", items: ["SDK transport + typed error classes", "All alert, filter, and RBAC read wrappers", "Two agent-skill fixes live", "Graded e2e coverage tasks"] },
-              { title: "In Review", items: ["Four filter discovery command groups", "240 unit tests on the slice", "Live e2e suite + scenario docs", "Alerts reads queued next"] },
-              { title: "The Target", items: ["23 new commands: alerts, filters, RBAC", "7 → 30 agent-reachable commands", "Measured against the 94-capability map", "Safety rules enforced in one contract"] },
+              {
+                title: "Shipped Surface",
+                items: [
+                  "41 CLI commands across 5 resource groups",
+                  "MCP server with uip_read/uip_exec tiers",
+                  "SDK transport + closed route registry",
+                  "Fail-closed caller-scoped permissions",
+                ],
+              },
+              {
+                title: "Agent Efficiency",
+                items: [
+                  "74% average token cost cut (up to 92%)",
+                  "Task routing loading only required context",
+                  "2.5x PR throughput via subagents",
+                  "Nightly eval harness on live tenants",
+                ],
+              },
+              {
+                title: "Open Source",
+                items: [
+                  "23 merged PRs in UiPath/skills",
+                  "Zero-prompt read diagnosis journeys",
+                  "Automated eval gates in GitHub Actions",
+                  "Clean public review history",
+                ],
+              },
             ].map((col, i) => (
               <div key={col.title}
                 className={`bg-white/5 dark:bg-black/5 rounded-xl p-6 border border-white/10 dark:border-black/10 ${reveal(outcome.visible, 300 + i * 150)}`}>
