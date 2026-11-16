@@ -12,6 +12,17 @@ export interface Project {
 export const PROJECTS: Project[] = [
   {
     id: "01",
+    title: "Notes App",
+    category: "Local-First Desktop App",
+    description:
+      "A fast, local-first tray notes app built with Electron, TypeScript, and Rust WebAssembly engines. Features files-first Markdown storage, SQLite FTS5 trigram indexing for 50,000 notes, sub-millisecond outside-edit sync, and KaTeX math.",
+    image: "/assets/mock1.png",
+    tags: ["Electron", "TypeScript", "Rust", "WebAssembly", "SQLite", "Tiptap", "Tailwind CSS"],
+    year: "2026",
+    slug: "notes-app",
+  },
+  {
+    id: "02",
     title: "UiPath Insights CLI",
     category: "AI Agents & Developer Tooling",
     description:
@@ -22,7 +33,7 @@ export const PROJECTS: Project[] = [
     slug: "uipath-insights",
   },
   {
-    id: "02",
+    id: "03",
     title: "SETlib",
     category: "Document Management System",
     description:
@@ -33,7 +44,7 @@ export const PROJECTS: Project[] = [
     slug: "SETlib",
   },
   {
-    id: "03",
+    id: "04",
     title: "Illuminance Esthetics",
     category: "Beauty School LMS",
     description:
@@ -44,7 +55,7 @@ export const PROJECTS: Project[] = [
     slug: "illuminance-esthetics",
   },
   {
-    id: "04",
+    id: "05",
     title: "Home Recommendation System",
     category: "MLOps & Recommendation Engine",
     description:
@@ -55,7 +66,7 @@ export const PROJECTS: Project[] = [
     slug: "home-recommendation",
   },
   {
-    id: "05",
+    id: "06",
     title: "AWS Cost Optimization",
     category: "Cloud Infrastructure",
     description:
@@ -66,7 +77,7 @@ export const PROJECTS: Project[] = [
     slug: "aws-cost-optimization",
   },
   {
-    id: "06",
+    id: "07",
     title: "Unix Shell in C",
     category: "Systems Programming",
     description:
@@ -77,7 +88,7 @@ export const PROJECTS: Project[] = [
     slug: "unix-shell",
   },
   {
-    id: "07",
+    id: "08",
     title: "UHackathon",
     category: "Event Leadership",
     description:
