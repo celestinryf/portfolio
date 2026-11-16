@@ -56,39 +56,33 @@ function ProjectUiPath() {
         <div className="text-left">
           <div className="mb-8">
             <p className="text-xs text-gray-500 dark:text-gray-400 font-light mb-2 tracking-widest">
-              Current Role
+              Featured Internship
             </p>
             <h4 className="text-3xl md:text-4xl text-black dark:text-white font-light mb-2">
               UiPath Insights
             </h4>
             <p className="text-black dark:text-gray-300 text-sm mb-4">
-              CLI &amp; Agent Skill for an Analytics Product
+              CLI &amp; MCP Server for Enterprise Analytics
             </p>
           </div>
 
           <div className="mb-8">
             <div className="border-t border-gray-300 dark:border-gray-700 py-4">
               <p className="text-black dark:text-gray-300">
-                Building the Insights surface of UiPath&apos;s open-source CLI in
-                TypeScript: shipped the typed SDK transport layer to main, with
-                filter discovery commands in review backed by 240 unit tests and
-                a live end-to-end suite.
+                Owned the CLI and MCP server for the Insights team from R&amp;D through release,
+                shipping 41 commands across queues, machines, dashboards, alerts, and access control.
               </p>
             </div>
             <div className="border-t border-gray-300 dark:border-gray-700 py-4">
               <p className="text-black dark:text-gray-300">
-                Own the uipath-insights agent skill that teaches AI coding agents
-                to run Insights tasks through the CLI and MCP. Shipped merged
-                fixes to UiPath&apos;s public skills repo, each verified against
-                an agent eval harness before review.
+                Cut average AI agent task token cost by 74% (up to 92%) with context-engineered
+                task routing, measured against a nightly eval harness running coding agents on live tenants.
               </p>
             </div>
             <div className="border-t border-b border-gray-300 dark:border-gray-700 py-4">
               <p className="text-black dark:text-gray-300">
-                Designed and won team sign-off on a 23-command surface for
-                alerts, filters, and RBAC reads: fail-closed input validation,
-                safe output projections, and access bounded by what the calling
-                user can already see and do.
+                Shipped 23 merged PRs to UiPath&apos;s public open-source skills repository, with
+                fail-closed input validation in TypeScript so agents can never exceed caller permissions.
               </p>
             </div>
           </div>
