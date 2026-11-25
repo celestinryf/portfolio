@@ -160,7 +160,7 @@ function ProjectUHackathon() {
                 { value: "100+", label: "Attendees" },
                 { value: "#1",   label: "South of Seattle" },
                 { value: "2yr",  label: "UWT Contract" },
-                { value: "12",   label: "Internship Placements" },
+                { value: "14",   label: "Internship Placements" },
               ].map(({ value, label }) => (
                 <div key={label} className="flex items-baseline justify-between py-4">
                   <span
@@ -179,7 +179,7 @@ function ProjectUHackathon() {
             {/* Description */}
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm">
               Organized the largest hackathon south of Seattle with 100+ attendees,
-              an annual format, and 12 internship placements coming
+              an annual format, and 14 internship placements coming
               out of a single event.
             </p>
 
